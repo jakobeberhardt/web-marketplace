@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button} from '@mui/material'
+import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper} from '@mui/material'
 import Shipment from './types/Shipment';
 import { getShipments } from './service/ShipmentService'
 
