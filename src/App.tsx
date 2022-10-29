@@ -1,28 +1,9 @@
 import * as React from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-
-function createData(
-  name: string,
-  calories: number,
-  fat: number,
-  carbs: number,
-  protein: number,
-) {
-  return { name, calories, fat, carbs, protein };
-}
+import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper} from '@mui/material'
+import Shipment from './types/Shipment';
 
 const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
+  new Shipment({id: 1, tmsReference: "Test", position: 123, label: "Test", pickupReference: "Test", deliveryReference: "Test", totalItemCount: 5, totalWeight: 0, totalVolume: 0, totalLoadMeters: 0})
 ];
 
 export default function BasicTable() {
@@ -31,26 +12,26 @@ export default function BasicTable() {
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell align="right">Calories</TableCell>
-            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
+            <TableCell align="right">ID</TableCell>
+            <TableCell align="right">TMSReference</TableCell>
+            <TableCell align="right">Position</TableCell>
+            <TableCell align="right">PickupReference</TableCell>
+            <TableCell align="right">Delivery Reference</TableCell>
+            <TableCell align="right">TotalItemCount</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
             <TableRow
-              key={row.name}
+              key={row.id}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
+              <TableCell align="right">{row.id}</TableCell>
+              <TableCell align="right">{row.tmsReference}</TableCell>
+              <TableCell align="right">{row.position.toString()}</TableCell>
+              <TableCell align="right">{row.pickupReference}</TableCell>
+              <TableCell align="right">{row.deliveryReference}</TableCell>
+              <TableCell align="right">{row.totalItemCount?.toString()}</TableCell>
             </TableRow>
           ))}
         </TableBody>
