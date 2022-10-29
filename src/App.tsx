@@ -1,12 +1,22 @@
 import * as React from 'react';
-import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper} from '@mui/material'
+import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button} from '@mui/material'
 import Shipment from './types/Shipment';
+import { getShipments } from './service/ShipmentService'
 
-const rows = [
-  new Shipment({id: 1, tmsReference: "Test", position: 123, label: "Test", pickupReference: "Test", deliveryReference: "Test", totalItemCount: 5, totalWeight: 0, totalVolume: 0, totalLoadMeters: 0})
-];
+function App() {
 
-export default function BasicTable() {
+  const fetchAllShipments = () => {
+    getShipments()
+      .then(shipments => {
+        console.log(shipments);
+      })
+  }
+
+  const rows = [
+    new Shipment({id: 1, tmsReference: "Test", position: 123, label: "Test", pickupReference: "Test", deliveryReference: "Test", totalItemCount: 5, totalWeight: 0, totalVolume: 0, totalLoadMeters: 0})
+    //new Shipment(fetchAllShipments())
+  ];
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -39,3 +49,4 @@ export default function BasicTable() {
     </TableContainer>
   );
 }
+export default App;
