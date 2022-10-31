@@ -1,51 +1,55 @@
 import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper} from '@mui/material'
-import { getShipments } from "../service/ShipmentService";
-import Shipment from "../types/Shipment";
+import { useEffect, useState } from 'react';
+import { fetchShipments } from '../service/ShipmentService';
+//import Contract from '../types/Contracts';
+
+function TableContent({items}:any) {
+  return (
+    <>
+      {items.map((item:any) => (
+        <TableRow
+          key={item.id}
+          sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+        >
+          <TableCell align="right">{item.id}</TableCell>
+          <TableCell align="right">{item.shipment.tmsReference}</TableCell>
+          <TableCell align="right">{item.userId}</TableCell>
+          <TableCell align="right">{item.shipment.pickupReference}</TableCell>
+          <TableCell align="right">{item.shipment.deliveryReference}</TableCell>
+          <TableCell align="right">{item.shipment.label}</TableCell>
+        </TableRow>
+      ))}
+    </>
+  )
+}
 
 export default function ShipmentTable() {
-    let rows: Shipment[] = [];
-  
-    function fetchShipments() {
-      fetch('http://localhost:8080/contracts')
+
+    const [items, setItems] = useState([]);
+
+    useEffect(() => {
+      fetch('https://marketplace.jeberhardt.dev/contracts')
         .then(res => res.json())
-        .then(data => {
-          console.log("in test: " + data)
-          rows.push(... data)
-        })
-    }
+        .then(data => setItems(data));
+    }, []);
 
-      fetchShipments()
-      setTimeout(() => console.log("Timeout"), 0)
-
-      return (
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell align="right">ID</TableCell>
-                <TableCell align="right">TMSReference</TableCell>
-                <TableCell align="right">Position</TableCell>
-                <TableCell align="right">PickupReference</TableCell>
-                <TableCell align="right">Delivery Reference</TableCell>
-                <TableCell align="right">TotalItemCount</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                >
-                  <TableCell align="right">{row.id}</TableCell>
-                  <TableCell align="right">{row.tmsReference}</TableCell>
-                  <TableCell align="right">Test</TableCell>
-                  <TableCell align="right">{row.pickupReference}</TableCell>
-                  <TableCell align="right">{row.deliveryReference}</TableCell>
-                  <TableCell align="right">Test</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      );
+    return (
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell align="right">ID</TableCell>
+              <TableCell align="right">Shipment ID</TableCell>
+              <TableCell align="right">TMSReference</TableCell>
+              <TableCell align="right">PickupReference</TableCell>
+              <TableCell align="right">Delivery Reference</TableCell>
+              <TableCell align="right">Label</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+              {items && <TableContent items={items}/>}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    );
 }
