@@ -28,7 +28,7 @@ export default function ShipmentTable() {
     const [items, setItems] = useState([]);
 
     useEffect(() => {
-      fetch('https://marketplace.jeberhardt.dev/contracts')
+      fetch('https://api.jeberhardt.dev/contracts')
         .then(res => res.json())
         .then(data => setItems(data));
     }, []);
