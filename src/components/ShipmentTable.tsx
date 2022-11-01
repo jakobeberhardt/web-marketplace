@@ -1,6 +1,5 @@
 import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper} from '@mui/material'
 import { useEffect, useState } from 'react';
-import { fetchShipments } from '../service/ShipmentService';
 //import Contract from '../types/Contracts';
 
 function TableContent({items}:any) {
@@ -12,8 +11,8 @@ function TableContent({items}:any) {
           sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
         >
           <TableCell align="right">{item.id}</TableCell>
+          <TableCell align="right">{item.shipment.id}</TableCell>
           <TableCell align="right">{item.shipment.tmsReference}</TableCell>
-          <TableCell align="right">{item.userId}</TableCell>
           <TableCell align="right">{item.shipment.pickupReference}</TableCell>
           <TableCell align="right">{item.shipment.deliveryReference}</TableCell>
           <TableCell align="right">{item.shipment.label}</TableCell>
