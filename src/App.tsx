@@ -7,13 +7,13 @@ function App() {
     <nav>
       <ul>
         <li><a href='/'>Home</a></li>
-        <li><a href='/Bidding'>Shipments</a></li>
+        <li><a href='/Shipments'>Shipments</a></li>
       </ul>
     </nav>
     <BrowserRouter>
       <Routes>
       <Route path='/' element={<h1>Home</h1>}/>
-        <Route path='/Bidding' element={<ShipmentTable/>}/>
+        <Route path='/Shipments' element={<ShipmentTable/>}/>
       </Routes>
     </BrowserRouter>
   </div>
