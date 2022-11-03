@@ -6,14 +6,14 @@ function App() {
   return <div className='wrapper'>
     <nav>
       <ul>
-        <li><a href="/Home">Home</a></li>
-        <li><a href='/'>Shipments</a></li>
+        <li><a href='/'>Home</a></li>
+        <li><a href='/Bidding'>Shipments</a></li>
       </ul>
     </nav>
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<ShipmentTable/>}/>
-        <Route path='/Home' element={<h1>Home</h1>}/>
+      <Route path='/' element={<h1>Home</h1>}/>
+        <Route path='/Bidding' element={<ShipmentTable/>}/>
       </Routes>
     </BrowserRouter>
   </div>
