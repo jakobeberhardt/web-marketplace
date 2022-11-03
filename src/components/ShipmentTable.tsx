@@ -1,5 +1,4 @@
 import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper} from '@mui/material'
-//import { useEffect, useState, use } from 'react';
 import { use } from 'react';
 //import Contract from '../types/Contracts';
 
