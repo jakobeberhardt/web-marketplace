@@ -1,5 +1,5 @@
 import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper} from '@mui/material'
-import { use } from 'react';
+import { useState, useEffect } from 'react';
 //import Contract from '../types/Contracts';
 
 function TableContent({items}:any) {
@@ -21,11 +21,15 @@ function TableContent({items}:any) {
   )
 }
 
-const getItems = fetch('https://api.jeberhardt.dev/biddings').then(res => res.json());
-
 export default function ShipmentTable() {
 
-    const items = use<any>(getItems);
+    const [items, setItems] = useState([]);
+
+    useEffect(() => {
+      fetch('https://api.jeberhardt.dev/biddings')
+        .then(res => res.json())
+        .then(data => setItems(data));
+    }, []);
 
     return (
       <TableContainer component={Paper}>
