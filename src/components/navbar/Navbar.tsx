@@ -52,7 +52,7 @@ const Navbar = ({children}: Props) => {
         <div className="navbar">
             <div className="top-section">
                 <h1 className="logo">
-                  <div style={{background: "white"}}>
+                  <div>
                    <img src={Logo} alt="NeoCargo" style={{width: "300px", height: "60px", marginTop: "20px", marginLeft: "5px", marginRight: "5px"}}/>
                   </div>
                 </h1>

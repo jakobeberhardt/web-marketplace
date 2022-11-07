@@ -1,5 +1,6 @@
 import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper} from '@mui/material'
 import { useState, useEffect } from 'react';
+import AllowedTimeWindow from '../types/AllowedTimeWindow';
 //import Contract from '../types/Contracts';
 
 function TableContent({items}:any) {
@@ -33,7 +34,7 @@ export default function ShipmentTable() {
 
     return (
       <>
-      <div style={{padding: "10%"}}>
+      <div style={{padding: "1%", background: "white"}}>
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
