@@ -32,21 +32,25 @@ export default function ShipmentTable() {
     }, []);
 
     return (
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell align="right">Shipment ID</TableCell>
-              <TableCell align="right">TMSReference</TableCell>
-              <TableCell align="right">PickupReference</TableCell>
-              <TableCell align="right">Delivery Reference</TableCell>
-              <TableCell align="right">Label</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-              {items && <TableContent items={items}/>}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <>
+      <div style={{padding: "10%"}}>
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell align="right">Shipment ID</TableCell>
+                <TableCell align="right">TMSReference</TableCell>
+                <TableCell align="right">PickupReference</TableCell>
+                <TableCell align="right">Delivery Reference</TableCell>
+                <TableCell align="right">Label</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+                {items && <TableContent items={items}/>}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </div>
+      </>
     );
 }

@@ -1,25 +1,25 @@
 import React from 'react';
 import CampaignIcon from '@mui/icons-material/Campaign';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
+import Home from '@mui/icons-material/Home';
 import MenuIcon from '@mui/icons-material/Menu';
+import Logo from './NeoCargoLogo.png';
 import { Link, NavLink } from 'react-router-dom';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import { Drawer, ListItemButton } from '@mui/material';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { isTemplateExpression } from 'typescript';
-import { useState } from 'react';
+import { useState, ReactNode } from 'react';
 
 type Props = {
-    title:string;
-    children?:React.ReactNode;
+    title: string;
+    children?: ReactNode;
 };
 
 const Navbar = ({children}: Props) => {
 
-
-    const [selectedIndex, setSelectedIndex] = React.useState(1);
+    const [selectedIndex, setSelectedIndex] = useState(1);
 
   const handleListItemClick = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
@@ -29,33 +29,33 @@ const Navbar = ({children}: Props) => {
 
   };
 
-  
-  
-    const menuItem=[
-        {
-            path:"/",
-            name:"Home",
-            icon:"",
-        },   
-        {
-            path:"/Shipments",
-            name:"Shipments",
-            icon:<LocalShippingIcon/>,
-        },  
-        {
-            path:"/Offers",
-            name:"Offers",
-            icon:<CampaignIcon/>,
-        }    
-    ]
+  const menuItem=[
+      {
+          path:"/",
+          name:"Home",
+          icon:<Home/>,
+      },   
+      {
+          path:"/shipments",
+          name:"Shipments",
+          icon:<LocalShippingIcon/>,
+      },  
+      {
+          path:"/offers",
+          name:"Offers",
+          icon:<CampaignIcon/>,
+      }    
+  ]
 
     return (
-        <div className="conatiner">
+        <div className="container">
         <div className="navbar">
-            
             <div className="top-section">
-
-                <h1 className="logo">Logo</h1>
+                <h1 className="logo">
+                  <div style={{background: "white"}}>
+                   <img src={Logo} alt="NeoCargo" style={{width: "300px", height: "60px", marginTop: "20px", marginLeft: "5px", marginRight: "5px"}}/>
+                  </div>
+                </h1>
             </div>
           {}
             <List>
