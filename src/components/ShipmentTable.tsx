@@ -1,5 +1,6 @@
 import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper} from '@mui/material'
 import { useState, useEffect } from 'react';
+import AllowedTimeWindow from '../types/AllowedTimeWindow';
 //import Contract from '../types/Contracts';
 
 function TableContent({items}:any) {
@@ -32,21 +33,25 @@ export default function ShipmentTable() {
     }, []);
 
     return (
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell align="right">Shipment ID</TableCell>
-              <TableCell align="right">TMSReference</TableCell>
-              <TableCell align="right">PickupReference</TableCell>
-              <TableCell align="right">Delivery Reference</TableCell>
-              <TableCell align="right">Label</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-              {items && <TableContent items={items}/>}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <>
+      <div style={{padding: "1%", background: "white"}}>
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell align="right">Shipment ID</TableCell>
+                <TableCell align="right">TMSReference</TableCell>
+                <TableCell align="right">PickupReference</TableCell>
+                <TableCell align="right">Delivery Reference</TableCell>
+                <TableCell align="right">Label</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+                {items && <TableContent items={items}/>}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </div>
+      </>
     );
 }
