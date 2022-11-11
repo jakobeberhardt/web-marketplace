@@ -1,14 +1,13 @@
 import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper} from '@mui/material'
-import { useState, useEffect } from 'react';
-import AllowedTimeWindow from '../types/AllowedTimeWindow';
-//import Contract from '../types/Contracts';
+import { useState, useEffect, Key } from 'react';
+import Bidding from '../types/Bidding';
 
-function TableContent({items}:any) {
+function TableContent(props: {items:Bidding[]}) {
   return (
     <>
-      {items.map((item:any) => (
+      {props.items.map((item:Bidding) => (
         <TableRow
-          key={item.id}
+          key={item.id as Key}
           sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
         >
           <TableCell align="right">{item.shipment.id}</TableCell>
@@ -24,7 +23,7 @@ function TableContent({items}:any) {
 
 export default function ShipmentTable() {
 
-    const [items, setItems] = useState([]);
+    const [items, setItems] = useState<Bidding[]>([])
 
     useEffect(() => {
       fetch('https://api.jeberhardt.dev/biddings')
@@ -47,7 +46,7 @@ export default function ShipmentTable() {
               </TableRow>
             </TableHead>
             <TableBody>
-                {items && <TableContent items={items}/>}
+                {items && <TableContent items={items} />}
             </TableBody>
           </Table>
         </TableContainer>
