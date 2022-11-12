@@ -34,6 +34,7 @@ function login(username: String, password: String) {
       userObject.userId = data.userId;
       userObject.refreshToken = data.refreshToken;
       console.log(data, userObject);
+      Object.freeze(userObject);
     });
 }
 
