@@ -14,6 +14,7 @@ import { Drawer, ListItemButton } from "@mui/material";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import { useState, ReactNode } from "react";
+import { color, fontSize } from "@mui/system";
 
 type Props = {
   title: string;
@@ -57,22 +58,19 @@ const Navbar = ({ children }: Props) => {
         position="fixed"
         sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
       >
-        <Toolbar>
+        <Toolbar style={{ backgroundColor: "#3a9b57", maxHeight: "7vh" }}>
           <img
             src={Logo}
             alt="NeoCargo"
             style={{
-              width: "300px",
-              height: "60px",
-              marginTop: "20px",
-              marginLeft: "5px",
-              marginRight: "5px",
+              maxWidth: "250px",
+              height: "55px",
+              backgroundColor: "white",
+              borderRadius: "16px",
+              marginLeft: "35px",
+              padding: "15px",
             }}
           />
-
-          <Typography variant="h6" noWrap component="div">
-            Clipped drawer
-          </Typography>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -87,16 +85,32 @@ const Navbar = ({ children }: Props) => {
         }}
       >
         <Toolbar />
-        <Box sx={{ overflow: "auto" }}>
-          <List>
+        <Box
+          sx={{
+            overflow: "auto",
+          }}
+        >
+          <List style={{ backgroundColor: "#75b989", minHeight: "93vh" }}>
             {menuItem.map((item) => (
-              <Link key={item.name} to={item.path}>
+              <Link
+                key={item.name}
+                to={item.path}
+                style={{
+                  textDecoration: "none",
+                }}
+              >
                 <ListItemButton
                   selected={selectedIndex === 1}
                   onClick={(event) => handleListItemClick(event, 1)}
                 >
                   <ListItemIcon>{item.icon}</ListItemIcon>
-                  <ListItemText primary={item.name} />
+                  <ListItemText
+                    style={{
+                      color: "white",
+                    }}
+                  >
+                    {item.name}
+                  </ListItemText>
                 </ListItemButton>
               </Link>
             ))}
@@ -106,10 +120,6 @@ const Navbar = ({ children }: Props) => {
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <Toolbar />
         <main>{children}</main>
-        <Typography paragraph>effdfdfsd</Typography>
-        <Typography paragraph>
-          Consequat mauris nunc congue nisi vitae su
-        </Typography>
       </Box>
     </Box>
   );
