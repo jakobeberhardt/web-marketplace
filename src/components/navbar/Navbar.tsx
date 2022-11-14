@@ -69,7 +69,6 @@ const Navbar = ({ children }: Props) => {
               marginRight: "5px",
             }}
           />
-          <main>{children}</main>
 
           <Typography variant="h6" noWrap component="div">
             Clipped drawer
@@ -106,6 +105,7 @@ const Navbar = ({ children }: Props) => {
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <Toolbar />
+        <main>{children}</main>
         <Typography paragraph>effdfdfsd</Typography>
         <Typography paragraph>
           Consequat mauris nunc congue nisi vitae su
