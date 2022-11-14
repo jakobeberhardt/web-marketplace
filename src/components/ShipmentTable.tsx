@@ -46,40 +46,35 @@ import SpaceBarIcon from "@mui/icons-material/SpaceBar";
 import HeightIcon from "@mui/icons-material/Height";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}));
-
+/*
 function TableContent({ items }: any) {
+  const [item, setItem] = useState([]);
+  const [data, setData] = useState([]);
+
+  //api call für die Bidding Objekte
+
+  useEffect(() => {
+    fetch("mock-shipment.json", {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    })
+      .then((res) => console.log(res.json()))
+      .then((items) => setItem(item));
+  }, []);
+
   return (
-    <>
-      {items.map((item: any) => (
-        <TableRow
-          key={item.id}
-          sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-        >
-          <Accordion>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1a-content"
-              id="panel1a-header"
-            >
-              <Typography>{item.shipment.label}</Typography>
-            </AccordionSummary>
-            <AccordionDetails></AccordionDetails>
-          </Accordion>
-        </TableRow>
-      ))}
-    </>
+    <div className="App">
+      {data &&
+        data.length > 0 &&
+        data.map((item) => <p>{item.shipment.label}</p>)}
+    </div>
   );
 }
+*/
 
 export default function ShipmentTable() {
-  const [items, setItems] = useState([]);
   const [open, setOpen] = React.useState(true);
 
   //toggle funktion für die Sendung
@@ -87,17 +82,8 @@ export default function ShipmentTable() {
     setOpen(!open);
   };
 
-  //api call für die Bidding Objekte
-  useEffect(() => {
-    fetch("mock-shipment.json")
-      .then((res) => res.json())
-      .then((data) => setItems(data));
-  }, []);
-
   return (
     <>
-      <TableBody>{items && <TableContent items={items} />}</TableBody>
-
       <Container maxWidth="lg">
         <Box sx={{ bgcolor: "#fafafa", height: "100vh", p: 2 }}>
           <List
@@ -110,8 +96,8 @@ export default function ShipmentTable() {
             component="nav"
           >
             <ListItemButton onClick={handleClick}>
-              <ListItemIcon>inbox</ListItemIcon>
-              <ListItemText primary="Inbox" />
+              <SendIcon sx={{ mr: "20px" }} />
+              <ListItemText primary="Sendung 14001" />
               {open ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
             <Collapse in={open} timeout="auto" unmountOnExit>
@@ -128,22 +114,23 @@ export default function ShipmentTable() {
                   <Grid xs={10}>
                     <Card sx={{ mt: "30px", mb: "30px", borderRadius: "10px" }}>
                       <CardContent>
-                        <Typography
-                          sx={{ fontSize: 14 }}
-                          color="text.secondary"
-                          gutterBottom
-                        >
-                          Word of the Day
-                        </Typography>
-                        <Typography variant="h5" component="div"></Typography>
-                        <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                          adjective
-                        </Typography>
                         <Typography variant="body2">
-                          well meaning and kindly.
+                          Anzahl: <br />
+                          Gewicht: <br />
+                          Idm: <br />
+                          Quadratmeter:
                           <br />
-                          {'"a benevolent smile"'}
                         </Typography>
+                        <LocationOnIcon />
+                        <TrendingFlatIcon />
+                        <CoronavirusIcon />
+                        <SyncIcon />
+                        <FoodBankIcon />
+                        <ScaleIcon />
+                        <ViewInArIcon />
+                        <SendIcon />
+                        <SpaceBarIcon />
+                        <HeightIcon />
                       </CardContent>
                     </Card>{" "}
                   </Grid>
