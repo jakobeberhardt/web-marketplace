@@ -1,53 +1,61 @@
 import React, { useState } from "react";
 import { Input, Button } from "@mui/material";
 import userObject from "../components/user/UserSingleton";
+import axios from "axios";
 
 function register(username: String, password: String) {
-  fetch("http://localhost:8080/api/auth/register", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      username: username,
-      password: password,
-    }),
-  })
-    .then((res) => res.json())
-    .then((data) => console.log(data));
+  axios
+    .post(
+      "https://api.jeberhardt.dev/api/v1/auth/register",
+      { "username": username, "password": password },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
+    .then((data) => console.log(data.data.accessToken))
+    .catch(console.log);
 }
 
-function login(username: String, password: String) {
-  fetch("http://localhost:8080/api/auth/login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      username: username,
-      password: password,
-    }),
-  })
-    .then((res) => res.json())
+function login(nutzername: String, passwort: String) {
+  axios
+    .post(
+      "https://api.jeberhardt.dev/api/v1/auth/login",
+      {
+        username: nutzername,
+        password: passwort,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
     .then((data) => {
-      userObject.accessToken = data.accessToken;
-      userObject.userId = data.userId;
-      userObject.refreshToken = data.refreshToken;
-      console.log(data, userObject);
+      userObject.accessToken = data.data.accessToken;
+      userObject.userId = data.data.userId;
+      userObject.refreshToken = data.data.refreshToken;
+      console.log(data.data, userObject.accessToken);
       Object.freeze(userObject);
-    });
+    })
+    .catch(console.log);
 }
 
 function getUserData(userId: String, accessToken: String) {
-  console.log(userId);
-  fetch(`http://localhost:8080/api/users/${userId}`, {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: "Token " + accessToken,
-    },
-  })
-    .then((res) => res.json())
-    .then((data) => console.log(data));
+  console.log(`Bearer ${accessToken}`);
+  axios
+    .get("https://api.jeberhardt.dev/api/v1/biddings/", {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch(console.log);
 }
 
 function Home() {
