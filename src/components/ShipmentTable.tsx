@@ -1,14 +1,24 @@
-import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper} from '@mui/material'
-import { useState, useEffect, Key } from 'react';
-import Bidding from '../types/Bidding';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+} from "@mui/material";
+import { useState, useEffect, Key } from "react";
+import Bidding from "../types/Bidding";
+import axios from "axios";
+import { useGlobalState } from "../components/GlobalStateProvider";
 
-function TableContent(props: {items:Bidding[]}) {
+function TableContent(props: { items: Bidding[] }) {
   return (
     <>
-      {props.items.map((item:Bidding) => (
+      {props.items.map((item: Bidding) => (
         <TableRow
           key={item.id as Key}
-          sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+          sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
         >
           <TableCell align="right">{item.shipment.id}</TableCell>
           <TableCell align="right">{item.shipment.tmsReference}</TableCell>
@@ -18,22 +28,26 @@ function TableContent(props: {items:Bidding[]}) {
         </TableRow>
       ))}
     </>
-  )
+  );
 }
 
 export default function ShipmentTable() {
+  const [items, setItems] = useState<Bidding[]>([]);
+  const { state } = useGlobalState();
 
-    const [items, setItems] = useState<Bidding[]>([])
-
-    useEffect(() => {
-      fetch('https://api.jeberhardt.dev/biddings')
-        .then(res => res.json())
-        .then(data => setItems(data));
-    }, []);
-
-    return (
-      <>
-      <div style={{padding: "1%", background: "white"}}>
+  useEffect(() => {
+    axios
+      .get("https://api.jeberhardt.dev/api/v1/biddings/", {
+        headers: {
+          Authorization: `Bearer ${state.accessToken}`,
+          "Content-Type": "application/json",
+        },
+      })
+      .then((data) => setItems(data.data));
+  }, [state.accessToken]);
+  return (
+    <>
+      <div style={{ padding: "1%", background: "white" }}>
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
@@ -45,12 +59,10 @@ export default function ShipmentTable() {
                 <TableCell align="right">Label</TableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
-                {items && <TableContent items={items} />}
-            </TableBody>
+            <TableBody>{items && <TableContent items={items} />}</TableBody>
           </Table>
         </TableContainer>
       </div>
-      </>
-    );
+    </>
+  );
 }
