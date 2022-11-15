@@ -6,22 +6,21 @@ import Pause from "./pages/Pause";
 import Home from "./pages/Home";
 import Offers from "./pages/Offers";
 import "./App.css";
-import userObject from "./components/user/UserSingleton";
+import { GlobalStateProvider } from "./components/GlobalStateProvider";
 
 function App() {
   return (
     <BrowserRouter>
       <Navbar title={"Navbar"}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/Home" element={<Home />} />
-          <Route
-            path="/Shipments"
-            element={<ShipmentTable accessToken={userObject.accessToken} />}
-          />
-          <Route path="/Offers" element={<Offers />} />
-          <Route path="/Pause" element={<Pause />} />
-        </Routes>
+        <GlobalStateProvider>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/Home" element={<Home />} />
+            <Route path="/Shipments" element={<ShipmentTable />} />
+            <Route path="/Offers" element={<Offers />} />
+            <Route path="/Pause" element={<Pause />} />
+          </Routes>
+        </GlobalStateProvider>
       </Navbar>
     </BrowserRouter>
   );

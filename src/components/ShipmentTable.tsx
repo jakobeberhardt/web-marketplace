@@ -9,8 +9,8 @@ import {
 } from "@mui/material";
 import { useState, useEffect, Key } from "react";
 import Bidding from "../types/Bidding";
-import userObject from "./user/UserSingleton";
 import axios from "axios";
+import { useGlobalState } from "../components/GlobalStateProvider";
 
 function TableContent(props: { items: Bidding[] }) {
   return (
@@ -31,19 +31,20 @@ function TableContent(props: { items: Bidding[] }) {
   );
 }
 
-export default function ShipmentTable(props: { accessToken: string }) {
+export default function ShipmentTable() {
   const [items, setItems] = useState<Bidding[]>([]);
+  const { state } = useGlobalState();
 
   useEffect(() => {
     axios
-      .get("https://api.jeberhardt.dev/biddings/", {
+      .get("https://api.jeberhardt.dev/api/v1/biddings/", {
         headers: {
-          Authorization: `Bearer ${props.accessToken}`,
+          Authorization: `Bearer ${state.accessToken}`,
           "Content-Type": "application/json",
         },
       })
       .then((data) => setItems(data.data));
-  }, [props.accessToken]);
+  }, [state.accessToken]);
   return (
     <>
       <div style={{ padding: "1%", background: "white" }}>
