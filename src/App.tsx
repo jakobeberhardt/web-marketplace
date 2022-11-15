@@ -1,5 +1,5 @@
 import * as React from "react";
-import ShipmentTable from "./components/ShipmentTable";
+import ShipmentContainer from "./components/Shipment/shipmentContainer";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Navbar from "./components/navbar/Navbar";
 import Pause from "./pages/Pause";
@@ -16,7 +16,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/Home" element={<Home />} />
-          <Route path="/Shipments" element={<ShipmentTable />} />
+          <Route path="/Shipments" element={<ShipmentContainer />} />
           <Route path="/Offers" element={<Offers />} />
           <Route path="/Pause" element={<Pause />} />
         </Routes>
