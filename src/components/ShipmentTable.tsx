@@ -22,6 +22,7 @@ import {
   CardActions,
   Button,
   CardContent,
+  Divider,
 } from "@mui/material";
 import { useState, useEffect } from "react";
 //import AllowedTimeWindow from '../types/AllowedTimeWindow';
@@ -144,17 +145,23 @@ export default function ShipmentTable() {
                       }}
                     >
                       <CardContent>
-                        <Typography
-                          sx={{ fontSize: 14 }}
-                          color="black"
-                          gutterBottom
-                          bgcolor={"#a9a9a9"}
+                        <div
+                          style={{ borderColor: "black", borderWidth: "4px" }}
                         >
-                          Beladeort
-                        </Typography>
+                          <Typography
+                            sx={{ fontSize: 20 }}
+                            color="black"
+                            gutterBottom
+                          >
+                            Beladeort
+                          </Typography>
+                          <Divider />
+                        </div>
                         <Typography variant="h5" component="div"></Typography>
 
-                        <Typography>Referenz:</Typography>
+                        <Typography style={{ paddingTop: "15px" }}>
+                          Referenz:
+                        </Typography>
                         <Typography
                           sx={{
                             bgcolor: "#e3e3e3",
@@ -166,7 +173,9 @@ export default function ShipmentTable() {
                         >
                           PIK_70528130
                         </Typography>
-                        <Typography>Status:</Typography>
+                        <Typography style={{ paddingTop: "15px" }}>
+                          Status:
+                        </Typography>
                         <Typography
                           sx={{
                             bgcolor: "#95ef5e",
@@ -224,16 +233,22 @@ export default function ShipmentTable() {
                       }}
                     >
                       <CardContent>
-                        <Typography
-                          sx={{ fontSize: 14 }}
-                          color="black"
-                          gutterBottom
-                          bgcolor={"#a9a9a9"}
+                        <div
+                          style={{ borderColor: "black", borderWidth: "4px" }}
                         >
-                          Entladeort
-                        </Typography>
+                          <Typography
+                            sx={{ fontSize: 20 }}
+                            color="black"
+                            gutterBottom
+                          >
+                            Entladeort
+                          </Typography>
+                          <Divider />
+                        </div>
 
-                        <Typography>Referenz:</Typography>
+                        <Typography style={{ paddingTop: "15px" }}>
+                          Referenz:
+                        </Typography>
                         <Typography
                           sx={{
                             bgcolor: "#e3e3e3",
@@ -246,7 +261,9 @@ export default function ShipmentTable() {
                           DEL_52180246
                         </Typography>
 
-                        <Typography>Status:</Typography>
+                        <Typography style={{ paddingTop: "15px" }}>
+                          Status:
+                        </Typography>
                         <Typography
                           sx={{
                             bgcolor: "#e3e3e3",
