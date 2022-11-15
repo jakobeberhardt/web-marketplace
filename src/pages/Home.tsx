@@ -7,7 +7,7 @@ function register(username: String, password: String) {
   axios
     .post(
       "https://api.jeberhardt.dev/api/v1/auth/register",
-      { "username": username, "password": password },
+      { username: username, password: password },
       {
         headers: {
           "Content-Type": "application/json",
@@ -18,13 +18,13 @@ function register(username: String, password: String) {
     .catch(console.log);
 }
 
-function login(nutzername: String, passwort: String) {
+function login(username: String, password: String) {
   axios
     .post(
       "https://api.jeberhardt.dev/api/v1/auth/login",
       {
-        username: nutzername,
-        password: passwort,
+        username: username,
+        password: password,
       },
       {
         headers: {
@@ -48,7 +48,6 @@ function getUserData(userId: String, accessToken: String) {
     .get("https://api.jeberhardt.dev/api/v1/biddings/", {
       headers: {
         Authorization: `Bearer ${accessToken}`,
-        "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       },
     })
@@ -96,11 +95,11 @@ function Home() {
         >
           Register
         </Button>
-        <Button variant="outlined" onClick={() => login(username, password)}>
+        <Button variant="contained" onClick={() => login(username, password)}>
           Login
         </Button>
         <Button
-          variant="outlined"
+          variant="contained"
           onClick={() => getUserData(userObject.userId, userObject.accessToken)}
         >
           GetUserData

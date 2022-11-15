@@ -10,6 +10,7 @@ import {
 import { useState, useEffect, Key } from "react";
 import Bidding from "../types/Bidding";
 import userObject from "./user/UserSingleton";
+import axios from "axios";
 
 function TableContent(props: { items: Bidding[] }) {
   return (
@@ -30,15 +31,19 @@ function TableContent(props: { items: Bidding[] }) {
   );
 }
 
-export default function ShipmentTable() {
+export default function ShipmentTable(props: { accessToken: string }) {
   const [items, setItems] = useState<Bidding[]>([]);
 
   useEffect(() => {
-    fetch("https://api.jeberhardt.dev/biddings")
-      .then((res) => res.json())
-      .then((data) => setItems(data));
-  }, []);
-
+    axios
+      .get("https://api.jeberhardt.dev/biddings/", {
+        headers: {
+          Authorization: `Bearer ${props.accessToken}`,
+          "Content-Type": "application/json",
+        },
+      })
+      .then((data) => setItems(data.data));
+  }, [props.accessToken]);
   return (
     <>
       <div style={{ padding: "1%", background: "white" }}>
