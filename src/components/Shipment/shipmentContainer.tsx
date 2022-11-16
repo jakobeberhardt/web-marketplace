@@ -7,7 +7,7 @@ import { Box, Container } from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Bidding from "../../types/Bid";
-import { useGlobalState } from "./src/components/GlobalStateProvider";
+import { useGlobalState } from "./../GlobalStateProvider";
 
 export function ShipmentContainer() {
   const [items, setItems] = useState<Bidding[]>([]);

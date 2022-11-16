@@ -11,7 +11,7 @@ import {
 import { useState, useEffect, Key } from "react";
 import Bidding from "../types/Bidding";
 import axios from "axios";
-import { useGlobalState } from "../components/GlobalStateProvider";
+import { useGlobalState } from "./../GlobalStateProvider";
 
 export function DischargeLoc() {
   return (

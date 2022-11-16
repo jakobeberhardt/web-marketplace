@@ -21,7 +21,7 @@ import { ExpandLess, ExpandMore } from "@mui/icons-material";
 
 import axios from "axios";
 import Bidding from "../../types/Bid";
-import { useGlobalState } from "../../../GlobalStateProvider";
+import { useGlobalState } from "./../GlobalStateProvider";
 
 export function ShipmentTable(items: Bidding[]) {
   const [open, setOpen] = React.useState(true);
