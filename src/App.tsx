@@ -8,23 +8,23 @@ import Offers from "./pages/Offers";
 import "./App.css";
 import { CssBaseline } from "@mui/material";
 import userObject from "./components/user/UserSingleton";
+import { GlobalStateProvider } from "./components/GlobalStateProvider";
 
 export default function App() {
   return (
     <BrowserRouter>
       <CssBaseline />
-      <Navbar title={"Navbar"}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/Home" element={<Home />} />
-          <Route
-            path="/Shipments"
-            element={<ShipmentContainer accessToken={userObject.accessToken} />}
-          />
-          <Route path="/Offers" element={<Offers />} />
-          <Route path="/Pause" element={<Pause />} />
-        </Routes>
-      </Navbar>
+      <GlobalStateProvider>
+        <Navbar title={"Navbar"}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/Home" element={<Home />} />
+            <Route path="/Shipments" element={<ShipmentContainer />} />
+            <Route path="/Offers" element={<Offers />} />
+            <Route path="/Pause" element={<Pause />} />
+          </Routes>
+        </Navbar>
+      </GlobalStateProvider>
     </BrowserRouter>
   );
 }
