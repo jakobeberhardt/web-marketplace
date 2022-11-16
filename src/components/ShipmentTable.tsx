@@ -116,7 +116,7 @@ export default function ShipmentTable() {
                     <Card sx={{ mt: "30px", mb: "30px", borderRadius: "10px" }}>
                       <CardContent>
                         <Typography variant="body2">
-                          Anzahl: <br />
+                          Bezeichnung: Anzahl: <br />
                           Gewicht: <br />
                           Idm: <br />
                           Quadratmeter:
@@ -185,7 +185,7 @@ export default function ShipmentTable() {
                           }}
                           variant="body2"
                         >
-                          Ankunft:
+                          Beladeort (PLZ):
                         </Typography>
                         <Typography
                           sx={{
@@ -196,7 +196,7 @@ export default function ShipmentTable() {
                           }}
                           variant="body2"
                         >
-                          Ladebeginn:
+                          Beladeort (Stadt):
                         </Typography>
                         <Typography
                           sx={{
@@ -207,7 +207,7 @@ export default function ShipmentTable() {
                           }}
                           variant="body2"
                         >
-                          Ladeende:
+                          Beladezeitraum (Beginn):
                         </Typography>
                         <Typography
                           sx={{
@@ -218,7 +218,7 @@ export default function ShipmentTable() {
                           }}
                           variant="body2"
                         >
-                          Abfahrt:
+                          Beladezeitraum (Ende):
                         </Typography>
                       </CardContent>
                     </Card>
@@ -273,7 +273,7 @@ export default function ShipmentTable() {
                           }}
                           variant="body2"
                         >
-                          Ankunft:
+                          Beladeort (PLZ):
                         </Typography>
                         <Typography
                           sx={{
@@ -284,7 +284,7 @@ export default function ShipmentTable() {
                           }}
                           variant="body2"
                         >
-                          Ladebeginn:
+                          Beladeort (Stadt):
                         </Typography>
                         <Typography
                           sx={{
@@ -295,7 +295,7 @@ export default function ShipmentTable() {
                           }}
                           variant="body2"
                         >
-                          Ladeende:
+                          Entladezeit (Beginn):
                         </Typography>
                         <Typography
                           sx={{
@@ -306,7 +306,7 @@ export default function ShipmentTable() {
                           }}
                           variant="body2"
                         >
-                          Abfahrt:
+                          Entladezeit (Ende):
                         </Typography>
                       </CardContent>
                     </Card>
