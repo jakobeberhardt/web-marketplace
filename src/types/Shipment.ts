@@ -2,7 +2,7 @@ import Visit from './Visit'
 import Requirement from './Requirement'
 
 export default class Shipment {
-    id!: any;
+    id!: String;
     tmsReference: String | undefined | null;
     position!: Number;
     label: String | undefined | null;

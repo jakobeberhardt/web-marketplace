@@ -1,8 +1,8 @@
 import * as React from "react";
 
-import Beladeort from "./Beladeort";
-import Entladeort from "./Entladeort";
-import SendungUebersicht from "./SendungUebersicht";
+import LoadingLoc from "./LoadingLoc";
+import { DischargeLoc } from "./DischargeLoc";
+import { Details } from "./Details";
 import {
   Grid,
   CssBaseline,
@@ -19,35 +19,11 @@ import SpaceBarIcon from "@mui/icons-material/SpaceBar";
 import HeightIcon from "@mui/icons-material/Height";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 
-/*
-function TableContent({ items }: any) {
-  const [item, setItem] = useState([]);
-  const [data, setData] = useState([]);
+import axios from "axios";
+import Bidding from "../../types/Bid";
+import { useGlobalState } from "../../../GlobalStateProvider";
 
-  //api call für die Bidding Objekte
-
-  useEffect(() => {
-    fetch("mock-shipment.json", {
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    })
-      .then((res) => console.log(res.json()))
-      .then((items) => setItem(item));
-  }, []);
-
-  return (
-    <div className="App">
-      {data &&
-        data.length > 0 &&
-        data.map((item) => <p>{item.shipment.label}</p>)}
-    </div>
-  );
-}
-*/
-
-export default function ShipmentTable() {
+export function ShipmentTable(items: Bidding[]) {
   const [open, setOpen] = React.useState(true);
 
   //toggle funktion für die Sendung
@@ -83,13 +59,13 @@ export default function ShipmentTable() {
           >
             <Grid container justifyContent="center">
               <Grid xs={10}>
-                <SendungUebersicht />
+                <Details />
               </Grid>
               <Grid xs={5}>
-                <Beladeort />
+                <LoadingLoc />
               </Grid>
               <Grid xs={5}>
-                <Entladeort />
+                <DischargeLoc />
               </Grid>
             </Grid>
           </List>

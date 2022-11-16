@@ -1,5 +1,4 @@
 import * as React from "react";
-import ShipmentTable from "./ShipmentTable";
 
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import TrendingFlatIcon from "@mui/icons-material/TrendingFlat";
@@ -15,7 +14,7 @@ import { ExpandLess, ExpandMore } from "@mui/icons-material";
 
 import { Box, Card, CardContent, Container, Typography } from "@mui/material";
 
-export default function SendungUebersicht() {
+export function Details() {
   return (
     <>
       <Card sx={{ mt: "30px", mb: "30px", borderRadius: "10px" }}>
