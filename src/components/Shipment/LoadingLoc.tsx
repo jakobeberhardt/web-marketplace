@@ -30,7 +30,7 @@ export default function LoadingLoc(props: { item: Bidding }) {
             <Divider />
           </div>
           <Typography variant="h5" component="div">
-            {item.shipment.pickup.station.name}
+            {props.item.shipment.pickup.station.name}
           </Typography>
 
           <Typography style={{ paddingTop: "15px" }}>Referenz:</Typography>
@@ -43,7 +43,7 @@ export default function LoadingLoc(props: { item: Bidding }) {
             }}
             variant="body2"
           >
-            {item.shipment.pickupReference}{" "}
+            {props.item.shipment.pickupReference}{" "}
           </Typography>
           <Typography style={{ paddingTop: "15px" }}>Status:</Typography>
           <Typography

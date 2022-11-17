@@ -27,7 +27,7 @@ export function DischargeLoc(props: { item: Bidding }) {
         <CardContent>
           <div style={{ borderColor: "black", borderWidth: "4px" }}>
             <Typography sx={{ fontSize: 20 }} color="black" gutterBottom>
-              Entladeort: {item.shipment.delivery.station.name}
+              Entladeort: {props.item.shipment.delivery.station.name}
             </Typography>
             <Divider />
           </div>
@@ -42,7 +42,7 @@ export function DischargeLoc(props: { item: Bidding }) {
             }}
             variant="body2"
           >
-            {item.shipment.deliveryReference}{" "}
+            {props.item.shipment.deliveryReference}{" "}
           </Typography>
 
           <Typography style={{ paddingTop: "15px" }}>Status:</Typography>
