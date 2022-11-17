@@ -1,1052 +1,207 @@
 [
   {
-    "id": "5f9352f2-30bc-4074-b481-b86e9b57fb7f",
-    "userId": 1,
-    "shipment": {
-      "id": 1,
-      "tmsReference": "test",
-      "position": 1,
-      "label": "test",
-      "pickup": {
-        "station": {
+    "id": 1,
+    "tmsReference": "LKW Convoy",
+    "position": 1,
+    "label": "Sperrgut",
+    "pickup": {
+      "station": {
+        "id": 17,
+        "tmsReference": "PIK_70528130",
+        "name": "DHL Zentrale Bielefeld",
+        "address": {
+          "name": "DHL Zentrale Bielefeld",
+          "building": "Gebaeude A",
+          "gate": "2c",
+          "street": "Transportwegstrasse",
+          "zipcode": "33611",
+          "city": "Bielefeld",
+          "country": "DE"
+        },
+        "gpsCoords": {
+          "latitude": 52.1,
+          "longitude": 8.32
+        },
+        "customer": {
           "id": 1,
-          "tmsReference": "test",
-          "name": "test",
+          "name": "NeoCargo AG",
+          "tmsReference": "MYTMSREF12345",
+          "vatId": "DE350124553",
           "address": {
-            "name": "test",
-            "building": "test",
-            "gate": "test",
-            "street": "test",
-            "zipcode": "test",
-            "city": "test",
-            "country": "test"
-          },
-          "gpsCoords": {
-            "latidute": 0.0,
-            "longtidude": 0.0
-          },
-          "customer": {
-            "id": 1,
-            "name": "test",
-            "tmsReference": "test",
-            "vatId": "test",
-            "address": {
-              "name": "test",
-              "street": "test",
-              "zipcode": "test",
-              "city": "test",
-              "country": "test"
-            }
-          },
-          "mainContact": null
+            "name": "NeoCargo",
+            "street": "Haid-und-Neu-Strasse 28",
+            "zipcode": "76131",
+            "city": "Karlsruhe",
+            "country": "DE"
+          }
         },
-        "contact": "test",
-        "plannedServiceDuration": 1,
-        "avis": [
-          {
-            "triggerType": "FIXED_DATETIME",
-            "avisType": "PHONE",
-            "triggerOffset": "test",
-            "recipient": "test"
-          },
-          {
-            "triggerType": "ARRIVAL_OFFSET",
-            "avisType": "SMS",
-            "triggerOffset": "test",
-            "recipient": "test"
-          }
-        ],
-        "allowedTimeWindows": [
-          {
-            "startTime": "2023-04-23T09:25:43.511+00:00",
-            "endTime": "2023-04-23T18:25:43.511+00:00"
-          },
-          {
-            "startTime": "2023-05-23T09:25:43.511+00:00",
-            "endTime": "2023-05-23T18:25:43.511+00:00"
-          }
-        ],
-        "timeWindowBookingUrl": "test"
+        "mainContact": null
       },
-      "pickupReference": "test",
-      "delivery": {
-        "station": {
-          "id": 1,
-          "tmsReference": "test",
-          "name": "test",
-          "address": {
-            "name": "test",
-            "building": "test",
-            "gate": "test",
-            "street": "test",
-            "zipcode": "test",
-            "city": "test",
-            "country": "test"
-          },
-          "gpsCoords": {
-            "latidute": 0.0,
-            "longtidude": 0.0
-          },
-          "customer": {
-            "id": 1,
-            "name": "test",
-            "tmsReference": "test",
-            "vatId": "test",
-            "address": {
-              "name": "test",
-              "street": "test",
-              "zipcode": "test",
-              "city": "test",
-              "country": "test"
-            }
-          },
-          "mainContact": null
+      "contact": "Muserkontakt",
+      "plannedServiceDuration": 60,
+      "avis": [
+        {
+          "triggerType": "FIXED_DATETIME",
+          "avisType": "MAIL",
+          "triggerOffset": "50",
+          "recipient": "max.mustermann@mail.de"
         },
-        "contact": "test",
-        "plannedServiceDuration": 1,
-        "avis": [
-          {
-            "triggerType": "FIXED_DATETIME",
-            "avisType": "PHONE",
-            "triggerOffset": "test",
-            "recipient": "test"
-          },
-          {
-            "triggerType": "ARRIVAL_OFFSET",
-            "avisType": "SMS",
-            "triggerOffset": "test",
-            "recipient": "test"
-          }
-        ],
-        "allowedTimeWindows": [
-          {
-            "startTime": "2023-04-23T09:25:43.511+00:00",
-            "endTime": "2023-04-23T18:25:43.511+00:00"
-          },
-          {
-            "startTime": "2023-05-23T09:25:43.511+00:00",
-            "endTime": "2023-05-23T18:25:43.511+00:00"
-          }
-        ],
-        "timeWindowBookingUrl": "test"
-      },
-      "deliveryReference": "test",
-      "totalItemCount": 1,
-      "totalWeight": 100.5,
-      "totalVolume": 50.5,
-      "totalLoadMeters": 13.6,
-      "internalInfo": "test",
-      "requirements": {
-        "boxTrailer": {
-          "scopes": "PICKUP"
-        },
-        "cleanedVehicle": {
-          "scopes": "ENROUTE"
-        },
-        "craneLoadable": {
-          "scopes": "DELIVERY"
-        },
-        "emptyVehicle": {
-          "scopes": "PICKUP"
-        },
-        "fireExtinguisher": null,
-        "foodstuffs": {
-          "scopes": "ENROUTE"
-        },
-        "healthCert": {
-          "scopes": "ENROUTE"
-        },
-        "keepDry": {
-          "scopes": "PICKUP"
-        },
-        "loadHeight": {
-          "scopes": "PICKUP",
-          "params": "test"
-        },
-        "loadLength": {
-          "scopes": "DELIVERY",
-          "params": "test"
-        },
-        "loadWidth": {
-          "scopes": "ENROUTE",
-          "params": "test"
-        },
-        "mobileForklift": {
-          "scopes": "DELIVERY"
-        },
-        "palletSwap": {
-          "scopes": "DELIVERY"
-        },
-        "ppeFfp2Mask": {
-          "scopes": "ENROUTE"
-        },
-        "ppeHelmet": {
-          "scopes": "DELIVERY"
-        },
-        "ppeShoes": {
-          "scopes": "PICKUP"
-        },
-        "ppeVest": {
-          "scopes": "ENROUTE"
-        },
-        "sideLoadable": {
-          "scopes": "DELIVERY"
-        },
-        "tailLift": {
-          "scopes": "PICKUP"
-        },
-        "trackingLevel": {
-          "scopes": "ENROUTE",
-          "params": "test"
-        },
-        "wasteSign": {
-          "scopes": "PICKUP"
-        },
-        "whitelabelVehicle": {
-          "scopes": "ENROUTE"
+        {
+          "triggerType": "ARRIVAL_OFFSET",
+          "avisType": "MAIL",
+          "triggerOffset": "70",
+          "recipient": "john.doe@mail.com"
         }
-      }
-    },
-    "bids": []
-  },
-  {
-    "id": "0ba1d2a3-02b3-4381-90f6-ee869a2ee17d",
-    "userId": 1,
-    "shipment": {
-      "id": 2,
-      "tmsReference": "test",
-      "position": 1,
-      "label": "test",
-      "pickup": {
-        "station": {
-          "id": 1,
-          "tmsReference": "test",
-          "name": "test",
-          "address": {
-            "name": "test",
-            "building": "test",
-            "gate": "test",
-            "street": "test",
-            "zipcode": "test",
-            "city": "test",
-            "country": "test"
-          },
-          "gpsCoords": {
-            "latidute": 0.0,
-            "longtidude": 0.0
-          },
-          "customer": {
-            "id": 1,
-            "name": "test",
-            "tmsReference": "test",
-            "vatId": "test",
-            "address": {
-              "name": "test",
-              "street": "test",
-              "zipcode": "test",
-              "city": "test",
-              "country": "test"
-            }
-          },
-          "mainContact": null
+      ],
+      "allowedTimeWindows": [
+        {
+          "startTime": "2023-04-23T09:25:43.511+00:00",
+          "endTime": "2023-04-23T18:25:43.511+00:00"
         },
-        "contact": "test",
-        "plannedServiceDuration": 1,
-        "avis": [
-          {
-            "triggerType": "FIXED_DATETIME",
-            "avisType": "PHONE",
-            "triggerOffset": "test",
-            "recipient": "test"
-          },
-          {
-            "triggerType": "ARRIVAL_OFFSET",
-            "avisType": "SMS",
-            "triggerOffset": "test",
-            "recipient": "test"
-          }
-        ],
-        "allowedTimeWindows": [
-          {
-            "startTime": "2023-04-23T09:25:43.511+00:00",
-            "endTime": "2023-04-23T18:25:43.511+00:00"
-          },
-          {
-            "startTime": "2023-05-23T09:25:43.511+00:00",
-            "endTime": "2023-05-23T18:25:43.511+00:00"
-          }
-        ],
-        "timeWindowBookingUrl": "test"
-      },
-      "pickupReference": "test",
-      "delivery": {
-        "station": {
-          "id": 1,
-          "tmsReference": "test",
-          "name": "test",
-          "address": {
-            "name": "test",
-            "building": "test",
-            "gate": "test",
-            "street": "test",
-            "zipcode": "test",
-            "city": "test",
-            "country": "test"
-          },
-          "gpsCoords": {
-            "latidute": 0.0,
-            "longtidude": 0.0
-          },
-          "customer": {
-            "id": 1,
-            "name": "test",
-            "tmsReference": "test",
-            "vatId": "test",
-            "address": {
-              "name": "test",
-              "street": "test",
-              "zipcode": "test",
-              "city": "test",
-              "country": "test"
-            }
-          },
-          "mainContact": null
-        },
-        "contact": "test",
-        "plannedServiceDuration": 1,
-        "avis": [
-          {
-            "triggerType": "FIXED_DATETIME",
-            "avisType": "PHONE",
-            "triggerOffset": "test",
-            "recipient": "test"
-          },
-          {
-            "triggerType": "ARRIVAL_OFFSET",
-            "avisType": "SMS",
-            "triggerOffset": "test",
-            "recipient": "test"
-          }
-        ],
-        "allowedTimeWindows": [
-          {
-            "startTime": "2023-04-23T09:25:43.511+00:00",
-            "endTime": "2023-04-23T18:25:43.511+00:00"
-          },
-          {
-            "startTime": "2023-05-23T09:25:43.511+00:00",
-            "endTime": "2023-05-23T18:25:43.511+00:00"
-          }
-        ],
-        "timeWindowBookingUrl": "test"
-      },
-      "deliveryReference": "test",
-      "totalItemCount": 1,
-      "totalWeight": 100.5,
-      "totalVolume": 50.5,
-      "totalLoadMeters": 13.6,
-      "internalInfo": "test",
-      "requirements": {
-        "boxTrailer": {
-          "scopes": "PICKUP"
-        },
-        "cleanedVehicle": {
-          "scopes": "ENROUTE"
-        },
-        "craneLoadable": {
-          "scopes": "DELIVERY"
-        },
-        "emptyVehicle": {
-          "scopes": "PICKUP"
-        },
-        "fireExtinguisher": null,
-        "foodstuffs": {
-          "scopes": "ENROUTE"
-        },
-        "healthCert": {
-          "scopes": "ENROUTE"
-        },
-        "keepDry": {
-          "scopes": "PICKUP"
-        },
-        "loadHeight": {
-          "scopes": "PICKUP",
-          "params": "test"
-        },
-        "loadLength": {
-          "scopes": "DELIVERY",
-          "params": "test"
-        },
-        "loadWidth": {
-          "scopes": "ENROUTE",
-          "params": "test"
-        },
-        "mobileForklift": {
-          "scopes": "DELIVERY"
-        },
-        "palletSwap": {
-          "scopes": "DELIVERY"
-        },
-        "ppeFfp2Mask": {
-          "scopes": "ENROUTE"
-        },
-        "ppeHelmet": {
-          "scopes": "DELIVERY"
-        },
-        "ppeShoes": {
-          "scopes": "PICKUP"
-        },
-        "ppeVest": {
-          "scopes": "ENROUTE"
-        },
-        "sideLoadable": {
-          "scopes": "DELIVERY"
-        },
-        "tailLift": {
-          "scopes": "PICKUP"
-        },
-        "trackingLevel": {
-          "scopes": "ENROUTE",
-          "params": "test"
-        },
-        "wasteSign": {
-          "scopes": "PICKUP"
-        },
-        "whitelabelVehicle": {
-          "scopes": "ENROUTE"
+        {
+          "startTime": "2023-05-23T09:25:43.511+00:00",
+          "endTime": "2023-05-23T18:25:43.511+00:00"
         }
-      }
+      ],
+      "timeWindowBookingUrl": "booking.transport.dhl.de"
     },
-    "bids": []
-  },
-  {
-    "id": "9e69c1ad-d8c3-45bd-a78d-a7bfefd4e4ba",
-    "userId": 1,
-    "shipment": {
-      "id": 3,
-      "tmsReference": "test",
-      "position": 1,
-      "label": "test",
-      "pickup": {
-        "station": {
+    "pickupReference": "XYZ-987654321",
+    "delivery": {
+      "station": {
+        "id": 1,
+        "tmsReference": "DEL_52180246",
+        "name": "DHL Zentrale Berlin",
+        "address": {
+          "name": "Deutsche Post DHL Group Zustellbasis",
+          "building": "Building 5a",
+          "gate": "Gate 1",
+          "street": "Josef-Orlopp-Straße 90",
+          "zipcode": "10115",
+          "city": "Berlin",
+          "country": "DE"
+        },
+        "gpsCoords": {
+          "latidute": 53.0,
+          "longtidude": 13.0
+        },
+        "customer": {
           "id": 1,
-          "tmsReference": "test",
-          "name": "test",
+          "name": "DHL Paket GmbH",
+          "tmsReference": "MYTMSREF47348",
+          "vatId": "DE35012231",
           "address": {
-            "name": "test",
-            "building": "test",
-            "gate": "test",
-            "street": "test",
-            "zipcode": "test",
-            "city": "test",
-            "country": "test"
-          },
-          "gpsCoords": {
-            "latidute": 0.0,
-            "longtidude": 0.0
-          },
-          "customer": {
-            "id": 1,
-            "name": "test",
-            "tmsReference": "test",
-            "vatId": "test",
-            "address": {
-              "name": "test",
-              "street": "test",
-              "zipcode": "test",
-              "city": "test",
-              "country": "test"
-            }
-          },
-          "mainContact": null
+            "name": "DHL Zentrale",
+            "street": "Straesschenweg 10",
+            "zipcode": "53111",
+            "city": "Bonn",
+            "country": "DE"
+          }
         },
-        "contact": "test",
-        "plannedServiceDuration": 1,
-        "avis": [
-          {
-            "triggerType": "FIXED_DATETIME",
-            "avisType": "PHONE",
-            "triggerOffset": "test",
-            "recipient": "test"
-          },
-          {
-            "triggerType": "ARRIVAL_OFFSET",
-            "avisType": "SMS",
-            "triggerOffset": "test",
-            "recipient": "test"
-          }
-        ],
-        "allowedTimeWindows": [
-          {
-            "startTime": "2023-04-23T09:25:43.511+00:00",
-            "endTime": "2023-04-23T18:25:43.511+00:00"
-          },
-          {
-            "startTime": "2023-05-23T09:25:43.511+00:00",
-            "endTime": "2023-05-23T18:25:43.511+00:00"
-          }
-        ],
-        "timeWindowBookingUrl": "test"
+        "mainContact": null
       },
-      "pickupReference": "test",
-      "delivery": {
-        "station": {
-          "id": 1,
-          "tmsReference": "test",
-          "name": "test",
-          "address": {
-            "name": "test",
-            "building": "test",
-            "gate": "test",
-            "street": "test",
-            "zipcode": "test",
-            "city": "test",
-            "country": "test"
-          },
-          "gpsCoords": {
-            "latidute": 0.0,
-            "longtidude": 0.0
-          },
-          "customer": {
-            "id": 1,
-            "name": "test",
-            "tmsReference": "test",
-            "vatId": "test",
-            "address": {
-              "name": "test",
-              "street": "test",
-              "zipcode": "test",
-              "city": "test",
-              "country": "test"
-            }
-          },
-          "mainContact": null
+      "contact": "Musterkontakt",
+      "plannedServiceDuration": 50,
+      "avis": [
+        {
+          "triggerType": "FIXED_DATETIME",
+          "avisType": "PHONE",
+          "triggerOffset": "40",
+          "recipient": "07823/327823"
         },
-        "contact": "test",
-        "plannedServiceDuration": 1,
-        "avis": [
-          {
-            "triggerType": "FIXED_DATETIME",
-            "avisType": "PHONE",
-            "triggerOffset": "test",
-            "recipient": "test"
-          },
-          {
-            "triggerType": "ARRIVAL_OFFSET",
-            "avisType": "SMS",
-            "triggerOffset": "test",
-            "recipient": "test"
-          }
-        ],
-        "allowedTimeWindows": [
-          {
-            "startTime": "2023-04-23T09:25:43.511+00:00",
-            "endTime": "2023-04-23T18:25:43.511+00:00"
-          },
-          {
-            "startTime": "2023-05-23T09:25:43.511+00:00",
-            "endTime": "2023-05-23T18:25:43.511+00:00"
-          }
-        ],
-        "timeWindowBookingUrl": "test"
-      },
-      "deliveryReference": "test",
-      "totalItemCount": 1,
-      "totalWeight": 100.5,
-      "totalVolume": 50.5,
-      "totalLoadMeters": 13.6,
-      "internalInfo": "test",
-      "requirements": {
-        "boxTrailer": {
-          "scopes": "PICKUP"
-        },
-        "cleanedVehicle": {
-          "scopes": "ENROUTE"
-        },
-        "craneLoadable": {
-          "scopes": "DELIVERY"
-        },
-        "emptyVehicle": {
-          "scopes": "PICKUP"
-        },
-        "fireExtinguisher": null,
-        "foodstuffs": {
-          "scopes": "ENROUTE"
-        },
-        "healthCert": {
-          "scopes": "ENROUTE"
-        },
-        "keepDry": {
-          "scopes": "PICKUP"
-        },
-        "loadHeight": {
-          "scopes": "PICKUP",
-          "params": "test"
-        },
-        "loadLength": {
-          "scopes": "DELIVERY",
-          "params": "test"
-        },
-        "loadWidth": {
-          "scopes": "ENROUTE",
-          "params": "test"
-        },
-        "mobileForklift": {
-          "scopes": "DELIVERY"
-        },
-        "palletSwap": {
-          "scopes": "DELIVERY"
-        },
-        "ppeFfp2Mask": {
-          "scopes": "ENROUTE"
-        },
-        "ppeHelmet": {
-          "scopes": "DELIVERY"
-        },
-        "ppeShoes": {
-          "scopes": "PICKUP"
-        },
-        "ppeVest": {
-          "scopes": "ENROUTE"
-        },
-        "sideLoadable": {
-          "scopes": "DELIVERY"
-        },
-        "tailLift": {
-          "scopes": "PICKUP"
-        },
-        "trackingLevel": {
-          "scopes": "ENROUTE",
-          "params": "test"
-        },
-        "wasteSign": {
-          "scopes": "PICKUP"
-        },
-        "whitelabelVehicle": {
-          "scopes": "ENROUTE"
+        {
+          "triggerType": "ARRIVAL_OFFSET",
+          "avisType": "SMS",
+          "triggerOffset": "test",
+          "recipient": "0176/2372838"
         }
-      }
-    },
-    "bids": []
-  },
-  {
-    "id": "a05d0a4a-aff4-411e-a032-9d1548d89142",
-    "userId": 1,
-    "shipment": {
-      "id": 4,
-      "tmsReference": "test",
-      "position": 1,
-      "label": "test",
-      "pickup": {
-        "station": {
-          "id": 1,
-          "tmsReference": "test",
-          "name": "test",
-          "address": {
-            "name": "test",
-            "building": "test",
-            "gate": "test",
-            "street": "test",
-            "zipcode": "test",
-            "city": "test",
-            "country": "test"
-          },
-          "gpsCoords": {
-            "latidute": 0.0,
-            "longtidude": 0.0
-          },
-          "customer": {
-            "id": 1,
-            "name": "test",
-            "tmsReference": "test",
-            "vatId": "test",
-            "address": {
-              "name": "test",
-              "street": "test",
-              "zipcode": "test",
-              "city": "test",
-              "country": "test"
-            }
-          },
-          "mainContact": null
+      ],
+      "allowedTimeWindows": [
+        {
+          "startTime": "2023-04-23T09:25:43.511+00:00",
+          "endTime": "2023-04-23T18:25:43.511+00:00"
         },
-        "contact": "test",
-        "plannedServiceDuration": 1,
-        "avis": [
-          {
-            "triggerType": "FIXED_DATETIME",
-            "avisType": "PHONE",
-            "triggerOffset": "test",
-            "recipient": "test"
-          },
-          {
-            "triggerType": "ARRIVAL_OFFSET",
-            "avisType": "SMS",
-            "triggerOffset": "test",
-            "recipient": "test"
-          }
-        ],
-        "allowedTimeWindows": [
-          {
-            "startTime": "2023-04-23T09:25:43.511+00:00",
-            "endTime": "2023-04-23T18:25:43.511+00:00"
-          },
-          {
-            "startTime": "2023-05-23T09:25:43.511+00:00",
-            "endTime": "2023-05-23T18:25:43.511+00:00"
-          }
-        ],
-        "timeWindowBookingUrl": "test"
-      },
-      "pickupReference": "test",
-      "delivery": {
-        "station": {
-          "id": 1,
-          "tmsReference": "test",
-          "name": "test",
-          "address": {
-            "name": "test",
-            "building": "test",
-            "gate": "test",
-            "street": "test",
-            "zipcode": "test",
-            "city": "test",
-            "country": "test"
-          },
-          "gpsCoords": {
-            "latidute": 0.0,
-            "longtidude": 0.0
-          },
-          "customer": {
-            "id": 1,
-            "name": "test",
-            "tmsReference": "test",
-            "vatId": "test",
-            "address": {
-              "name": "test",
-              "street": "test",
-              "zipcode": "test",
-              "city": "test",
-              "country": "test"
-            }
-          },
-          "mainContact": null
-        },
-        "contact": "test",
-        "plannedServiceDuration": 1,
-        "avis": [
-          {
-            "triggerType": "FIXED_DATETIME",
-            "avisType": "PHONE",
-            "triggerOffset": "test",
-            "recipient": "test"
-          },
-          {
-            "triggerType": "ARRIVAL_OFFSET",
-            "avisType": "SMS",
-            "triggerOffset": "test",
-            "recipient": "test"
-          }
-        ],
-        "allowedTimeWindows": [
-          {
-            "startTime": "2023-04-23T09:25:43.511+00:00",
-            "endTime": "2023-04-23T18:25:43.511+00:00"
-          },
-          {
-            "startTime": "2023-05-23T09:25:43.511+00:00",
-            "endTime": "2023-05-23T18:25:43.511+00:00"
-          }
-        ],
-        "timeWindowBookingUrl": "test"
-      },
-      "deliveryReference": "test",
-      "totalItemCount": 1,
-      "totalWeight": 100.5,
-      "totalVolume": 50.5,
-      "totalLoadMeters": 13.6,
-      "internalInfo": "test",
-      "requirements": {
-        "boxTrailer": {
-          "scopes": "PICKUP"
-        },
-        "cleanedVehicle": {
-          "scopes": "ENROUTE"
-        },
-        "craneLoadable": {
-          "scopes": "DELIVERY"
-        },
-        "emptyVehicle": {
-          "scopes": "PICKUP"
-        },
-        "fireExtinguisher": null,
-        "foodstuffs": {
-          "scopes": "ENROUTE"
-        },
-        "healthCert": {
-          "scopes": "ENROUTE"
-        },
-        "keepDry": {
-          "scopes": "PICKUP"
-        },
-        "loadHeight": {
-          "scopes": "PICKUP",
-          "params": "test"
-        },
-        "loadLength": {
-          "scopes": "DELIVERY",
-          "params": "test"
-        },
-        "loadWidth": {
-          "scopes": "ENROUTE",
-          "params": "test"
-        },
-        "mobileForklift": {
-          "scopes": "DELIVERY"
-        },
-        "palletSwap": {
-          "scopes": "DELIVERY"
-        },
-        "ppeFfp2Mask": {
-          "scopes": "ENROUTE"
-        },
-        "ppeHelmet": {
-          "scopes": "DELIVERY"
-        },
-        "ppeShoes": {
-          "scopes": "PICKUP"
-        },
-        "ppeVest": {
-          "scopes": "ENROUTE"
-        },
-        "sideLoadable": {
-          "scopes": "DELIVERY"
-        },
-        "tailLift": {
-          "scopes": "PICKUP"
-        },
-        "trackingLevel": {
-          "scopes": "ENROUTE",
-          "params": "test"
-        },
-        "wasteSign": {
-          "scopes": "PICKUP"
-        },
-        "whitelabelVehicle": {
-          "scopes": "ENROUTE"
+        {
+          "startTime": "2023-05-23T09:25:43.511+00:00",
+          "endTime": "2023-05-23T18:25:43.511+00:00"
         }
-      }
+      ],
+      "timeWindowBookingUrl": "booking.transport.dhl.de"
     },
-    "bids": []
-  },
-  {
-    "id": "4809362d-9df2-4d41-8bc1-a19cd9314cfc",
-    "userId": 1,
-    "shipment": {
-      "id": 6,
-      "tmsReference": "test",
-      "position": 1,
-      "label": "test",
-      "pickup": {
-        "station": {
-          "id": 1,
-          "tmsReference": "test",
-          "name": "test",
-          "address": {
-            "name": "test",
-            "building": "test",
-            "gate": "test",
-            "street": "test",
-            "zipcode": "test",
-            "city": "test",
-            "country": "test"
-          },
-          "gpsCoords": {
-            "latidute": 0.0,
-            "longtidude": 0.0
-          },
-          "customer": {
-            "id": 1,
-            "name": "test",
-            "tmsReference": "test",
-            "vatId": "test",
-            "address": {
-              "name": "test",
-              "street": "test",
-              "zipcode": "test",
-              "city": "test",
-              "country": "test"
-            }
-          },
-          "mainContact": null
-        },
-        "contact": "test",
-        "plannedServiceDuration": 1,
-        "avis": [
-          {
-            "triggerType": "FIXED_DATETIME",
-            "avisType": "PHONE",
-            "triggerOffset": "test",
-            "recipient": "test"
-          },
-          {
-            "triggerType": "ARRIVAL_OFFSET",
-            "avisType": "SMS",
-            "triggerOffset": "test",
-            "recipient": "test"
-          }
-        ],
-        "allowedTimeWindows": [
-          {
-            "startTime": "2023-04-23T09:25:43.511+00:00",
-            "endTime": "2023-04-23T18:25:43.511+00:00"
-          },
-          {
-            "startTime": "2023-05-23T09:25:43.511+00:00",
-            "endTime": "2023-05-23T18:25:43.511+00:00"
-          }
-        ],
-        "timeWindowBookingUrl": "test"
+    "deliveryReference": "ABC-123234569",
+    "totalItemCount": 17,
+    "totalWeight": 100.5,
+    "totalVolume": 50.5,
+    "totalLoadMeters": 13.6,
+    "internalInfo": "Please dont send Mr Mueller",
+    "requirements": {
+      "boxTrailer": {
+        "scopes": "PICKUP"
       },
-      "pickupReference": "test",
-      "delivery": {
-        "station": {
-          "id": 1,
-          "tmsReference": "test",
-          "name": "test",
-          "address": {
-            "name": "test",
-            "building": "test",
-            "gate": "test",
-            "street": "test",
-            "zipcode": "test",
-            "city": "test",
-            "country": "test"
-          },
-          "gpsCoords": {
-            "latidute": 0.0,
-            "longtidude": 0.0
-          },
-          "customer": {
-            "id": 1,
-            "name": "test",
-            "tmsReference": "test",
-            "vatId": "test",
-            "address": {
-              "name": "test",
-              "street": "test",
-              "zipcode": "test",
-              "city": "test",
-              "country": "test"
-            }
-          },
-          "mainContact": null
-        },
-        "contact": "test",
-        "plannedServiceDuration": 1,
-        "avis": [
-          {
-            "triggerType": "FIXED_DATETIME",
-            "avisType": "PHONE",
-            "triggerOffset": "test",
-            "recipient": "test"
-          },
-          {
-            "triggerType": "ARRIVAL_OFFSET",
-            "avisType": "SMS",
-            "triggerOffset": "test",
-            "recipient": "test"
-          }
-        ],
-        "allowedTimeWindows": [
-          {
-            "startTime": "2023-04-23T09:25:43.511+00:00",
-            "endTime": "2023-04-23T18:25:43.511+00:00"
-          },
-          {
-            "startTime": "2023-05-23T09:25:43.511+00:00",
-            "endTime": "2023-05-23T18:25:43.511+00:00"
-          }
-        ],
-        "timeWindowBookingUrl": "test"
+      "cleanedVehicle": {
+        "scopes": "ENROUTE"
       },
-      "deliveryReference": "test",
-      "totalItemCount": 1,
-      "totalWeight": 100.5,
-      "totalVolume": 50.5,
-      "totalLoadMeters": 13.6,
-      "internalInfo": "test",
-      "requirements": {
-        "boxTrailer": {
-          "scopes": "PICKUP"
-        },
-        "cleanedVehicle": {
-          "scopes": "ENROUTE"
-        },
-        "craneLoadable": {
-          "scopes": "DELIVERY"
-        },
-        "emptyVehicle": {
-          "scopes": "PICKUP"
-        },
-        "fireExtinguisher": null,
-        "foodstuffs": {
-          "scopes": "ENROUTE"
-        },
-        "healthCert": {
-          "scopes": "ENROUTE"
-        },
-        "keepDry": {
-          "scopes": "PICKUP"
-        },
-        "loadHeight": {
-          "scopes": "PICKUP",
-          "params": "test"
-        },
-        "loadLength": {
-          "scopes": "DELIVERY",
-          "params": "test"
-        },
-        "loadWidth": {
-          "scopes": "ENROUTE",
-          "params": "test"
-        },
-        "mobileForklift": {
-          "scopes": "DELIVERY"
-        },
-        "palletSwap": {
-          "scopes": "DELIVERY"
-        },
-        "ppeFfp2Mask": {
-          "scopes": "ENROUTE"
-        },
-        "ppeHelmet": {
-          "scopes": "DELIVERY"
-        },
-        "ppeShoes": {
-          "scopes": "PICKUP"
-        },
-        "ppeVest": {
-          "scopes": "ENROUTE"
-        },
-        "sideLoadable": {
-          "scopes": "DELIVERY"
-        },
-        "tailLift": {
-          "scopes": "PICKUP"
-        },
-        "trackingLevel": {
-          "scopes": "ENROUTE",
-          "params": "test"
-        },
-        "wasteSign": {
-          "scopes": "PICKUP"
-        },
-        "whitelabelVehicle": {
-          "scopes": "ENROUTE"
-        }
+      "craneLoadable": {
+        "scopes": "DELIVERY"
+      },
+      "emptyVehicle": {
+        "scopes": "PICKUP"
+      },
+      "fireExtinguisher": null,
+      "foodstuffs": {
+        "scopes": "ENROUTE"
+      },
+      "healthCert": {
+        "scopes": "ENROUTE"
+      },
+      "keepDry": {
+        "scopes": "PICKUP"
+      },
+      "loadHeight": {
+        "scopes": "PICKUP",
+        "params": "test"
+      },
+      "loadLength": {
+        "scopes": "DELIVERY",
+        "params": "test"
+      },
+      "loadWidth": {
+        "scopes": "ENROUTE",
+        "params": "test"
+      },
+      "mobileForklift": {
+        "scopes": "DELIVERY"
+      },
+      "palletSwap": {
+        "scopes": "DELIVERY"
+      },
+      "ppeFfp2Mask": {
+        "scopes": "ENROUTE"
+      },
+      "ppeHelmet": {
+        "scopes": "DELIVERY"
+      },
+      "ppeShoes": {
+        "scopes": "PICKUP"
+      },
+      "ppeVest": {
+        "scopes": "ENROUTE"
+      },
+      "sideLoadable": {
+        "scopes": "DELIVERY"
+      },
+      "tailLift": {
+        "scopes": "PICKUP"
+      },
+      "trackingLevel": {
+        "scopes": "ENROUTE",
+        "params": "test"
+      },
+      "wasteSign": {
+        "scopes": "PICKUP"
+      },
+      "whitelabelVehicle": {
+        "scopes": "ENROUTE"
       }
-    },
-    "bids": []
+    }
   }
 ]
