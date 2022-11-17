@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import { Input, Button } from "@mui/material";
 import userObject from "../components/user/UserSingleton";
 import axios from "axios";
+import {
+  useGlobalState,
+  GlobalStateInterface,
+} from "../components/GlobalStateProvider";
 
 function register(username: String, password: String) {
   axios
@@ -18,7 +22,7 @@ function register(username: String, password: String) {
     .catch(console.log);
 }
 
-function login(username: String, password: String) {
+function login(username: String, password: String, submitFunction: Function) {
   axios
     .post(
       "https://api.jeberhardt.dev/api/v1/auth/login",
@@ -37,12 +41,13 @@ function login(username: String, password: String) {
       userObject.userId = data.data.userId;
       userObject.refreshToken = data.data.refreshToken;
       console.log(data.data, userObject.accessToken);
+      submitFunction(data.data);
       Object.freeze(userObject);
     })
     .catch(console.log);
 }
 
-function getUserData(userId: String, accessToken: String) {
+function getUserData(accessToken: String) {
   console.log(`Bearer ${accessToken}`);
   axios
     .get("https://api.jeberhardt.dev/api/v1/biddings/", {
@@ -60,6 +65,11 @@ function getUserData(userId: String, accessToken: String) {
 function Home() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const { setState } = useGlobalState();
+
+  const submitFunction = (data: Partial<GlobalStateInterface>) => {
+    setState((prev) => ({ ...prev, ...data }));
+  };
 
   const handleChangeUsername = (event: {
     target: { value: React.SetStateAction<string> };
@@ -95,12 +105,15 @@ function Home() {
         >
           Register
         </Button>
-        <Button variant="contained" onClick={() => login(username, password)}>
+        <Button
+          variant="contained"
+          onClick={() => login(username, password, submitFunction)}
+        >
           Login
         </Button>
         <Button
           variant="contained"
-          onClick={() => getUserData(userObject.userId, userObject.accessToken)}
+          onClick={() => getUserData(userObject.accessToken)}
         >
           GetUserData
         </Button>

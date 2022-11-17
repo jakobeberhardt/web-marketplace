@@ -1,19 +1,16 @@
 import * as React from "react";
 import { ShipmentTable } from "./ShipmentTable";
-import { Details } from "./Details";
-import { DischargeLoc } from "./DischargeLoc";
-import LoadingLoc from "./LoadingLoc";
 import { Box, Container, List } from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Bidding from "../../types/Bid";
+import Bidding from "../../types/Bidding";
 import { useGlobalState } from "../GlobalStateProvider";
 
 function ShipmentItems(props: { items: Bidding[] }) {
   return (
     <>
       {props.items.map((item: Bidding) => (
-        <ShipmentTable item={item as Bidding} />
+        <ShipmentTable item={item} />
       ))}
     </>
   );
@@ -25,7 +22,7 @@ export function ShipmentContainer() {
 
   useEffect(() => {
     axios
-      .get("https://api.jeberhardt.dev/biddings/", {
+      .get("https://api.jeberhardt.dev/api/v1/biddings/", {
         headers: {
           Authorization: `Bearer ${state.accessToken}`,
           "Content-Type": "application/json",
