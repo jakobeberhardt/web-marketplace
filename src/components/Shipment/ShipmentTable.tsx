@@ -15,7 +15,7 @@ import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import Bidding from "../../types/Bidding";
 
 export function ShipmentTable(props: { item: Bidding }) {
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
 
   //toggle funktion für die Sendung
   const handleClick = () => {
