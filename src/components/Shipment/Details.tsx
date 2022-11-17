@@ -20,11 +20,15 @@ export function Details(props: { item: Bidding }) {
       <Card sx={{ mt: "30px", mb: "30px", borderRadius: "10px" }}>
         <CardContent>
           <Typography variant="body2">
-            Anzahl: <br />
-            Gewicht: <br />
-            Idm: <br />
-            Quadratmeter:
-            <br />
+            <>
+              Anzahl: {props.item.shipment.totalItemCount} <br />
+              Gewicht: {props.item.shipment.totalWeight}
+              <br />
+              Idm: {props.item.shipment.totalLoadMeters}
+              <br />
+              Quadratmeter: {props.item.shipment.totalVolume}
+              <br />
+            </>
           </Typography>
           <LocationOnIcon />
           <TrendingFlatIcon />

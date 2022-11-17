@@ -35,7 +35,7 @@ export function ShipmentTable(props: { item: Bidding }) {
       >
         <ListItemButton onClick={handleClick}>
           <SendIcon sx={{ mr: "20px" }} />
-          <ListItemText primary="Sendung 14001" />
+          <ListItemText primary={props.item.shipment.id} />
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
         <Collapse in={open} timeout="auto" unmountOnExit>
