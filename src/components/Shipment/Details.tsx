@@ -13,8 +13,9 @@ import HeightIcon from "@mui/icons-material/Height";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 
 import { Box, Card, CardContent, Container, Typography } from "@mui/material";
+import Bidding from "../../types/Bid";
 
-export function Details() {
+export function Details(item: Bidding) {
   return (
     <>
       <Card sx={{ mt: "30px", mb: "30px", borderRadius: "10px" }}>

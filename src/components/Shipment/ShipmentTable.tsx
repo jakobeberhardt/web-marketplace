@@ -23,7 +23,7 @@ import axios from "axios";
 import Bidding from "../../types/Bid";
 import { useGlobalState } from "./../GlobalStateProvider";
 
-export function ShipmentTable(items: Bidding[]) {
+export function ShipmentTable(item: Bidding) {
   const [open, setOpen] = React.useState(true);
 
   //toggle funktion für die Sendung
@@ -59,13 +59,13 @@ export function ShipmentTable(items: Bidding[]) {
           >
             <Grid container justifyContent="center">
               <Grid xs={10}>
-                <Details />
+                <Details item={item} />
               </Grid>
               <Grid xs={5}>
-                <LoadingLoc />
+                <LoadingLoc item={item} />
               </Grid>
               <Grid xs={5}>
-                <DischargeLoc />
+                <DischargeLoc item={item} />
               </Grid>
             </Grid>
           </List>
