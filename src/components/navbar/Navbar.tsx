@@ -9,7 +9,13 @@ import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import Home from "@mui/icons-material/Home";
 import Logo from "./NeoCargoLogo.png";
 import { Link } from "react-router-dom";
-import { Drawer, ListItemButton, Button, Input } from "@mui/material";
+import {
+  Drawer,
+  ListItemButton,
+  Button,
+  Input,
+  Typography,
+} from "@mui/material";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import { useState, ReactNode } from "react";
@@ -140,7 +146,7 @@ const Navbar = ({ children }: Props) => {
               padding: "15px",
             }}
           />
-          <div>
+          <div style={{ marginLeft: "auto", marginRight: 0 }}>
             <Input
               placeholder="Username"
               value={username}
@@ -150,22 +156,25 @@ const Navbar = ({ children }: Props) => {
               placeholder="Password"
               value={password}
               onChange={handleChangePassword}
-            />
-            <Button
-              variant="contained"
-              onClick={() => register(username, password)}
-            >
-              Register
-            </Button>
+            />{" "}
             <Button
               variant="contained"
               onClick={() => login(username, password, submitFunction)}
+              style={{ backgroundColor: "black", margin: "5px" }}
             >
               Login
             </Button>
             <Button
               variant="contained"
+              onClick={() => register(username, password)}
+              style={{ backgroundColor: "black", margin: "5px" }}
+            >
+              Register
+            </Button>
+            <Button
+              variant="contained"
               onClick={() => getUserData(state.accessToken as String)}
+              style={{ backgroundColor: "black", margin: "5px" }}
             >
               GetUserData
             </Button>
@@ -214,6 +223,7 @@ const Navbar = ({ children }: Props) => {
               </Link>
             ))}
           </List>
+          <Typography>Username: {username}</Typography>
         </Box>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
