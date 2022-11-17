@@ -15,6 +15,7 @@ import {
   Button,
   Input,
   Typography,
+  TextField,
 } from "@mui/material";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
@@ -132,16 +133,26 @@ const Navbar = ({ children }: Props) => {
             }}
           />
           <div style={{ marginLeft: "auto", marginRight: 0 }}>
-            <Input
-              placeholder="Username"
+            <TextField
+              required
+              id="outlined-required"
+              label="Username"
+              defaultValue="yourUsername"
               value={username}
               onChange={handleChangeUsername}
+              style={{ margin: "5px" }}
             />
-            <Input
-              placeholder="Password"
+            <TextField
+              id="outlined-password-input"
+              label="Password"
+              type="password"
+              autoComplete="current-password"
+              variant="standard"
               value={password}
               onChange={handleChangePassword}
-            />{" "}
+              style={{ margin: "5px" }}
+            />
+
             <Button
               variant="contained"
               onClick={() => login(username, password, submitFunction)}
