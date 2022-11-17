@@ -34,17 +34,17 @@ const Navbar = ({ children }: Props) => {
   const menuItem = [
     {
       path: "/",
-      name: "Home",
+      name: "Start",
       icon: <Home />,
     },
     {
       path: "/shipments",
-      name: "Shipments",
+      name: "Ausschreibungen",
       icon: <LocalShippingIcon />,
     },
     {
       path: "/offers",
-      name: "Offers",
+      name: "Angebote",
       icon: <CampaignIcon />,
     },
   ];
@@ -67,7 +67,7 @@ const Navbar = ({ children }: Props) => {
               height: "55px",
               backgroundColor: "white",
               borderRadius: "16px",
-              marginLeft: "35px",
+              marginLeft: "12px",
               padding: "15px",
             }}
           />
