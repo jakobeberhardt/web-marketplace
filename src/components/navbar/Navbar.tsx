@@ -4,17 +4,15 @@ import AppBar from "@mui/material/AppBar";
 import CssBaseline from "@mui/material/CssBaseline";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
-import Typography from "@mui/material/Typography";
 import CampaignIcon from "@mui/icons-material/Campaign";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import Home from "@mui/icons-material/Home";
 import Logo from "./NeoCargoLogo.png";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Drawer, ListItemButton } from "@mui/material";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import { useState, ReactNode } from "react";
-import { color, fontSize } from "@mui/system";
 
 type Props = {
   title: string;
