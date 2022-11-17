@@ -10,11 +10,11 @@ import {
 } from "@mui/material";
 import Bidding from "../../types/Bidding";
 
-export default function LoadingLoc(item: Bidding) {
+export default function LoadingLoc(props: { item: Bidding }) {
   return (
     <>
       <Card
-        key={item.id as React.Key}
+        key={props.item.id as React.Key}
         sx={{
           mt: "30px",
           mb: "30px",
@@ -25,7 +25,7 @@ export default function LoadingLoc(item: Bidding) {
         <CardContent>
           <div style={{ borderColor: "black", borderWidth: "4px" }}>
             <Typography sx={{ fontSize: 20 }} color="black" gutterBottom>
-              Beladeort:
+              Beladeort: {props.item.shipment.pickupReference}
             </Typography>
             <Divider />
           </div>

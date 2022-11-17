@@ -5,25 +5,16 @@ import { DischargeLoc } from "./DischargeLoc";
 import { Details } from "./Details";
 import {
   Grid,
-  CssBaseline,
-  Container,
-  ListItemIcon,
   List,
   ListItemButton,
-  ListSubheader,
   ListItemText,
   Collapse,
 } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
-import SpaceBarIcon from "@mui/icons-material/SpaceBar";
-import HeightIcon from "@mui/icons-material/Height";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
+import Bidding from "../../types/Bidding";
 
-import axios from "axios";
-import Bidding from "../../types/Bid";
-import { useGlobalState } from "./../GlobalStateProvider";
-
-export function ShipmentTable(item: Bidding) {
+export function ShipmentTable(props: { item: Bidding }) {
   const [open, setOpen] = React.useState(true);
 
   //toggle funktion für die Sendung
@@ -59,13 +50,13 @@ export function ShipmentTable(item: Bidding) {
           >
             <Grid container justifyContent="center">
               <Grid xs={10}>
-                <Details item={item} />
+                <Details item={props.item} />
               </Grid>
               <Grid xs={5}>
-                <LoadingLoc item={item} />
+                <LoadingLoc item={props.item} />
               </Grid>
               <Grid xs={5}>
-                <DischargeLoc item={item} />
+                <DischargeLoc item={props.item} />
               </Grid>
             </Grid>
           </List>

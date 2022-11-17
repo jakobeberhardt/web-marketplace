@@ -13,7 +13,7 @@ import Bidding from "../../types/Bidding";
 import axios from "axios";
 import { useGlobalState } from "./../GlobalStateProvider";
 
-export function DischargeLoc(item: Bidding) {
+export function DischargeLoc(props: { item: Bidding }) {
   return (
     <>
       <Card

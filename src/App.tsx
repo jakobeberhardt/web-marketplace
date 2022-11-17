@@ -7,7 +7,6 @@ import Home from "./pages/Home";
 import Offers from "./pages/Offers";
 import "./App.css";
 import { CssBaseline } from "@mui/material";
-import userObject from "./components/user/UserSingleton";
 import { GlobalStateProvider } from "./components/GlobalStateProvider";
 
 export default function App() {
