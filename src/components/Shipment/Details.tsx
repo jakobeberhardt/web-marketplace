@@ -10,9 +10,8 @@ import ViewInArIcon from "@mui/icons-material/ViewInAr";
 import SendIcon from "@mui/icons-material/Send";
 import SpaceBarIcon from "@mui/icons-material/SpaceBar";
 import HeightIcon from "@mui/icons-material/Height";
-import { ExpandLess, ExpandMore } from "@mui/icons-material";
 
-import { Box, Card, CardContent, Container, Typography } from "@mui/material";
+import { Card, CardContent, Typography } from "@mui/material";
 import Bidding from "../../types/Bidding";
 
 export function Details(props: { item: Bidding }) {

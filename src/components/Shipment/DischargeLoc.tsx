@@ -1,17 +1,6 @@
 import * as React from "react";
-import {
-  Box,
-  Card,
-  CardContent,
-  Container,
-  Divider,
-  Typography,
-} from "@mui/material";
-
-import { useState, useEffect, Key } from "react";
+import { Card, CardContent, Divider, Typography } from "@mui/material";
 import Bidding from "../../types/Bidding";
-import axios from "axios";
-import { useGlobalState } from "./../GlobalStateProvider";
 
 export function DischargeLoc(props: { item: Bidding }) {
   return (

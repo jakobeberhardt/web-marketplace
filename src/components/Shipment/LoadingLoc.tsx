@@ -1,13 +1,6 @@
 import * as React from "react";
 
-import {
-  Box,
-  Card,
-  CardContent,
-  Container,
-  Divider,
-  Typography,
-} from "@mui/material";
+import { Card, CardContent, Divider, Typography } from "@mui/material";
 import Bidding from "../../types/Bidding";
 
 export default function LoadingLoc(props: { item: Bidding }) {
