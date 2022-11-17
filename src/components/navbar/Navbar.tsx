@@ -1,79 +1,128 @@
-import React from 'react';
-import CampaignIcon from '@mui/icons-material/Campaign';
-import LocalShippingIcon from '@mui/icons-material/LocalShipping';
-import Home from '@mui/icons-material/Home';
-import MenuIcon from '@mui/icons-material/Menu';
-import Logo from './NeoCargoLogo.png';
-import { Link, NavLink } from 'react-router-dom';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import { Drawer, ListItemButton } from '@mui/material';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import { useState, ReactNode } from 'react';
+import * as React from "react";
+import Box from "@mui/material/Box";
+import AppBar from "@mui/material/AppBar";
+import CssBaseline from "@mui/material/CssBaseline";
+import Toolbar from "@mui/material/Toolbar";
+import List from "@mui/material/List";
+import Typography from "@mui/material/Typography";
+import CampaignIcon from "@mui/icons-material/Campaign";
+import LocalShippingIcon from "@mui/icons-material/LocalShipping";
+import Home from "@mui/icons-material/Home";
+import Logo from "./NeoCargoLogo.png";
+import { Link, NavLink } from "react-router-dom";
+import { Drawer, ListItemButton } from "@mui/material";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import { useState, ReactNode } from "react";
+import { color, fontSize } from "@mui/system";
 
 type Props = {
-    title: string;
-    children?: ReactNode;
+  title: string;
+  children?: ReactNode;
 };
 
-const Navbar = ({children}: Props) => {
-
-    const [selectedIndex, setSelectedIndex] = useState(1);
+const Navbar = ({ children }: Props) => {
+  const [selectedIndex, setSelectedIndex] = useState(1);
 
   const handleListItemClick = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    index: number,
+    index: number
   ) => {
     setSelectedIndex(index);
-
   };
 
-  const menuItem=[
-      {
-          path:"/",
-          name:"Home",
-          icon:<Home/>,
-      },   
-      {
-          path:"/shipments",
-          name:"Shipments",
-          icon:<LocalShippingIcon/>,
-      },  
-      {
-          path:"/offers",
-          name:"Offers",
-          icon:<CampaignIcon/>,
-      }    
-  ]
+  const menuItem = [
+    {
+      path: "/",
+      name: "Home",
+      icon: <Home />,
+    },
+    {
+      path: "/shipments",
+      name: "Shipments",
+      icon: <LocalShippingIcon />,
+    },
+    {
+      path: "/offers",
+      name: "Offers",
+      icon: <CampaignIcon />,
+    },
+  ];
 
-    return (
-        <div className="container">
-        <div className="navbar">
-            <div className="top-section">
-                <h1 className="logo">
-                  <div>
-                   <img src={Logo} alt="NeoCargo" style={{width: "300px", height: "60px", marginTop: "20px", marginLeft: "5px", marginRight: "5px"}}/>
-                  </div>
-                </h1>
-            </div>
-          {}
-            <List>
-              {menuItem.map(item =>(
-                <Link key={item.name} to={item.path}>
+  const drawerWidth = 240;
+
+  return (
+    <Box sx={{ display: "flex" }}>
+      <CssBaseline />
+      <AppBar
+        position="fixed"
+        sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+      >
+        <Toolbar style={{ backgroundColor: "#3a9b57", maxHeight: "7vh" }}>
+          <img
+            src={Logo}
+            alt="NeoCargo"
+            style={{
+              maxWidth: "250px",
+              height: "55px",
+              backgroundColor: "white",
+              borderRadius: "16px",
+              marginLeft: "35px",
+              padding: "15px",
+            }}
+          />
+        </Toolbar>
+      </AppBar>
+      <Drawer
+        variant="permanent"
+        sx={{
+          width: drawerWidth,
+          flexShrink: 0,
+          [`& .MuiDrawer-paper`]: {
+            width: drawerWidth,
+            boxSizing: "border-box",
+          },
+        }}
+      >
+        <Toolbar />
+        <Box
+          sx={{
+            overflow: "auto",
+          }}
+        >
+          <List style={{ backgroundColor: "#75b989", minHeight: "93vh" }}>
+            {menuItem.map((item) => (
+              <Link
+                key={item.name}
+                to={item.path}
+                style={{
+                  textDecoration: "none",
+                }}
+              >
                 <ListItemButton
-                selected={selectedIndex === 1}
-                onClick={(event) => handleListItemClick(event, 1)}>
-                <ListItemIcon>{item.icon}</ListItemIcon>
-                <ListItemText primary={item.name} />
+                  selected={selectedIndex === 1}
+                  onClick={(event) => handleListItemClick(event, 1)}
+                >
+                  <ListItemIcon>{item.icon}</ListItemIcon>
+                  <ListItemText
+                    style={{
+                      color: "white",
+                    }}
+                  >
+                    {item.name}
+                  </ListItemText>
                 </ListItemButton>
-                </Link>
-              ))}
-              </List>
-        </div>
+              </Link>
+            ))}
+          </List>
+        </Box>
+      </Drawer>
+      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+        <Toolbar />
         <main>{children}</main>
-    </div>
-  )
-}
+      </Box>
+    </Box>
+  );
+};
 
 export default Navbar;

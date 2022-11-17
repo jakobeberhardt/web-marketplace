@@ -1,5 +1,5 @@
 import * as React from "react";
-import ShipmentTable from "./components/ShipmentTable";
+import { ShipmentContainer } from "./components/Shipment/ShipmentContainer";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Navbar from "./components/navbar/Navbar";
 import Pause from "./pages/Pause";
@@ -8,21 +8,20 @@ import Offers from "./pages/Offers";
 import "./App.css";
 import { GlobalStateProvider } from "./components/GlobalStateProvider";
 
-function App() {
+export default function App() {
   return (
     <BrowserRouter>
-      <Navbar title={"Navbar"}>
-        <GlobalStateProvider>
+      <GlobalStateProvider>
+        <Navbar title={"Navbar"}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/Home" element={<Home />} />
-            <Route path="/Shipments" element={<ShipmentTable />} />
+            <Route path="/Shipments" element={<ShipmentContainer />} />
             <Route path="/Offers" element={<Offers />} />
             <Route path="/Pause" element={<Pause />} />
           </Routes>
-        </GlobalStateProvider>
-      </Navbar>
+        </Navbar>
+      </GlobalStateProvider>
     </BrowserRouter>
   );
 }
-export default App;
