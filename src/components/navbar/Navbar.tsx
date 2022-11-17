@@ -142,7 +142,7 @@ const Navbar = ({ children }: Props) => {
               height: "55px",
               backgroundColor: "white",
               borderRadius: "16px",
-              marginLeft: "35px",
+              marginLeft: "12px",
               padding: "15px",
             }}
           />
