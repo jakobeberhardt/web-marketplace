@@ -25,11 +25,13 @@ export default function LoadingLoc(item: Bidding) {
         <CardContent>
           <div style={{ borderColor: "black", borderWidth: "4px" }}>
             <Typography sx={{ fontSize: 20 }} color="black" gutterBottom>
-              Beladeort: {item.shipment.pickupReference}
+              Beladeort:
             </Typography>
             <Divider />
           </div>
-          <Typography variant="h5" component="div"></Typography>
+          <Typography variant="h5" component="div">
+            {item.shipment.pickup.station.name}
+          </Typography>
 
           <Typography style={{ paddingTop: "15px" }}>Referenz:</Typography>
           <Typography
@@ -41,7 +43,7 @@ export default function LoadingLoc(item: Bidding) {
             }}
             variant="body2"
           >
-            PIK_70528130
+            {item.shipment.pickupReference}{" "}
           </Typography>
           <Typography style={{ paddingTop: "15px" }}>Status:</Typography>
           <Typography
