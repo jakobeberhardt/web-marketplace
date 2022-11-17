@@ -31,7 +31,7 @@ export function DischargeLoc(props: { item: Bidding }) {
             }}
             variant="body2"
           >
-            DEL_52180246
+            {props.item.shipment.deliveryReference}
           </Typography>
 
           <Typography style={{ paddingTop: "15px" }}>Status:</Typography>
@@ -44,7 +44,7 @@ export function DischargeLoc(props: { item: Bidding }) {
             }}
             variant="body2"
           >
-            Ankunft:
+            <>PLZ: {props.item.shipment.delivery.station.address?.zipcode}</>
           </Typography>
           <Typography
             sx={{
@@ -55,7 +55,7 @@ export function DischargeLoc(props: { item: Bidding }) {
             }}
             variant="body2"
           >
-            Ladebeginn:
+            Stadt: {props.item.shipment.delivery.station.address?.city}
           </Typography>
           <Typography
             sx={{
@@ -66,7 +66,10 @@ export function DischargeLoc(props: { item: Bidding }) {
             }}
             variant="body2"
           >
-            Ladeende:
+            <>
+              Beladezeit (Anfang):{" "}
+              {props.item.shipment.delivery.allowedTimeWindows[0].startTime}
+            </>
           </Typography>
           <Typography
             sx={{
@@ -77,7 +80,10 @@ export function DischargeLoc(props: { item: Bidding }) {
             }}
             variant="body2"
           >
-            Abfahrt:
+            <>
+              Beladezeit (Ende):{" "}
+              {props.item.shipment.delivery.allowedTimeWindows[0].endTime}
+            </>
           </Typography>
         </CardContent>
       </Card>

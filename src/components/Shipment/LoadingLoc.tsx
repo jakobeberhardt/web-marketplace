@@ -34,7 +34,7 @@ export default function LoadingLoc(props: { item: Bidding }) {
             }}
             variant="body2"
           >
-            PIK_70528130
+            {props.item.shipment.pickupReference}
           </Typography>
           <Typography style={{ paddingTop: "15px" }}>Status:</Typography>
           <Typography
@@ -46,7 +46,7 @@ export default function LoadingLoc(props: { item: Bidding }) {
             }}
             variant="body2"
           >
-            Ankunft:
+            <>PLZ: {props.item.shipment.pickup.station.address?.zipcode}</>
           </Typography>
           <Typography
             sx={{
@@ -57,7 +57,7 @@ export default function LoadingLoc(props: { item: Bidding }) {
             }}
             variant="body2"
           >
-            Ladebeginn:
+            Stadt: {props.item.shipment.pickup.station.address?.city}
           </Typography>
           <Typography
             sx={{
@@ -68,7 +68,10 @@ export default function LoadingLoc(props: { item: Bidding }) {
             }}
             variant="body2"
           >
-            Ladeende:
+            <>
+              Beladezeit (Anfang):{" "}
+              {props.item.shipment.pickup.allowedTimeWindows[0].startTime}
+            </>
           </Typography>
           <Typography
             sx={{
@@ -79,7 +82,10 @@ export default function LoadingLoc(props: { item: Bidding }) {
             }}
             variant="body2"
           >
-            Abfahrt:
+            <>
+              Beladezeit (Ende):{" "}
+              {props.item.shipment.pickup.allowedTimeWindows[0].endTime}
+            </>
           </Typography>
         </CardContent>
       </Card>
