@@ -62,26 +62,11 @@ function login(username: String, password: String, submitFunction: Function) {
     .catch(console.log);
 }
 
-function getUserData(accessToken: String) {
-  console.log(`Bearer ${accessToken}`);
-  axios
-    .get("https://api.jeberhardt.dev/api/v1/biddings/", {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "Content-Type": "application/json",
-      },
-    })
-    .then((res) => {
-      console.log(res);
-    })
-    .catch(console.log);
-}
-
 const Navbar = ({ children }: Props) => {
   const [selectedIndex, setSelectedIndex] = useState(1);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { state, setState } = useGlobalState();
+  const { setState } = useGlobalState();
 
   const handleListItemClick = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
@@ -170,13 +155,6 @@ const Navbar = ({ children }: Props) => {
               style={{ backgroundColor: "black", margin: "5px" }}
             >
               Register
-            </Button>
-            <Button
-              variant="contained"
-              onClick={() => getUserData(state.accessToken as String)}
-              style={{ backgroundColor: "black", margin: "5px" }}
-            >
-              GetUserData
             </Button>
           </div>
         </Toolbar>
