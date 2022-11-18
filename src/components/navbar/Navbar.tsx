@@ -9,7 +9,7 @@ import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import Home from "@mui/icons-material/Home";
 import Logo from "./NeoCargoLogo.png";
 import { Link } from "react-router-dom";
-import { Drawer, ListItemButton } from "@mui/material";
+import { Drawer, ListItemButton, TextField } from "@mui/material";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import { useState, ReactNode } from "react";
@@ -79,6 +79,7 @@ const Navbar = ({ children }: Props) => {
           [`& .MuiDrawer-paper`]: {
             width: drawerWidth,
             boxSizing: "border-box",
+            backgroundColor: "rgb(117, 185, 137)",
           },
         }}
       >
@@ -88,7 +89,7 @@ const Navbar = ({ children }: Props) => {
             overflow: "auto",
           }}
         >
-          <List style={{ backgroundColor: "#75b989", minHeight: "93vh" }}>
+          <List style={{ backgroundColor: "#75b989", minHeight: "80vh" }}>
             {menuItem.map((item) => (
               <Link
                 key={item.name}
@@ -113,6 +114,22 @@ const Navbar = ({ children }: Props) => {
               </Link>
             ))}
           </List>
+          <div style={{ width: "-webkit-fill-available" }}>
+            <TextField
+              style={{
+                width: "-webkit-fill-available",
+                marginLeft: "15px",
+                marginRight: "15px",
+              }}
+              id="outlined-read-only-input"
+              label="Username"
+              //defaultValue={username}
+              InputProps={{
+                readOnly: true,
+              }}
+              color="success"
+            />
+          </div>
         </Box>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
