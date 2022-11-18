@@ -6,9 +6,13 @@ import truckLottie from "./../LottieGraphics/car-loading.json";
 function Home() {
   return (
     <>
-      <Card style={{ padding: "50px" }}>
-        <Typography variant="h3" component="h3">
-          Bitte loggen Sie sich ein, um Ihre Aktivitäten einsehen zu können.
+      <Card style={{ padding: "50px", margin: "auto" }}>
+        <Typography
+          variant="h4"
+          component="h3"
+          style={{ padding: "50px", margin: "auto" }}
+        >
+          Willkommen auf dem NeoCargo Bieterportal!
         </Typography>
         <Lottie
           loop

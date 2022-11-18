@@ -16,6 +16,9 @@ import {
   Input,
   Typography,
   TextField,
+  Snackbar,
+  Alert,
+  AlertTitle,
 } from "@mui/material";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
@@ -83,6 +86,8 @@ const Navbar = ({ children }: Props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { state, setState } = useGlobalState();
+  const [openSnack, setSnack] = React.useState(false);
+  const [show, setShow] = useState(true);
 
   const handleListItemClick = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
@@ -107,6 +112,23 @@ const Navbar = ({ children }: Props) => {
     setPassword(event.target.value);
   };
 
+  const loginButtonClick = () => {
+    login(username, password, submitFunction);
+    setShow((prev) => !prev);
+    setSnack(true);
+  };
+
+  const handleSnackbarClose = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setSnack(false);
+  };
+
   const menuItem = [
     {
       path: "/",
@@ -117,12 +139,12 @@ const Navbar = ({ children }: Props) => {
       path: "/shipments",
       name: "Ausschreibungen",
       icon: <LocalShippingIcon />,
-    },
+    } /*
     {
       path: "/offers",
       name: "Angebote",
       icon: <CampaignIcon />,
-    },
+    },*/,
   ];
 
   const drawerWidth = 240;
@@ -130,6 +152,7 @@ const Navbar = ({ children }: Props) => {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
+
       <AppBar
         position="fixed"
         sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
@@ -148,40 +171,53 @@ const Navbar = ({ children }: Props) => {
             }}
           />
           <div style={{ marginLeft: "auto", marginRight: 0 }}>
-            <Input
-              placeholder="Username"
-              value={username}
-              onChange={handleChangeUsername}
-            />
-            <Input
-              placeholder="Password"
-              value={password}
-              onChange={handleChangePassword}
-            />{" "}
-            <Button
-              variant="contained"
-              onClick={() => login(username, password, submitFunction)}
-              style={{ backgroundColor: "black", margin: "5px" }}
-            >
-              Login
-            </Button>
-            <Button
-              variant="contained"
-              onClick={() => register(username, password)}
-              style={{ backgroundColor: "black", margin: "5px" }}
-            >
-              Register
-            </Button>
-            <Button
-              variant="contained"
-              onClick={() => getUserData(state.accessToken as String)}
-              style={{ backgroundColor: "black", margin: "5px" }}
-            >
-              GetUserData
-            </Button>
+            <div style={{ display: show ? "flex" : "none" }}>
+              <Input
+                placeholder="Username"
+                value={username}
+                onChange={handleChangeUsername}
+              />
+              <Input
+                placeholder="Passwort"
+                value={password}
+                onChange={handleChangePassword}
+              />{" "}
+              <Button
+                //disabled={show}
+                variant="contained"
+                onClick={() => loginButtonClick()}
+                style={{
+                  //backgroundColor: show ? "black" : "none",
+                  backgroundColor: "black",
+                  margin: "5px",
+                }}
+              >
+                Einloggen
+              </Button>
+              <Button
+                variant="contained"
+                onClick={() => register(username, password)}
+                style={{ backgroundColor: "black", margin: "5px" }}
+              >
+                Registrieren
+              </Button>
+            </div>
           </div>
         </Toolbar>
       </AppBar>
+      <Snackbar
+        open={openSnack}
+        autoHideDuration={6000}
+        onClose={handleSnackbarClose}
+      >
+        <Alert
+          onClose={handleSnackbarClose}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
+          Du bist erfolgreich eingeloggt, {username} !
+        </Alert>
+      </Snackbar>
       <Drawer
         variant="permanent"
         sx={{
@@ -225,24 +261,15 @@ const Navbar = ({ children }: Props) => {
               </Link>
             ))}
           </List>
-          <div style={{ width: "-webkit-fill-available" }}>
-            <TextField
-              style={{
-                width: "-webkit-fill-available",
-                marginLeft: "15px",
-                marginRight: "15px",
-              }}
-              id="outlined-read-only-input"
-              label="Username"
-              //defaultValue={username}
-              InputProps={{
-                readOnly: true,
-              }}
-              color="success"
-            />
-          </div>
+          <div
+            style={{
+              width: "-webkit-fill-available",
+              display: show ? "none" : "flex",
+            }}
+          ></div>
         </Box>
       </Drawer>
+
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <Toolbar />
         <main>{children}</main>
@@ -252,3 +279,24 @@ const Navbar = ({ children }: Props) => {
 };
 
 export default Navbar;
+
+/*
+            <Button
+              variant="contained"
+              onClick={() => getUserData(state.accessToken as String)}
+              style={{ backgroundColor: "black", margin: "5px" }}
+            >
+              GetUserData
+            </Button>
+            */
+
+/* <Typography
+              style={{
+                width: "-webkit-fill-available",
+                marginLeft: "15px",
+                marginRight: "15px",
+              }}
+              id="outlined-read-only-input"
+            >
+              {username}
+            </Typography>*/
