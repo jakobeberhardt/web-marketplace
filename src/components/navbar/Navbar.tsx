@@ -9,65 +9,18 @@ import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import Home from "@mui/icons-material/Home";
 import Logo from "./NeoCargoLogo.png";
 import { Link } from "react-router-dom";
-import {
-  Drawer,
-  ListItemButton,
-  Button,
-  Input,
-  Typography,
-  TextField,
-} from "@mui/material";
+import { Drawer, ListItemButton } from "@mui/material";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import { useState, ReactNode } from "react";
-import axios from "axios";
-import { useGlobalState, GlobalStateInterface } from "../GlobalStateProvider";
 
 type Props = {
   title: string;
   children?: ReactNode;
 };
 
-function register(username: String, password: String) {
-  axios
-    .post(
-      "https://api.jeberhardt.dev/api/v1/auth/register",
-      { username: username, password: password },
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    )
-    .then((data) => console.log(data.data.accessToken))
-    .catch(console.log);
-}
-
-function login(username: String, password: String, submitFunction: Function) {
-  axios
-    .post(
-      "https://api.jeberhardt.dev/api/v1/auth/login",
-      {
-        username: username,
-        password: password,
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    )
-    .then((data) => {
-      submitFunction(data.data);
-    })
-    .catch(console.log);
-}
-
 const Navbar = ({ children }: Props) => {
   const [selectedIndex, setSelectedIndex] = useState(1);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const { setState } = useGlobalState();
 
   const handleListItemClick = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
@@ -76,36 +29,20 @@ const Navbar = ({ children }: Props) => {
     setSelectedIndex(index);
   };
 
-  const submitFunction = (data: Partial<GlobalStateInterface>) => {
-    setState((prev) => ({ ...prev, ...data }));
-  };
-
-  const handleChangeUsername = (event: {
-    target: { value: React.SetStateAction<string> };
-  }) => {
-    setUsername(event.target.value);
-  };
-
-  const handleChangePassword = (event: {
-    target: { value: React.SetStateAction<string> };
-  }) => {
-    setPassword(event.target.value);
-  };
-
   const menuItem = [
     {
       path: "/",
-      name: "Home",
+      name: "Start",
       icon: <Home />,
     },
     {
       path: "/shipments",
-      name: "Shipments",
+      name: "Ausschreibungen",
       icon: <LocalShippingIcon />,
     },
     {
       path: "/offers",
-      name: "Offers",
+      name: "Angebote",
       icon: <CampaignIcon />,
     },
   ];
@@ -132,42 +69,6 @@ const Navbar = ({ children }: Props) => {
               padding: "15px",
             }}
           />
-          <div style={{ marginLeft: "auto", marginRight: 0 }}>
-            <TextField
-              required
-              id="outlined-required"
-              label="Username"
-              defaultValue="yourUsername"
-              value={username}
-              onChange={handleChangeUsername}
-              style={{ margin: "5px" }}
-            />
-            <TextField
-              id="outlined-password-input"
-              label="Password"
-              type="password"
-              autoComplete="current-password"
-              variant="standard"
-              value={password}
-              onChange={handleChangePassword}
-              style={{ margin: "5px" }}
-            />
-
-            <Button
-              variant="contained"
-              onClick={() => login(username, password, submitFunction)}
-              style={{ backgroundColor: "black", margin: "5px" }}
-            >
-              Login
-            </Button>
-            <Button
-              variant="contained"
-              onClick={() => register(username, password)}
-              style={{ backgroundColor: "black", margin: "5px" }}
-            >
-              Register
-            </Button>
-          </div>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -212,7 +113,6 @@ const Navbar = ({ children }: Props) => {
               </Link>
             ))}
           </List>
-          <Typography>Username: {username}</Typography>
         </Box>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
