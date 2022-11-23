@@ -1,27 +1,22 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
-import AppBar from "@mui/material/AppBar";
-import CssBaseline from "@mui/material/CssBaseline";
-import Toolbar from "@mui/material/Toolbar";
-import List from "@mui/material/List";
-import CampaignIcon from "@mui/icons-material/Campaign";
-import LocalShippingIcon from "@mui/icons-material/LocalShipping";
-import Home from "@mui/icons-material/Home";
-import Logo from "./NeoCargoLogo.png";
-import { Link } from "react-router-dom";
 import {
+  Box,
+  AppBar,
+  CssBaseline,
+  Toolbar,
+  List,
   Drawer,
   ListItemButton,
   Button,
   Input,
-  Typography,
-  TextField,
   Snackbar,
   Alert,
-  AlertTitle,
+  ListItemIcon,
+  ListItemText,
 } from "@mui/material";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
+import { People, Campaign, LocalShipping, Home } from "@mui/icons-material";
+import Logo from "./NeoCargoLogo.png";
+import { Link } from "react-router-dom";
 import { useState, ReactNode } from "react";
 import axios from "axios";
 import { useGlobalState, GlobalStateInterface } from "../GlobalStateProvider";
@@ -66,26 +61,11 @@ function login(username: String, password: String, submitFunction: Function) {
     .catch(console.log);
 }
 
-function getUserData(accessToken: String) {
-  console.log(`Bearer ${accessToken}`);
-  axios
-    .get("https://api.jeberhardt.dev/api/v1/biddings/", {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "Content-Type": "application/json",
-      },
-    })
-    .then((res) => {
-      console.log(res);
-    })
-    .catch(console.log);
-}
-
 const Navbar = ({ children }: Props) => {
   const [selectedIndex, setSelectedIndex] = useState(1);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { state, setState } = useGlobalState();
+  const { setState } = useGlobalState();
   const [openSnack, setSnack] = React.useState(false);
   const [show, setShow] = useState(true);
 
@@ -136,15 +116,20 @@ const Navbar = ({ children }: Props) => {
       icon: <Home />,
     },
     {
+      path: "/whitelist",
+      name: "Bieterkreis",
+      icon: <People />,
+    },
+    {
       path: "/shipments",
       name: "Ausschreibungen",
-      icon: <LocalShippingIcon />,
-    } /*
+      icon: <LocalShipping />,
+    },
     {
       path: "/offers",
       name: "Angebote",
-      icon: <CampaignIcon />,
-    },*/,
+      icon: <Campaign />,
+    },
   ];
 
   const drawerWidth = 240;
@@ -183,11 +168,9 @@ const Navbar = ({ children }: Props) => {
                 onChange={handleChangePassword}
               />{" "}
               <Button
-                //disabled={show}
                 variant="contained"
                 onClick={() => loginButtonClick()}
                 style={{
-                  //backgroundColor: show ? "black" : "none",
                   backgroundColor: "black",
                   margin: "5px",
                 }}
@@ -279,24 +262,3 @@ const Navbar = ({ children }: Props) => {
 };
 
 export default Navbar;
-
-/*
-            <Button
-              variant="contained"
-              onClick={() => getUserData(state.accessToken as String)}
-              style={{ backgroundColor: "black", margin: "5px" }}
-            >
-              GetUserData
-            </Button>
-            */
-
-/* <Typography
-              style={{
-                width: "-webkit-fill-available",
-                marginLeft: "15px",
-                marginRight: "15px",
-              }}
-              id="outlined-read-only-input"
-            >
-              {username}
-            </Typography>*/

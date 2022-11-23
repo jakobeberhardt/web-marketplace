@@ -5,6 +5,7 @@ import Navbar from "./components/navbar/Navbar";
 import Pause from "./pages/Pause";
 import Home from "./pages/Home";
 import Offers from "./pages/Offers";
+import Whitelist from "./pages/Whitelist";
 import "./App.css";
 import { GlobalStateProvider } from "./components/GlobalStateProvider";
 
@@ -16,6 +17,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/Home" element={<Home />} />
+            <Route path="/Whitelist" element={<Whitelist />} />
             <Route path="/Shipments" element={<ShipmentContainer />} />
             <Route path="/Offers" element={<Offers />} />
             <Route path="/Pause" element={<Pause />} />
