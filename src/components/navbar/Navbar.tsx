@@ -29,7 +29,7 @@ type Props = {
 function register(username: String, password: String) {
   axios
     .post(
-      "https://api.jeberhardt.dev/api/v1/auth/register",
+      "http://localhost:8080/api/v1/auth/register",
       { username: username, password: password },
       {
         headers: {
@@ -44,7 +44,7 @@ function register(username: String, password: String) {
 function login(username: String, password: String, submitFunction: Function) {
   axios
     .post(
-      "https://api.jeberhardt.dev/api/v1/auth/login",
+      "http://localhost:8080/api/v1/auth/login",
       {
         username: username,
         password: password,
@@ -164,6 +164,7 @@ const Navbar = ({ children }: Props) => {
               />
               <Input
                 placeholder="Passwort"
+                type="password"
                 value={password}
                 onChange={handleChangePassword}
               />{" "}
