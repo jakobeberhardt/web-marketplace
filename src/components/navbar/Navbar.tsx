@@ -37,7 +37,7 @@ function register(username: String, password: String) {
         },
       }
     )
-    .then((data) => console.log(data.data.accessToken))
+    .then((response) => console.log(response.data.accessToken))
     .catch(console.log);
 }
 
@@ -55,8 +55,8 @@ function login(username: String, password: String, submitFunction: Function) {
         },
       }
     )
-    .then((data) => {
-      submitFunction(data.data);
+    .then((response) => {
+      submitFunction(response.data);
     })
     .catch(console.log);
 }

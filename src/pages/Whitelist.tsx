@@ -62,16 +62,16 @@ function addWhiteListItem(
 ) {
   if (!item) return;
   axios
-    .post("http://localhost:8080/api/v1/users/whitelist/", {
+    .post("http://localhost:8080/api/v1/whitelist/", {
       headers: {
         Authorization: `Bearer ${state.accessToken}`,
         "Content-Type": "application/json",
       },
       data: {
-        item,
+        id: item,
       },
     })
-    .then(() => fetchWhiteListItems(state, setItems));
+    .then((response) => setItems(response.data.whitelist));
 }
 
 function removeWhiteListItem(
@@ -80,30 +80,16 @@ function removeWhiteListItem(
   setItems: Dispatch<SetStateAction<String[]>>
 ) {
   axios
-    .delete("http://localhost:8080/api/v1/users/whitelist/", {
+    .delete("http://localhost:8080/api/v1/whitelist/", {
       headers: {
         Authorization: `Bearer ${state.accessToken}`,
         "Content-Type": "application/json",
       },
       data: {
-        item,
+        id: item,
       },
     })
-    .then(() => fetchWhiteListItems(state, setItems));
-}
-
-function fetchWhiteListItems(
-  state: Partial<GlobalStateInterface>,
-  setItems: Dispatch<SetStateAction<String[]>>
-) {
-  axios
-    .get("http://localhost:8080/api/v1/users/whitelist/", {
-      headers: {
-        Authorization: `Bearer ${state.accessToken}`,
-        "Content-Type": "application/json",
-      },
-    })
-    .then((data) => setItems(data.data));
+    .then((response) => setItems(response.data.whitelist));
 }
 
 export default function Whitelist() {
@@ -113,13 +99,13 @@ export default function Whitelist() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/v1/users/whitelist/", {
+      .get("http://localhost:8080/api/v1/whitelist/", {
         headers: {
           Authorization: `Bearer ${state.accessToken}`,
           "Content-Type": "application/json",
         },
       })
-      .then((data) => setItems(data.data));
+      .then((response) => setItems(response.data));
   }, [state.accessToken]);
 
   return (

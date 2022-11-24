@@ -28,7 +28,7 @@ export function ShipmentContainer() {
           "Content-Type": "application/json",
         },
       })
-      .then((data) => setItems(data.data));
+      .then((reponse) => setItems(reponse.data));
   }, [state.accessToken]);
 
   return (
