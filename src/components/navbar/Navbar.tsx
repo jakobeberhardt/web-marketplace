@@ -126,7 +126,7 @@ const Navbar = ({ children }: Props) => {
       icon: <LocalShipping />,
     },
     {
-      path: "/offers",
+      path: "/biddings",
       name: "Angebote",
       icon: <Campaign />,
     },

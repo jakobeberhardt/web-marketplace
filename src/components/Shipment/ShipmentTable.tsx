@@ -13,8 +13,10 @@ import {
 import SendIcon from "@mui/icons-material/Send";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import Bidding from "../../types/Bidding";
+import { Bids } from "./Bids";
+import { Bid } from "./Bid";
 
-export function ShipmentTable(props: { item: Bidding }) {
+export function ShipmentTable(props: { item: Bidding; view: String }) {
   const [open, setOpen] = React.useState(false);
 
   //toggle funktion für die Sendung
@@ -59,6 +61,20 @@ export function ShipmentTable(props: { item: Bidding }) {
                 <DischargeLoc item={props.item} />
               </Grid>
             </Grid>
+            {props.view === "Offers" && (
+              <>
+                <Grid>
+                  <Bid />
+                </Grid>
+              </>
+            )}
+            {props.view === "Biddings" && (
+              <>
+                <Grid>
+                  <Bids />
+                </Grid>
+              </>
+            )}
           </List>
         </Collapse>
       </List>

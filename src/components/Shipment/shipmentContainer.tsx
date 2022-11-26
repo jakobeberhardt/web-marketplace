@@ -6,11 +6,11 @@ import axios from "axios";
 import Bidding from "../../types/Bidding";
 import { useGlobalState } from "../GlobalStateProvider";
 
-function ShipmentItems(props: { items: Bidding[] }) {
+function ShipmentItems(props: { items: Bidding[]; view: String }) {
   return (
     <>
       {props.items.map((item: Bidding) => (
-        <ShipmentTable item={item} />
+        <ShipmentTable item={item} view={props.view} />
       ))}
     </>
   );
@@ -19,6 +19,7 @@ function ShipmentItems(props: { items: Bidding[] }) {
 export function ShipmentContainer() {
   const [items, setItems] = useState<Bidding[]>([]);
   const { state } = useGlobalState();
+  const view = "Biddings";
 
   useEffect(() => {
     axios
@@ -35,7 +36,7 @@ export function ShipmentContainer() {
     <>
       <Container maxWidth="lg">
         <Box sx={{ bgcolor: "#fafafa", height: "100vh", p: 2 }}>
-          <List>{items && <ShipmentItems items={items} />}</List>
+          <List>{items && <ShipmentItems items={items} view={view} />}</List>
         </Box>
       </Container>
     </>
