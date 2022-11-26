@@ -29,7 +29,7 @@ type Props = {
 function register(username: String, password: String) {
   axios
     .post(
-      "http://localhost:8080/api/v1/auth/register",
+      `${process.env.REACT_APP_API_URL}/api/v1/auth/register`,
       { username: username, password: password },
       {
         headers: {
@@ -44,7 +44,7 @@ function register(username: String, password: String) {
 function login(username: String, password: String, submitFunction: Function) {
   axios
     .post(
-      "http://localhost:8080/api/v1/auth/login",
+      `${process.env.REACT_APP_API_URL}/api/v1/auth/login`,
       {
         username: username,
         password: password,

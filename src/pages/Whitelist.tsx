@@ -62,7 +62,7 @@ function addWhiteListItem(
 ) {
   if (!item) return;
   axios
-    .post("http://localhost:8080/api/v1/whitelist/", {
+    .post(`${process.env.REACT_APP_API_URL}/api/v1/auth/register`, {
       headers: {
         Authorization: `Bearer ${state.accessToken}`,
         "Content-Type": "application/json",
@@ -80,7 +80,7 @@ function removeWhiteListItem(
   setItems: Dispatch<SetStateAction<String[]>>
 ) {
   axios
-    .delete("http://localhost:8080/api/v1/whitelist/", {
+    .delete(`${process.env.REACT_APP_API_URL}/api/v1/whitelist/`, {
       headers: {
         Authorization: `Bearer ${state.accessToken}`,
         "Content-Type": "application/json",
@@ -95,11 +95,10 @@ function removeWhiteListItem(
 export default function Whitelist() {
   const [items, setItems] = useState<String[]>([]);
   const { state } = useGlobalState();
-  //const items = ["Test", "NeoCargo", "Jakob", "Nik", "Kevin", "Lisa"];
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/v1/whitelist/", {
+      .get(`${process.env.REACT_APP_API_URL}/api/v1/whitelist/`, {
         headers: {
           Authorization: `Bearer ${state.accessToken}`,
           "Content-Type": "application/json",

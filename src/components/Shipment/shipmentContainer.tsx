@@ -22,7 +22,7 @@ export function ShipmentContainer() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080//api/v1/biddings/", {
+      .get(`${process.env.REACT_APP_API_URL}/api/v1/biddings/`, {
         headers: {
           Authorization: `Bearer ${state.accessToken}`,
           "Content-Type": "application/json",
