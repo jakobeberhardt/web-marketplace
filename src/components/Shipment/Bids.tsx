@@ -1,6 +1,7 @@
 import { Card, CardContent } from "@mui/material";
+import Bid from "../../types/Bid";
 
-export function Bids() {
+export function Bids(props: { items: Array<Bid> }) {
   return (
     <>
       <Card /* key={props.item.id as React.Key} */

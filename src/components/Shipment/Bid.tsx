@@ -1,4 +1,4 @@
-import { Card, CardContent } from "@mui/material";
+import { Button, Card, CardContent, Input } from "@mui/material";
 
 export function Bid() {
   return (
@@ -11,7 +11,10 @@ export function Bid() {
           borderRadius: "10px",
         }}
       >
-        <CardContent></CardContent>
+        <CardContent>
+          <Input />
+          <Button />
+        </CardContent>
       </Card>
     </>
   );

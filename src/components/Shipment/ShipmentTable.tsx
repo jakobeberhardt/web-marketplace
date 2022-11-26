@@ -71,7 +71,7 @@ export function ShipmentTable(props: { item: Bidding; view: String }) {
             {props.view === "Biddings" && (
               <>
                 <Grid>
-                  <Bids />
+                  <Bids items={props.item.bids} />
                 </Grid>
               </>
             )}
