@@ -56,6 +56,7 @@ function login(username: String, password: String, submitFunction: Function) {
       }
     )
     .then((response) => {
+      console.log(response.data.accessToken);
       submitFunction(response.data);
     })
     .catch(console.log);

@@ -26,9 +26,10 @@ function WhitelistItems(props: {
   const handleChange = (event: any) => {
     setInputValue(event.target.value);
   };
-  let listItems = props.items.map((item: String) => (
+  let itemArray = Object.values(props.items);
+  let listItems = itemArray.map((item: String) => (
     <ListItem>
-      <ListItemText primary={item} />
+      <ListItemText primary={item /* .split('"')[1] */} />
       <ListItemButton
         alignItems="center"
         onClick={() => removeWhiteListItem(item, state, props.setItems)}
@@ -60,16 +61,16 @@ function addWhiteListItem(
   state: Partial<GlobalStateInterface>,
   setItems: Dispatch<SetStateAction<String[]>>
 ) {
-  if (!item) return;
+  const headers = {
+    Authorization: `Bearer ${state.accessToken}`,
+    "Content-Type": "application/json",
+  };
+  const data = {
+    id: item,
+  };
   axios
-    .post(`${process.env.REACT_APP_API_URL}/api/v1/auth/register`, {
-      headers: {
-        Authorization: `Bearer ${state.accessToken}`,
-        "Content-Type": "application/json",
-      },
-      data: {
-        id: item,
-      },
+    .post(`${process.env.REACT_APP_API_URL}/api/v1/whitelist`, data, {
+      headers: headers,
     })
     .then((response) => setItems(response.data.whitelist));
 }
@@ -79,17 +80,22 @@ function removeWhiteListItem(
   state: Partial<GlobalStateInterface>,
   setItems: Dispatch<SetStateAction<String[]>>
 ) {
+  const headers = {
+    Authorization: `Bearer ${state.accessToken}`,
+    "Content-Type": "application/json",
+  };
+  const data = {
+    id: item /* .split('"')[3] */,
+  };
   axios
     .delete(`${process.env.REACT_APP_API_URL}/api/v1/whitelist/`, {
-      headers: {
-        Authorization: `Bearer ${state.accessToken}`,
-        "Content-Type": "application/json",
-      },
-      data: {
-        id: item,
-      },
+      headers: headers,
+      data: data,
     })
-    .then((response) => setItems(response.data.whitelist));
+    .then((response) => {
+      console.log(response);
+      setItems(response.data.whitelist);
+    });
 }
 
 export default function Whitelist() {
@@ -104,7 +110,9 @@ export default function Whitelist() {
           "Content-Type": "application/json",
         },
       })
-      .then((response) => setItems(response.data));
+      .then((response) => {
+        setItems(response.data.whitelist);
+      });
   }, [state.accessToken]);
 
   return (
