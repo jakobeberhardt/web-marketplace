@@ -29,7 +29,7 @@ function WhitelistItems(props: {
   let itemArray = Object.values(props.items);
   let listItems = itemArray.map((item: String) => (
     <ListItem>
-      <ListItemText primary={item /* .split('"')[1] */} />
+      <ListItemText primary={item.split('"')[3]} />
       <ListItemButton
         alignItems="center"
         onClick={() => removeWhiteListItem(item, state, props.setItems)}
@@ -85,7 +85,7 @@ function removeWhiteListItem(
     "Content-Type": "application/json",
   };
   const data = {
-    id: item /* .split('"')[3] */,
+    id: item.split('"')[3],
   };
   axios
     .delete(`${process.env.REACT_APP_API_URL}/api/v1/whitelist/`, {

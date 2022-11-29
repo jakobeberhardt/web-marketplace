@@ -12,7 +12,7 @@ export function Bids(props: { items: Array<Bid> }) {
           borderRadius: "10px",
         }}
       >
-        <CardContent></CardContent>
+        <CardContent>Gebote</CardContent>
       </Card>
     </>
   );

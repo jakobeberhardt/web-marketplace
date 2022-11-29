@@ -17,10 +17,10 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/Home" element={<Home />} />
-            <Route path="/Whitelist" element={<Whitelist />} />
-            <Route path="/Shipments" element={<ShipmentContainer />} />
-            <Route path="/Offers" element={<Offers />} />
-            <Route path="/Pause" element={<Pause />} />
+            <Route path="/whitelist" element={<Whitelist />} />
+            <Route path="/shipments" element={<ShipmentContainer />} />
+            <Route path="/offers" element={<Offers />} />
+            <Route path="/pause" element={<Pause />} />
           </Routes>
         </Navbar>
       </GlobalStateProvider>
