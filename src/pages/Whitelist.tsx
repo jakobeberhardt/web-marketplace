@@ -31,8 +31,8 @@ import { color } from "@mui/system";
 //C:\Users\Annika\web-marketplace\src\assets\trash-can.png
 
 function WhitelistItems(props: {
-  items: String[];
-  setItems: Dispatch<SetStateAction<String[]>>;
+  items: string[];
+  setItems: Dispatch<SetStateAction<string[]>>;
 }) {
   const [inputValue, setInputValue] = useState("");
   const { state } = useGlobalState();
@@ -40,7 +40,10 @@ function WhitelistItems(props: {
     setInputValue(event.target.value);
   };
   let itemArray = Object.values(props.items);
-  let listItems = itemArray.map((item: String) => (
+  let itemArrayParsed = itemArray
+    .map((element) => JSON.parse(element))
+    .map((e) => e.id);
+  let listItems = itemArrayParsed.map((item: string) => (
     // ungestyltes/funktionales ListItem
     /*
     <ListItem>
@@ -57,31 +60,36 @@ function WhitelistItems(props: {
 
     */
     //designtes List Item
-    <Card
-      style={{
-        alignContent: "center",
-        margin: "auto",
-        width: "88%",
-        border: "3px solid green",
-        marginTop: "15px",
-        minWidth: 275,
-      }}
-    >
-      <CardContent
-        style={{ float: "left", padding: "16px", backgroundColor: "#3A9B57" }}
+    <ListItem>
+      <Card
+        style={{
+          alignContent: "center",
+          margin: "auto",
+          width: "88%",
+          border: "3px solid green",
+          marginTop: "15px",
+          minWidth: 275,
+        }}
       >
-        <Box>
-          <Typography style={{ fontWeight: "800" }}>
-            Spedition Mustermann
-          </Typography>
-        </Box>
-      </CardContent>
-      <CardActions style={{ float: "right", backgroundColor: "black" }}>
-        <IconButton aria-label="delete" disabled style={{ color: "white" }}>
-          <DeleteIcon />
-        </IconButton>
-      </CardActions>
-    </Card>
+        <CardContent
+          style={{ float: "left", padding: "16px", backgroundColor: "#3A9B57" }}
+        >
+          <Box>
+            <Typography style={{ fontWeight: "800" }}>{item}</Typography>
+          </Box>
+        </CardContent>
+        <CardActions style={{ float: "right", backgroundColor: "black" }}>
+          <IconButton
+            aria-label="delete"
+            onClick={() => removeWhiteListItem(item, state, props.setItems)}
+            disabled
+            style={{ color: "white" }}
+          >
+            <DeleteIcon />
+          </IconButton>
+        </CardActions>
+      </Card>
+    </ListItem>
   ));
   listItems.push(
     /*
@@ -138,7 +146,7 @@ function WhitelistItems(props: {
 function addWhiteListItem(
   item: string,
   state: Partial<GlobalStateInterface>,
-  setItems: Dispatch<SetStateAction<String[]>>
+  setItems: Dispatch<SetStateAction<string[]>>
 ) {
   const headers = {
     Authorization: `Bearer ${state.accessToken}`,
@@ -155,9 +163,9 @@ function addWhiteListItem(
 }
 
 function removeWhiteListItem(
-  item: String,
+  item: string,
   state: Partial<GlobalStateInterface>,
-  setItems: Dispatch<SetStateAction<String[]>>
+  setItems: Dispatch<SetStateAction<string[]>>
 ) {
   const headers = {
     Authorization: `Bearer ${state.accessToken}`,
@@ -178,7 +186,7 @@ function removeWhiteListItem(
 }
 
 export default function Whitelist() {
-  const [items, setItems] = useState<String[]>([]);
+  const [items, setItems] = useState<string[]>([]);
   const { state } = useGlobalState();
 
   useEffect(() => {
