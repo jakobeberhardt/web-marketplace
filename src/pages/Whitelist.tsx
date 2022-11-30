@@ -8,6 +8,12 @@ import {
   ListItemIcon,
   ListItemText,
   Input,
+  Card,
+  CardContent,
+  Typography,
+  Button,
+  CardActions,
+  TextField,
 } from "@mui/material";
 import { DeleteOutline, AddCircleOutline } from "@mui/icons-material";
 import axios from "axios";
@@ -16,6 +22,13 @@ import {
   GlobalStateInterface,
   useGlobalState,
 } from "../components/GlobalStateProvider";
+import { IconButton } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { color } from "@mui/system";
+
+//src\assets\trash - can.png
+//../pages/components/assets/trash-can.png
+//C:\Users\Annika\web-marketplace\src\assets\trash-can.png
 
 function WhitelistItems(props: {
   items: String[];
@@ -28,6 +41,8 @@ function WhitelistItems(props: {
   };
   let itemArray = Object.values(props.items);
   let listItems = itemArray.map((item: String) => (
+    // ungestyltes/funktionales ListItem
+    /*
     <ListItem>
       <ListItemText primary={item.split('"')[3]} />
       <ListItemButton
@@ -39,8 +54,37 @@ function WhitelistItems(props: {
         </ListItemIcon>
       </ListItemButton>
     </ListItem>
+
+    */
+    //designtes List Item
+    <Card
+      style={{
+        alignContent: "center",
+        margin: "auto",
+        width: "88%",
+        border: "3px solid green",
+        marginTop: "15px",
+        minWidth: 275,
+      }}
+    >
+      <CardContent
+        style={{ float: "left", padding: "16px", backgroundColor: "#3A9B57" }}
+      >
+        <Box>
+          <Typography style={{ fontWeight: "800" }}>
+            Spedition Mustermann
+          </Typography>
+        </Box>
+      </CardContent>
+      <CardActions style={{ float: "right", backgroundColor: "black" }}>
+        <IconButton aria-label="delete" disabled style={{ color: "white" }}>
+          <DeleteIcon />
+        </IconButton>
+      </CardActions>
+    </Card>
   ));
   listItems.push(
+    /*
     <ListItem>
       <Input onChange={handleChange} value={inputValue} />
       <ListItemButton
@@ -51,6 +95,41 @@ function WhitelistItems(props: {
           <AddCircleOutline />
         </ListItemIcon>
       </ListItemButton>
+    </ListItem>
+
+  */
+    <ListItem>
+      <Card
+        style={{
+          alignContent: "center",
+          margin: "auto",
+          width: "88%",
+          border: "3px solid green",
+          marginTop: "15px",
+          minWidth: 275,
+        }}
+      >
+        <TextField
+          id="outlined-basic"
+          label="Bieter zur Liste hinzufügen"
+          variant="outlined"
+          style={{ margin: "auto" }}
+        >
+          {" "}
+          <Input onChange={handleChange} value={inputValue} />
+        </TextField>
+        <ListItemButton
+          style={{ float: "right" }}
+          alignItems="center"
+          onClick={() => addWhiteListItem(inputValue, state, props.setItems)}
+        >
+          <ListItemIcon>
+            <AddCircleOutline
+              style={{ width: "50px", height: "50px", color: "black" }}
+            />
+          </ListItemIcon>
+        </ListItemButton>
+      </Card>
     </ListItem>
   );
   return <>{listItems}</>;

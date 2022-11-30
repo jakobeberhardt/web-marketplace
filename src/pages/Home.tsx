@@ -1,7 +1,7 @@
 import { Card, Typography } from "@mui/material";
 import React from "react";
 import Lottie from "react-lottie-player";
-import truckLottie from "./../LottieGraphics/car-loading.json";
+import truckLottie from "./../assets/car-loading.json";
 
 function Home() {
   return (
