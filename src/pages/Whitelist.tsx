@@ -14,6 +14,8 @@ import {
   Button,
   CardActions,
   TextField,
+  ToggleButtonGroup,
+  ToggleButton,
 } from "@mui/material";
 import { DeleteOutline, AddCircleOutline } from "@mui/icons-material";
 import axios from "axios";
@@ -25,6 +27,8 @@ import {
 import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { color } from "@mui/system";
+import FormatAlignLeftIcon from "@mui/icons-material/FormatAlignLeft";
+import FormatAlignRightIcon from "@mui/icons-material/FormatAlignRight";
 
 //src\assets\trash - can.png
 //../pages/components/assets/trash-can.png
@@ -36,6 +40,15 @@ function WhitelistItems(props: {
 }) {
   const [inputValue, setInputValue] = useState("");
   const { state } = useGlobalState();
+  const [alignment, setAlignment] = useState("left");
+  const handleAlignment = (
+    event: React.MouseEvent<HTMLElement>,
+    newAlignment: string | null
+  ) => {
+    if (newAlignment !== null) {
+      setAlignment(newAlignment);
+    }
+  };
   const handleChange = (event: any) => {
     setInputValue(event.target.value);
   };
@@ -98,38 +111,54 @@ function WhitelistItems(props: {
     </ListItem>
 
   */
-    <ListItem>
-      <Card
-        style={{
-          alignContent: "center",
-          margin: "auto",
-          width: "88%",
-          border: "3px solid green",
-          marginTop: "15px",
-          minWidth: 275,
-        }}
+    <ListItem
+      style={{
+        alignContent: "center",
+        margin: "auto",
+        width: "88%",
+        border: "3px solid green",
+        marginTop: "15px",
+        minWidth: 275,
+      }}
+    >
+      <ToggleButtonGroup
+        value={alignment}
+        exclusive
+        onChange={handleAlignment}
+        aria-label="text alignment"
       >
-        <TextField
-          id="outlined-basic"
-          label="Bieter zur Liste hinzufügen"
-          variant="outlined"
-          style={{ margin: "auto" }}
+        <ToggleButton value="left" aria-label="left aligned">
+          <ListItemButton
+            style={{ float: "right" }}
+            alignItems="center"
+            onClick={() => addWhiteListItem(inputValue, state, props.setItems)}
+          >
+            <ListItemIcon>
+              <AddCircleOutline
+                style={{ width: "50px", height: "50px", color: "black" }}
+              />
+            </ListItemIcon>
+          </ListItemButton>
+        </ToggleButton>
+        <ToggleButton
+          value="right"
+          aria-label="right aligned"
+          style={{ width: "100%" }}
         >
-          {" "}
-          <Input onChange={handleChange} value={inputValue} />
-        </TextField>
-        <ListItemButton
-          style={{ float: "right" }}
-          alignItems="center"
-          onClick={() => addWhiteListItem(inputValue, state, props.setItems)}
-        >
-          <ListItemIcon>
-            <AddCircleOutline
-              style={{ width: "50px", height: "50px", color: "black" }}
+          <TextField
+            id="basic"
+            label="Bieter zur Liste hinzufügen"
+            style={{ alignContent: "center" }}
+          >
+            {" "}
+            <Input
+              style={{ margin: "6px", borderWidth: "0", width: "100%" }}
+              onChange={handleChange}
+              value={inputValue}
             />
-          </ListItemIcon>
-        </ListItemButton>
-      </Card>
+          </TextField>
+        </ToggleButton>
+      </ToggleButtonGroup>
     </ListItem>
   );
   return <>{listItems}</>;
