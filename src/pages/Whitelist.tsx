@@ -16,6 +16,7 @@ import {
   TextField,
   ToggleButtonGroup,
   ToggleButton,
+  ButtonBase,
 } from "@mui/material";
 import { DeleteOutline, AddCircleOutline } from "@mui/icons-material";
 import axios from "axios";
@@ -29,10 +30,6 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { color } from "@mui/system";
 import FormatAlignLeftIcon from "@mui/icons-material/FormatAlignLeft";
 import FormatAlignRightIcon from "@mui/icons-material/FormatAlignRight";
-
-//src\assets\trash - can.png
-//../pages/components/assets/trash-can.png
-//C:\Users\Annika\web-marketplace\src\assets\trash-can.png
 
 function WhitelistItems(props: {
   items: string[];
@@ -56,24 +53,8 @@ function WhitelistItems(props: {
   let itemArrayParsed = itemArray
     .map((element) => JSON.parse(element))
     .map((e) => e.id);
-  let listItems = itemArrayParsed.map((item: string) => (
-    // ungestyltes/funktionales ListItem
-    /*
-    <ListItem>
-      <ListItemText primary={item.split('"')[3]} />
-      <ListItemButton
-        alignItems="center"
-        onClick={() => removeWhiteListItem(item, state, props.setItems)}
-      >
-        <ListItemIcon>
-          <DeleteOutline />
-        </ListItemIcon>
-      </ListItemButton>
-    </ListItem>
-
-    */
-    //designtes List Item
-    <ListItem>
+  let listItems = itemArrayParsed.map((item: string, index: Number) => (
+    <ListItem key={index as React.Key}>
       <Card
         style={{
           alignContent: "center",
@@ -92,21 +73,19 @@ function WhitelistItems(props: {
           </Box>
         </CardContent>
         <CardActions style={{ float: "right", backgroundColor: "black" }}>
-          <IconButton
-            aria-label="delete"
+          <ButtonBase
             onClick={() => removeWhiteListItem(item, state, props.setItems)}
-            disabled
-            style={{ color: "white" }}
           >
-            <DeleteIcon />
-          </IconButton>
+            <IconButton aria-label="delete" disabled style={{ color: "white" }}>
+              <DeleteIcon />
+            </IconButton>
+          </ButtonBase>
         </CardActions>
       </Card>
     </ListItem>
   ));
   listItems.push(
-    /*
-    <ListItem>
+    /* <ListItem>
       <Input onChange={handleChange} value={inputValue} />
       <ListItemButton
         alignItems="center"
@@ -116,9 +95,8 @@ function WhitelistItems(props: {
           <AddCircleOutline />
         </ListItemIcon>
       </ListItemButton>
-    </ListItem>
+    </ListItem> */
 
-  */
     <ListItem
       style={{
         alignContent: "center",
@@ -129,44 +107,28 @@ function WhitelistItems(props: {
         minWidth: 275,
       }}
     >
-      <ToggleButtonGroup
-        value={alignment}
-        exclusive
-        onChange={handleAlignment}
-        aria-label="text alignment"
+      <TextField
+        id="basic"
+        label="Bieter zur Liste hinzufügen"
+        style={{ alignContent: "center" }}
+        onChange={handleChange}
       >
-        <ToggleButton value="left" aria-label="left aligned">
-          <ListItemButton
-            style={{ float: "right" }}
-            alignItems="center"
-            onClick={() => addWhiteListItem(inputValue, state, props.setItems)}
-          >
-            <ListItemIcon>
-              <AddCircleOutline
-                style={{ width: "50px", height: "50px", color: "black" }}
-              />
-            </ListItemIcon>
-          </ListItemButton>
-        </ToggleButton>
-        <ToggleButton
-          value="right"
-          aria-label="right aligned"
-          style={{ width: "100%" }}
-        >
-          <TextField
-            id="basic"
-            label="Bieter zur Liste hinzufügen"
-            style={{ alignContent: "center" }}
-          >
-            {" "}
-            <Input
-              style={{ margin: "6px", borderWidth: "0", width: "100%" }}
-              onChange={handleChange}
-              value={inputValue}
-            />
-          </TextField>
-        </ToggleButton>
-      </ToggleButtonGroup>
+        <Input
+          style={{ margin: "6px", borderWidth: "0", width: "100%" }}
+          value={inputValue}
+        />
+      </TextField>
+      <ListItemButton
+        style={{ float: "right" }}
+        alignItems="center"
+        onClick={() => addWhiteListItem(inputValue, state, props.setItems)}
+      >
+        <ListItemIcon>
+          <AddCircleOutline
+            style={{ width: "50px", height: "50px", color: "black" }}
+          />
+        </ListItemIcon>
+      </ListItemButton>
     </ListItem>
   );
   return <>{listItems}</>;
@@ -201,7 +163,7 @@ function removeWhiteListItem(
     "Content-Type": "application/json",
   };
   const data = {
-    id: item.split('"')[3],
+    id: item,
   };
   axios
     .delete(`${process.env.REACT_APP_API_URL}/api/v1/whitelist/`, {
