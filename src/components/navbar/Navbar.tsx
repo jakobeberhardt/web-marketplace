@@ -37,11 +37,17 @@ function register(username: String, password: String) {
         },
       }
     )
-    .then((response) => console.log(response.data.accessToken))
     .catch(console.log);
 }
 
-function login(username: String, password: String, submitFunction: Function) {
+async function login(
+  username: String,
+  password: String,
+  submitFunction: Function,
+  setShow: Function,
+  setSnack: Function,
+  setSnackError: Function
+) {
   axios
     .post(
       `${process.env.REACT_APP_API_URL}/api/v1/auth/login`,
@@ -56,10 +62,14 @@ function login(username: String, password: String, submitFunction: Function) {
       }
     )
     .then((response) => {
-      console.log(response.data.accessToken);
       submitFunction(response.data);
+      setShow((prev: Boolean) => !prev);
+      setSnack(true);
     })
-    .catch(console.log);
+    .catch((err) => {
+      console.log(err);
+      setSnackError(true);
+    });
 }
 
 const Navbar = ({ children }: Props) => {
@@ -67,8 +77,9 @@ const Navbar = ({ children }: Props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { setState } = useGlobalState();
-  const [openSnack, setSnack] = React.useState(false);
+  const [openSnack, setSnack] = useState(false);
   const [show, setShow] = useState(true);
+  const [openSnackError, setSnackError] = useState(false);
 
   const handleListItemClick = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
@@ -94,9 +105,7 @@ const Navbar = ({ children }: Props) => {
   };
 
   const loginButtonClick = () => {
-    login(username, password, submitFunction);
-    setShow((prev) => !prev);
-    setSnack(true);
+    login(username, password, submitFunction, setShow, setSnack, setSnackError);
   };
 
   const handleSnackbarClose = (
@@ -108,6 +117,16 @@ const Navbar = ({ children }: Props) => {
     }
 
     setSnack(false);
+  };
+  const handleSnackbarErrorClose = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setSnackError(false);
   };
 
   const menuItem = [
@@ -201,6 +220,19 @@ const Navbar = ({ children }: Props) => {
           sx={{ width: "100%" }}
         >
           Du bist erfolgreich eingeloggt, {username} !
+        </Alert>
+      </Snackbar>
+      <Snackbar
+        open={openSnackError}
+        autoHideDuration={6000}
+        onClose={handleSnackbarErrorClose}
+      >
+        <Alert
+          onClose={handleSnackbarErrorClose}
+          severity="error"
+          sx={{ width: "100%" }}
+        >
+          Login mit dem Nutzer {username} ist fehlgeschlagen !
         </Alert>
       </Snackbar>
       <Drawer
