@@ -6,19 +6,15 @@ import {
   ListItem,
   ListItemButton,
   ListItemIcon,
-  ListItemText,
   Input,
   Card,
   CardContent,
   Typography,
-  Button,
   CardActions,
   TextField,
-  ToggleButtonGroup,
-  ToggleButton,
   ButtonBase,
 } from "@mui/material";
-import { DeleteOutline, AddCircleOutline } from "@mui/icons-material";
+import { AddCircleOutline } from "@mui/icons-material";
 import axios from "axios";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import {
@@ -27,9 +23,6 @@ import {
 } from "../components/GlobalStateProvider";
 import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { color } from "@mui/system";
-import FormatAlignLeftIcon from "@mui/icons-material/FormatAlignLeft";
-import FormatAlignRightIcon from "@mui/icons-material/FormatAlignRight";
 
 function WhitelistItems(props: {
   items: string[];
@@ -37,15 +30,15 @@ function WhitelistItems(props: {
 }) {
   const [inputValue, setInputValue] = useState("");
   const { state } = useGlobalState();
-  const [alignment, setAlignment] = useState("left");
-  const handleAlignment = (
+  /* const [alignment, setAlignment] = useState("left"); */
+  /* const handleAlignment = (
     event: React.MouseEvent<HTMLElement>,
     newAlignment: string | null
   ) => {
     if (newAlignment !== null) {
       setAlignment(newAlignment);
     }
-  };
+  }; */
   const handleChange = (event: any) => {
     setInputValue(event.target.value);
   };
