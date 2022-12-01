@@ -8,6 +8,15 @@ import {
   ListItemIcon,
   ListItemText,
   Input,
+  Card,
+  CardContent,
+  Typography,
+  Button,
+  CardActions,
+  TextField,
+  ToggleButtonGroup,
+  ToggleButton,
+  ButtonBase,
 } from "@mui/material";
 import { DeleteOutline, AddCircleOutline } from "@mui/icons-material";
 import axios from "axios";
@@ -16,32 +25,67 @@ import {
   GlobalStateInterface,
   useGlobalState,
 } from "../components/GlobalStateProvider";
+import { IconButton } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { color } from "@mui/system";
+import FormatAlignLeftIcon from "@mui/icons-material/FormatAlignLeft";
+import FormatAlignRightIcon from "@mui/icons-material/FormatAlignRight";
 
 function WhitelistItems(props: {
-  items: String[];
-  setItems: Dispatch<SetStateAction<String[]>>;
+  items: string[];
+  setItems: Dispatch<SetStateAction<string[]>>;
 }) {
   const [inputValue, setInputValue] = useState("");
   const { state } = useGlobalState();
+  const [alignment, setAlignment] = useState("left");
+  const handleAlignment = (
+    event: React.MouseEvent<HTMLElement>,
+    newAlignment: string | null
+  ) => {
+    if (newAlignment !== null) {
+      setAlignment(newAlignment);
+    }
+  };
   const handleChange = (event: any) => {
     setInputValue(event.target.value);
   };
   let itemArray = Object.values(props.items);
-  let listItems = itemArray.map((item: String) => (
-    <ListItem>
-      <ListItemText primary={item.split('"')[3]} />
-      <ListItemButton
-        alignItems="center"
-        onClick={() => removeWhiteListItem(item, state, props.setItems)}
+  let itemArrayParsed = itemArray
+    .map((element) => JSON.parse(element))
+    .map((e) => e.id);
+  let listItems = itemArrayParsed.map((item: string, index: Number) => (
+    <ListItem key={index as React.Key}>
+      <Card
+        style={{
+          alignContent: "center",
+          margin: "auto",
+          width: "88%",
+          border: "3px solid green",
+          marginTop: "15px",
+          minWidth: 275,
+        }}
       >
-        <ListItemIcon>
-          <DeleteOutline />
-        </ListItemIcon>
-      </ListItemButton>
+        <CardContent
+          style={{ float: "left", padding: "16px", backgroundColor: "#3A9B57" }}
+        >
+          <Box>
+            <Typography style={{ fontWeight: "800" }}>{item}</Typography>
+          </Box>
+        </CardContent>
+        <CardActions style={{ float: "right", backgroundColor: "black" }}>
+          <ButtonBase
+            onClick={() => removeWhiteListItem(item, state, props.setItems)}
+          >
+            <IconButton aria-label="delete" disabled style={{ color: "white" }}>
+              <DeleteIcon />
+            </IconButton>
+          </ButtonBase>
+        </CardActions>
+      </Card>
     </ListItem>
   ));
   listItems.push(
-    <ListItem>
+    /* <ListItem>
       <Input onChange={handleChange} value={inputValue} />
       <ListItemButton
         alignItems="center"
@@ -49,6 +93,40 @@ function WhitelistItems(props: {
       >
         <ListItemIcon>
           <AddCircleOutline />
+        </ListItemIcon>
+      </ListItemButton>
+    </ListItem> */
+
+    <ListItem
+      style={{
+        alignContent: "center",
+        margin: "auto",
+        width: "88%",
+        border: "3px solid green",
+        marginTop: "15px",
+        minWidth: 275,
+      }}
+    >
+      <TextField
+        id="basic"
+        label="Bieter zur Liste hinzufügen"
+        style={{ alignContent: "center" }}
+        onChange={handleChange}
+      >
+        <Input
+          style={{ margin: "6px", borderWidth: "0", width: "100%" }}
+          value={inputValue}
+        />
+      </TextField>
+      <ListItemButton
+        style={{ float: "right" }}
+        alignItems="center"
+        onClick={() => addWhiteListItem(inputValue, state, props.setItems)}
+      >
+        <ListItemIcon>
+          <AddCircleOutline
+            style={{ width: "50px", height: "50px", color: "black" }}
+          />
         </ListItemIcon>
       </ListItemButton>
     </ListItem>
@@ -59,7 +137,7 @@ function WhitelistItems(props: {
 function addWhiteListItem(
   item: string,
   state: Partial<GlobalStateInterface>,
-  setItems: Dispatch<SetStateAction<String[]>>
+  setItems: Dispatch<SetStateAction<string[]>>
 ) {
   const headers = {
     Authorization: `Bearer ${state.accessToken}`,
@@ -76,16 +154,16 @@ function addWhiteListItem(
 }
 
 function removeWhiteListItem(
-  item: String,
+  item: string,
   state: Partial<GlobalStateInterface>,
-  setItems: Dispatch<SetStateAction<String[]>>
+  setItems: Dispatch<SetStateAction<string[]>>
 ) {
   const headers = {
     Authorization: `Bearer ${state.accessToken}`,
     "Content-Type": "application/json",
   };
   const data = {
-    id: item.split('"')[3],
+    id: item,
   };
   axios
     .delete(`${process.env.REACT_APP_API_URL}/api/v1/whitelist/`, {
@@ -99,7 +177,7 @@ function removeWhiteListItem(
 }
 
 export default function Whitelist() {
-  const [items, setItems] = useState<String[]>([]);
+  const [items, setItems] = useState<string[]>([]);
   const { state } = useGlobalState();
 
   useEffect(() => {
