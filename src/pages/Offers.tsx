@@ -23,7 +23,7 @@ export default function Offers() {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/api/v1/offers/`, {
+      .get(`${process.env.REACT_APP_API_URL}/api/v1/biddings/assigned`, {
         headers: {
           Authorization: `Bearer ${state.accessToken}`,
           "Content-Type": "application/json",

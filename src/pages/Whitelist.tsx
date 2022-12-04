@@ -42,11 +42,8 @@ function WhitelistItems(props: {
   const handleChange = (event: any) => {
     setInputValue(event.target.value);
   };
-  let itemArray = Object.values(props.items);
-  let itemArrayParsed = itemArray
-    .map((element) => JSON.parse(element))
-    .map((e) => e.id);
-  let listItems = itemArrayParsed.map((item: string, index: Number) => (
+
+  let listItems = props.items.map((item: string, index: Number) => (
     <ListItem key={index as React.Key}>
       <Card
         style={{
