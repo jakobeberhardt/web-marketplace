@@ -30,21 +30,12 @@ function WhitelistItems(props: {
 }) {
   const [inputValue, setInputValue] = useState("");
   const { state } = useGlobalState();
-  /* const [alignment, setAlignment] = useState("left"); */
-  /* const handleAlignment = (
-    event: React.MouseEvent<HTMLElement>,
-    newAlignment: string | null
-  ) => {
-    if (newAlignment !== null) {
-      setAlignment(newAlignment);
-    }
-  }; */
   const handleChange = (event: any) => {
     setInputValue(event.target.value);
   };
 
-  let listItems = props.items.map((item: string, index: Number) => (
-    <ListItem key={index as React.Key}>
+  let listItems = props.items.map((item: string) => (
+    <ListItem key={item as React.Key}>
       <Card
         style={{
           alignContent: "center",
@@ -75,19 +66,8 @@ function WhitelistItems(props: {
     </ListItem>
   ));
   listItems.push(
-    /* <ListItem>
-      <Input onChange={handleChange} value={inputValue} />
-      <ListItemButton
-        alignItems="center"
-        onClick={() => addWhiteListItem(inputValue, state, props.setItems)}
-      >
-        <ListItemIcon>
-          <AddCircleOutline />
-        </ListItemIcon>
-      </ListItemButton>
-    </ListItem> */
-
     <ListItem
+      key={0}
       style={{
         alignContent: "center",
         margin: "auto",
@@ -161,7 +141,6 @@ function removeWhiteListItem(
       data: data,
     })
     .then((response) => {
-      console.log(response);
       setItems(response.data.whitelist);
     });
 }

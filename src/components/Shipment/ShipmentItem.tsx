@@ -16,10 +16,10 @@ import Bidding from "../../types/Bidding";
 import { Bids } from "./Bids";
 import { Bid } from "./Bid";
 
-export function ShipmentTable(props: { item: Bidding; view: String }) {
+export function ShipmentItem(props: { item: Bidding; view: String }) {
   const [open, setOpen] = React.useState(false);
 
-  //toggle funktion für die Sendung
+  //toggle Function für die Sendung
   const handleClick = () => {
     setOpen(!open);
   };

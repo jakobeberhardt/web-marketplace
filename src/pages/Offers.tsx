@@ -3,14 +3,14 @@ import { Box, Container, List } from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useGlobalState } from "../components/GlobalStateProvider";
-import { ShipmentTable } from "../components/Shipment/ShipmentTable";
+import { ShipmentItem } from "../components/Shipment/ShipmentItem";
 import Bidding from "../types/Bidding";
 
 function ShipmentItems(props: { items: Bidding[]; view: String }) {
   return (
     <>
       {props.items.map((item: Bidding) => (
-        <ShipmentTable item={item} view={props.view} />
+        <ShipmentItem item={item} view={props.view} />
       ))}
     </>
   );
