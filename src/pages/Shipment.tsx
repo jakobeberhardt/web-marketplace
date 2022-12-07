@@ -6,11 +6,15 @@ import axios from "axios";
 import Bidding from "../types/Bidding";
 import { useGlobalState } from "../components/GlobalStateProvider";
 
-function ShipmentItems(props: { items: Bidding[]; view: String }) {
+function ShipmentItems(props: {
+  items: Bidding[];
+  view: String;
+  setItems: Function;
+}) {
   return (
     <>
       {props.items.map((item: Bidding) => (
-        <ShipmentItem item={item} view={props.view} />
+        <ShipmentItem item={item} view={props.view} setItems={props.setItems} />
       ))}
     </>
   );
@@ -36,7 +40,11 @@ export default function ShipmentContainer() {
     <>
       <Container maxWidth="lg">
         <Box sx={{ bgcolor: "#fafafa", height: "100vh", p: 2 }}>
-          <List>{items && <ShipmentItems items={items} view={view} />}</List>
+          <List>
+            {items && (
+              <ShipmentItems items={items} view={view} setItems={setItems} />
+            )}
+          </List>
         </Box>
       </Container>
     </>

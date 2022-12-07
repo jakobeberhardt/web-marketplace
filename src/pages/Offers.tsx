@@ -6,11 +6,15 @@ import { useGlobalState } from "../components/GlobalStateProvider";
 import { ShipmentItem } from "../components/Shipment/ShipmentItem";
 import Bidding from "../types/Bidding";
 
-function ShipmentItems(props: { items: Bidding[]; view: String }) {
+function ShipmentItems(props: {
+  items: Bidding[];
+  view: String;
+  setItems: Function;
+}) {
   return (
     <>
       {props.items.map((item: Bidding) => (
-        <ShipmentItem item={item} view={props.view} />
+        <ShipmentItem item={item} view={props.view} setItems={props.setItems} />
       ))}
     </>
   );
@@ -36,7 +40,11 @@ export default function Offers() {
     <>
       <Container maxWidth="lg">
         <Box sx={{ bgcolor: "#fafafa", height: "100vh", p: 2 }}>
-          <List>{items && <ShipmentItems items={items} view={view} />}</List>
+          <List>
+            {items && (
+              <ShipmentItems items={items} view={view} setItems={setItems} />
+            )}
+          </List>
         </Box>
       </Container>
     </>
