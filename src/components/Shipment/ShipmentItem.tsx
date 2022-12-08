@@ -75,7 +75,7 @@ export function ShipmentItem(props: {
             {props.view === "Biddings" && (
               <>
                 <Grid>
-                  <Bids items={props.item.bids} />
+                  <Bids items={props.item.bids} setItems={props.setItems} />
                 </Grid>
               </>
             )}
