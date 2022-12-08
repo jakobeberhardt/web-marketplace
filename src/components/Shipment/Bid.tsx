@@ -2,11 +2,13 @@ import {
   Button,
   Card,
   CardContent,
-  Input,
+  InputAdornment,
   List,
   ListItem,
   ListItemText,
+  TextField,
 } from "@mui/material";
+import { Euro } from "@mui/icons-material";
 import axios from "axios";
 import { useState } from "react";
 import BidClass from "../../types/Bid";
@@ -44,12 +46,32 @@ export function Bid(props: { items: BidClass[]; setItems: Function }) {
           borderRadius: "10px",
         }}
       >
+        {/*Display Action for placing a bid*/}
         {!(props.items.length > 0) && (
           <CardContent>
-            <Input value={inputValue} onChange={handleChange} />
-            <Button onClick={() => submitBidding(inputValue, props.setItems)} />
+            <TextField
+              value={inputValue}
+              onChange={handleChange}
+              type="number"
+              label="Gebot"
+              InputProps={{
+                inputProps: { min: 0 },
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Euro />
+                  </InputAdornment>
+                ),
+              }}
+            />
+            <Button
+              onClick={() => submitBidding(inputValue, props.setItems)}
+              variant="contained"
+            >
+              Gebot abgeben
+            </Button>
           </CardContent>
         )}
+        {/*Display placed bid*/}
         {props.items.length > 0 && (
           <CardContent>
             <List>
