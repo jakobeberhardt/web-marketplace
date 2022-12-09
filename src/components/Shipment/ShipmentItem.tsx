@@ -16,7 +16,11 @@ import Bidding from "../../types/Bidding";
 import { Bids } from "./Bids";
 import { Bid } from "./Bid";
 
-export function ShipmentItem(props: { item: Bidding; view: String }) {
+export function ShipmentItem(props: {
+  item: Bidding;
+  view: String;
+  setItems: Function;
+}) {
   const [open, setOpen] = React.useState(false);
 
   //toggle Function für die Sendung
@@ -64,14 +68,14 @@ export function ShipmentItem(props: { item: Bidding; view: String }) {
             {props.view === "Offers" && (
               <>
                 <Grid>
-                  <Bid />
+                  <Bid items={props.item.bids} setItems={props.setItems} />
                 </Grid>
               </>
             )}
             {props.view === "Biddings" && (
               <>
                 <Grid>
-                  <Bids items={props.item.bids} />
+                  <Bids items={props.item.bids} setItems={props.setItems} />
                 </Grid>
               </>
             )}
