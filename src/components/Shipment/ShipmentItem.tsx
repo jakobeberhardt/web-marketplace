@@ -9,12 +9,20 @@ import {
   ListItemButton,
   ListItemText,
   Collapse,
+  Typography,
+  Button,
 } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
-import { ExpandLess, ExpandMore } from "@mui/icons-material";
+import {
+  ExpandLess,
+  ExpandMore,
+  AccessTime,
+  LocalShippingIcon,
+} from "@mui/icons-material";
 import Bidding from "../../types/Bidding";
 import { Bids } from "./Bids";
 import { Bid } from "./Bid";
+import Moment from "react-moment";
 
 export function ShipmentItem(props: {
   item: Bidding;
@@ -28,6 +36,8 @@ export function ShipmentItem(props: {
     setOpen(!open);
   };
 
+  Moment.globalLocale = "de";
+
   return (
     <>
       <List
@@ -40,8 +50,21 @@ export function ShipmentItem(props: {
         component="nav"
       >
         <ListItemButton onClick={handleClick}>
-          <SendIcon sx={{ mr: "20px" }} />
+          <Typography sx={{ mr: "20px", fontWeight: "700" }}>
+            Sendung:{" "}
+          </Typography>
           <ListItemText primary={props.item.shipment.id} />
+          <div>icon</div>
+
+          <div style={{ marginRight: "20px" }}>
+            {props.item.shipment.totalLoadMeters?.toString()} ldm
+          </div>
+          <div>icon</div>
+
+          <div style={{ marginRight: "20px" }}>
+            {props.item.shipment.totalWeight?.toString()} kg
+          </div>
+          <Typography sx={{ backgroundColor: "blue" }}>Gebote: xxx</Typography>
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
         <Collapse in={open} timeout="auto" unmountOnExit>
@@ -55,6 +78,72 @@ export function ShipmentItem(props: {
             disablePadding
           >
             <Grid container justifyContent="center">
+              <Grid xs={3}>
+                <Typography>Von:</Typography>
+                <div>{props.item.shipment.pickup.station.name}</div>
+                <div>
+                  {props.item.shipment.pickup.allowedTimeWindows.map(
+                    (element) => (
+                      <>
+                        <AccessTime />
+                        <Moment
+                          date={element.startTime}
+                          format="dddd, MMMM YY [um] hh:mm [Uhr]"
+                        />
+                        <div>bis</div>
+                        <div>
+                          <AccessTime />
+                          <Moment
+                            date={element.endTime}
+                            format="dddd, MMMM YY [um] hh:mm [Uhr]"
+                          />
+                        </div>
+                      </>
+                    )
+                  )}
+                </div>
+              </Grid>
+
+              <Grid xs={3}>
+                <Typography>Nach:</Typography>
+                <div>{props.item.shipment.delivery.station.name}</div>
+                <div>
+                  {props.item.shipment.delivery.allowedTimeWindows.map(
+                    (element) => (
+                      <>
+                        <AccessTime />
+                        <Moment
+                          date={element.startTime}
+                          format="dddd, MMMM YY [um] hh:mm [Uhr]"
+                        />
+                        <div>bis</div>
+                        <div>
+                          <AccessTime />
+                          <Moment
+                            date={element.endTime}
+                            format="dddd, MMMM YY [um] hh:mm [Uhr]"
+                          />
+                        </div>
+                      </>
+                    )
+                  )}
+                </div>
+              </Grid>
+
+              <Grid xs={3}>
+                <Typography>Anforderungen:</Typography>
+                <div>
+                  Object.entries
+                  {props.item.shipment.requirements.map((element) => (
+                    <>
+                      <div>
+                        <LocalShippingIcon />
+                        <div>{element.boxTrailer.scopes}</div>
+                      </div>
+                    </>
+                  ))}
+                </div>
+              </Grid>
               <Grid xs={10}>
                 <Details item={props.item} />
               </Grid>
