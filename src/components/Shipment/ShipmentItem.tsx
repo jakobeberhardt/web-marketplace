@@ -1,8 +1,6 @@
 import * as React from "react";
 
-import LoadingLoc from "./LoadingLoc";
-import { DischargeLoc } from "./DischargeLoc";
-import { Details } from "./Details";
+import Offer from "./Offer";
 import Requirements from "./Requirements";
 import {
   Grid,
@@ -135,14 +133,8 @@ export function ShipmentItem(props: {
                 <Typography>Anforderungen:</Typography>
                 <Requirements item={props.item} />
               </Grid>
-              <Grid xs={10}>
-                <Details item={props.item} />
-              </Grid>
-              <Grid xs={5}>
-                <LoadingLoc item={props.item} />
-              </Grid>
-              <Grid xs={5}>
-                <DischargeLoc item={props.item} />
+              <Grid xs={7}>
+                <Offer item={props.item} />
               </Grid>
             </Grid>
             {props.view === "Offers" && (

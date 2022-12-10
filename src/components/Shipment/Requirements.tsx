@@ -28,6 +28,7 @@ export default function Requirements(props: { item: Bidding }) {
 
   return (
     <>
+      {/* 
       <div>
         {Object.entries(props.item.shipment.requirements).map((element) => (
           <>
@@ -37,13 +38,9 @@ export default function Requirements(props: { item: Bidding }) {
               for (let i = 0; i < 22; i++) {
                 options.push(
                   <div>
-                    {/* Requirement benötigt (ist null, wenn nicht)*/}
                     <div>{!element[i]}</div>
-                    {/* Icon */}
                     <div>{iconMap.get(element[i])}</div>
-                    {/* Scope */}
                     <div>{element[i].scopes}</div>
-                    {/* Params bei IntRequirement z.B Ladehöhe in m */}
                     <div>{element[i].params}</div>
                   </div>
                 );
@@ -53,7 +50,8 @@ export default function Requirements(props: { item: Bidding }) {
             })()}
           </>
         ))}
-      </div>
+      </div >
+          */}
     </>
   );
 }
