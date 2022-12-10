@@ -3,6 +3,7 @@ import * as React from "react";
 import LoadingLoc from "./LoadingLoc";
 import { DischargeLoc } from "./DischargeLoc";
 import { Details } from "./Details";
+import Requirements from "./Requirements";
 import {
   Grid,
   List,
@@ -30,30 +31,6 @@ export function ShipmentItem(props: {
   setItems: Function;
 }) {
   const [open, setOpen] = React.useState(false);
-
-  const iconMap = new Map<string, JSX.Element>([
-    ["boxtrailer", <LocalShipping />],
-    ["cleanedVehicle", <></>],
-    ["craneLoadable", <></>],
-    ["emptyVehicle", <></>],
-    ["fireExtinguisher", <></>],
-    ["foodStuffs", <></>],
-    ["healthCert", <></>],
-    ["keepDry", <></>],
-    ["loadHeight", <></>],
-    ["loadWidth", <></>],
-    ["loadLength", <></>],
-    ["mobileForklift", <></>],
-    ["palletSwap", <></>],
-    ["ppeFfp2Mask", <></>],
-    ["ppeHelmet", <></>],
-    ["ppeShoes", <></>],
-    ["sideLoadable", <></>],
-    ["tailLift", <></>],
-    ["trackingLevel", <></>],
-    ["wasteSign", <></>],
-    ["whitelabelVehicle", <></>],
-  ]);
 
   //toggle Function für die Sendung
   const handleClick = () => {
@@ -156,22 +133,7 @@ export function ShipmentItem(props: {
 
               <Grid xs={3}>
                 <Typography>Anforderungen:</Typography>
-                <div>
-                  {Object.entries(props.item.shipment.requirements).map(
-                    (element) => (
-                      <>
-                        {/* Requirement benötigt (ist null, wenn nicht)*/}
-                        <div>{!!element[1]}</div>
-                        {/* Icon */}
-                        <div>{iconMap.get(element[0])}</div>
-                        {/* Scope */}
-                        <div>{element[1].scopes}</div>
-                        {/* Params bei IntRequirement z.B Ladehöhe in m */}
-                        <div>{element[1].params}</div>
-                      </>
-                    )
-                  )}
-                </div>
+                <Requirements item={props.item} />
               </Grid>
               <Grid xs={10}>
                 <Details item={props.item} />
