@@ -31,26 +31,19 @@ export default function Requirements(props: { item: Bidding }) {
       <div>
         {Object.entries(props.item.shipment.requirements).map((element) => (
           <>
-            {(() => {
-              const options = element;
-              //22 anforderungen gibt es
-              for (let i = 0; i < 22; i++) {
-                options.push(
-                  <div>
-                    {/* Requirement benötigt (ist null, wenn nicht)*/}
-                    <div>{!element[i]}</div>
-                    {/* Icon */}
-                    <div>{iconMap.get(element[i])}</div>
-                    {/* Scope */}
-                    <div>{element[i].scopes}</div>
-                    {/* Params bei IntRequirement z.B Ladehöhe in m */}
-                    <div>{element[i].params}</div>
-                  </div>
-                );
-              }
-
-              return options;
-            })()}
+            {/* Gib was leeres zurück, wenn das Requirement null ist */}
+            {!element[1] && <></>}
+            {/* Gib das Icon + Scopes zurück, wenn das Requirement gesetzt ist */}
+            {!!element[1] && (
+              <div>
+                {/* Icon */}
+                <div>{iconMap.get(element[0])}</div>
+                {/* Scope */}
+                <div>{element[1].scopes}</div>
+                {/* Params bei IntRequirement z.B Ladehöhe in m */}
+                <div>{element[1].params}</div>
+              </div>
+            )}
           </>
         ))}
       </div>
