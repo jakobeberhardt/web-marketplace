@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { lazy, Suspense } from "react";
 
 import LoadingLoc from "./LoadingLoc";
 import { DischargeLoc } from "./DischargeLoc";
@@ -13,8 +13,17 @@ import {
 import SendIcon from "@mui/icons-material/Send";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import Bidding from "../../types/Bidding";
-import { Bids } from "./Bids";
-import { Bid } from "./Bid";
+
+const Bid = lazy(() =>
+  import("./Bid").then((module) => {
+    return { default: module.Bid };
+  })
+);
+const Bids = lazy(() =>
+  import("./Bids").then((module) => {
+    return { default: module.Bids };
+  })
+);
 
 export function ShipmentItem(props: {
   item: Bidding;
@@ -65,24 +74,26 @@ export function ShipmentItem(props: {
                 <DischargeLoc item={props.item} />
               </Grid>
             </Grid>
-            {props.view === "Offers" && (
-              <>
-                <Grid>
-                  <Bid
-                    biddingID={props.item.id}
-                    items={props.item.bids}
-                    setItems={props.setItems}
-                  />
-                </Grid>
-              </>
-            )}
-            {props.view === "Biddings" && (
-              <>
-                <Grid>
-                  <Bids items={props.item.bids} setItems={props.setItems} />
-                </Grid>
-              </>
-            )}
+            <Suspense>
+              {props.view === "Offers" && (
+                <>
+                  <Grid>
+                    <Bid
+                      biddingID={props.item.id}
+                      items={props.item.bids}
+                      setItems={props.setItems}
+                    />
+                  </Grid>
+                </>
+              )}
+              {props.view === "Biddings" && (
+                <>
+                  <Grid>
+                    <Bids items={props.item.bids} setItems={props.setItems} />
+                  </Grid>
+                </>
+              )}
+            </Suspense>
           </List>
         </Collapse>
       </List>
