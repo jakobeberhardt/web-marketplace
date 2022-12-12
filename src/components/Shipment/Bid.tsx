@@ -14,15 +14,24 @@ import { useState } from "react";
 import BidClass from "../../types/Bid";
 import { useGlobalState } from "../GlobalStateProvider";
 
-export function Bid(props: { items: BidClass[]; setItems: Function }) {
+export function Bid(props: {
+  biddingID: String;
+  items: BidClass[];
+  setItems: Function;
+}) {
   const [inputValue, setInputValue] = useState("");
   const { state } = useGlobalState();
   const handleChange = (event: any) => {
     setInputValue(event.target.value);
   };
 
-  const submitBidding = (inputValue: String, setItems: Function) => {
+  const submitBidding = (
+    biddingID: String,
+    inputValue: String,
+    setItems: Function
+  ) => {
     const data = {
+      id: biddingID,
       value: inputValue,
     };
     const headers = {
@@ -64,7 +73,9 @@ export function Bid(props: { items: BidClass[]; setItems: Function }) {
               }}
             />
             <Button
-              onClick={() => submitBidding(inputValue, props.setItems)}
+              onClick={() =>
+                submitBidding(props.biddingID, inputValue, props.setItems)
+              }
               variant="contained"
             >
               Gebot abgeben
