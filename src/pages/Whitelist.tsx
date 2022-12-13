@@ -23,6 +23,7 @@ import {
 } from "../components/GlobalStateProvider";
 import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import PopupDelete from "../components/PopupDelete";
 
 function WhitelistItems(props: {
   items: string[];
@@ -52,7 +53,7 @@ function WhitelistItems(props: {
             fontWeight: "600",
             float: "left",
             fontSize: "medium",
-            padding: "15px",
+            padding: "10px",
             border: "3px solid green",
             borderRadius: "7px",
           }}
@@ -76,13 +77,14 @@ function WhitelistItems(props: {
             backgroundColor: "black",
             border: "3px solid green",
             borderRadius: "7px",
+            padding: "2px",
           }}
         >
           <ButtonBase
             onClick={() => removeWhiteListItem(item, state, props.setItems)}
           >
             <IconButton aria-label="delete" disabled style={{ color: "white" }}>
-              <DeleteIcon />
+              <DeleteIcon style={{ width: "20px", height: "20px" }} />
             </IconButton>
           </ButtonBase>
         </CardActions>
@@ -198,6 +200,9 @@ export default function Whitelist() {
             {items && <WhitelistItems items={items} setItems={setItems} />}
           </List>
         </Box>
+        <PopupDelete
+        //    if triggered from delete button, open popup window to ask confirmation
+        />
       </Container>
     </>
   );
