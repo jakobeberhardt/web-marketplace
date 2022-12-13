@@ -36,7 +36,7 @@ function WhitelistItems(props: {
 
   let listItems = props.items.map((item: string) => (
     <ListItem key={item as React.Key}>
-      <Card
+      <div
         style={{
           alignContent: "center",
           margin: "auto",
@@ -53,6 +53,8 @@ function WhitelistItems(props: {
             float: "left",
             fontSize: "medium",
             padding: "15px",
+            border: "3px solid green",
+            borderRadius: "7px",
           }}
         >
           {item}
@@ -68,7 +70,14 @@ function WhitelistItems(props: {
             float: "left",
           }}
         />
-        <CardActions style={{ float: "left", backgroundColor: "black" }}>
+        <CardActions
+          style={{
+            float: "left",
+            backgroundColor: "black",
+            border: "3px solid green",
+            borderRadius: "7px",
+          }}
+        >
           <ButtonBase
             onClick={() => removeWhiteListItem(item, state, props.setItems)}
           >
@@ -77,7 +86,7 @@ function WhitelistItems(props: {
             </IconButton>
           </ButtonBase>
         </CardActions>
-      </Card>
+      </div>
     </ListItem>
   ));
   listItems.push(
@@ -110,7 +119,11 @@ function WhitelistItems(props: {
       >
         <ListItemIcon>
           <AddCircleOutline
-            style={{ width: "50px", height: "50px", color: "black" }}
+            style={{
+              width: "50px",
+              height: "50px",
+              color: "black",
+            }}
           />
         </ListItemIcon>
       </ListItemButton>
