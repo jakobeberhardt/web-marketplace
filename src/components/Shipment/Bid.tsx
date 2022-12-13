@@ -59,6 +59,7 @@ export function Bid(props: {
         {!(props.items.length > 0) && (
           <CardContent>
             <TextField
+              data-testid="bidInput"
               value={inputValue}
               onChange={handleChange}
               type="number"
