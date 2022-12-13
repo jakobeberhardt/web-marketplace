@@ -217,7 +217,12 @@ export function ShipmentItem(props: {
           >
             <Grid container justifyContent="center" style={{ padding: "20px" }}>
               <Grid xs={7}>
-                <div>Gebote.tsx</div>{" "}
+                {props.view === "Offers" && (
+                  <Bid items={props.item.bids} setItems={props.setItems} />
+                )}
+                {props.view === "Biddings" && (
+                  <Bids items={props.item.bids} setItems={props.setItems} />
+                )}
               </Grid>
             </Grid>
           </List>
