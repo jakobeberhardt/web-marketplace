@@ -20,6 +20,7 @@ import { Link } from "react-router-dom";
 import { useState, ReactNode } from "react";
 import axios from "axios";
 import { useGlobalState, GlobalStateInterface } from "../GlobalStateProvider";
+import UserSidebar from "./UserSidebar";
 
 type Props = {
   title: string;
@@ -278,6 +279,7 @@ const Navbar = ({ children }: Props) => {
               </Link>
             ))}
           </List>
+          <UserSidebar />
           <div
             style={{
               width: "-webkit-fill-available",

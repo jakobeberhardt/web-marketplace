@@ -41,19 +41,34 @@ function WhitelistItems(props: {
           alignContent: "center",
           margin: "auto",
           width: "88%",
-          border: "3px solid green",
           marginTop: "15px",
           minWidth: 275,
+          display: "flex",
+          alignItems: "center",
         }}
       >
-        <CardContent
-          style={{ float: "left", padding: "16px", backgroundColor: "#3A9B57" }}
+        <Typography
+          style={{
+            fontWeight: "600",
+            float: "left",
+            fontSize: "medium",
+            padding: "15px",
+          }}
         >
-          <Box>
-            <Typography style={{ fontWeight: "800" }}>{item}</Typography>
-          </Box>
-        </CardContent>
-        <CardActions style={{ float: "right", backgroundColor: "black" }}>
+          {item}
+        </Typography>
+
+        <div
+          style={{
+            backgroundColor: "#FFFFFF",
+            borderTop: "3px solid green",
+            borderBottom: "3px solid green",
+            width: "100%",
+            height: "30px",
+            float: "left",
+          }}
+        />
+        <CardActions style={{ float: "left", backgroundColor: "black" }}>
           <ButtonBase
             onClick={() => removeWhiteListItem(item, state, props.setItems)}
           >

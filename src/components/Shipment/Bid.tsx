@@ -44,6 +44,7 @@ export function Bid(props: { items: BidClass[]; setItems: Function }) {
           mb: "30px",
           mr: "30px",
           borderRadius: "10px",
+          backgroundColor: "grey",
         }}
       >
         {/*Display Action for placing a bid*/}

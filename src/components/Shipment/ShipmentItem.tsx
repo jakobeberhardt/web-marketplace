@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import Offer from "./Offer";
+import Gebote from "./Gebote";
 import Requirements from "./Requirements";
 import {
   Grid,
@@ -22,6 +23,10 @@ import Bidding from "../../types/Bidding";
 import { Bids } from "./Bids";
 import { Bid } from "./Bid";
 import Moment from "react-moment";
+
+import ScaleIcon from "@mui/icons-material/Scale";
+import AspectRatio from "@mui/icons-material/AspectRatio";
+import Straighten from "@mui/icons-material/Straighten";
 
 export function ShipmentItem(props: {
   item: Bidding;
@@ -45,6 +50,8 @@ export function ShipmentItem(props: {
           maxWidth: "100%",
           bgcolor: "#9ad6bd",
           borderRadius: "10px",
+          alignItems: "center",
+          marginBottom: "15px",
         }}
         component="nav"
       >
@@ -53,20 +60,152 @@ export function ShipmentItem(props: {
             Sendung:{" "}
           </Typography>
           <ListItemText primary={props.item.shipment.id} />
-          <div>icon</div>
 
-          <div style={{ marginRight: "20px" }}>
+          <Straighten />
+          <div style={{ marginRight: "30px", marginLeft: "10px" }}>
             {props.item.shipment.totalLoadMeters?.toString()} ldm
           </div>
-          <div>icon</div>
+          <ScaleIcon />
 
-          <div style={{ marginRight: "20px" }}>
+          <div style={{ marginRight: "30px", marginLeft: "10px" }}>
             {props.item.shipment.totalWeight?.toString()} kg
           </div>
-          <Typography sx={{ backgroundColor: "blue" }}>Gebote: xxx</Typography>
+          <AspectRatio />
+          <div style={{ marginRight: "30px", marginLeft: "10px" }}>
+            {props.item.shipment.totalVolume?.toString()} m³
+          </div>
+          <Typography
+            sx={{
+              backgroundColor: "#1E90FF",
+              color: "white",
+              padding: "7px 10px 7px 10px",
+              borderRadius: "25px",
+              marginRight: "15px",
+            }}
+          >
+            Gebote: xxx
+          </Typography>
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
-        <Collapse in={open} timeout="auto" unmountOnExit>
+        <div className="quickinfo" style={{ backgroundColor: "#FFFFFF" }}>
+          {" "}
+          <Grid container justifyContent="center" style={{ padding: "20px" }}>
+            <Grid xs={3} style={{ marginRight: "20px" }}>
+              <Typography style={{ fontWeight: "600" }}>Von:</Typography>
+              <div>{props.item.shipment.pickup.station.name}</div>
+              <div>
+                {props.item.shipment.pickup.allowedTimeWindows.map(
+                  (element) => (
+                    <>
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          fontSize: "small",
+                          paddingTop: "10px",
+                        }}
+                      >
+                        <AccessTime
+                          style={{
+                            width: "15px",
+                            height: "15px",
+                          }}
+                        />{" "}
+                        <Moment
+                          date={element.startTime}
+                          format="DD. MMM,  hh:mm [Uhr - ]"
+                        />
+                      </div>
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          fontSize: "small",
+                        }}
+                      >
+                        {" "}
+                        <AccessTime
+                          style={{
+                            width: "15px",
+                            height: "15px",
+                          }}
+                        />{" "}
+                        <Moment
+                          date={element.endTime}
+                          format="DD. MMM,  hh:mm [Uhr]"
+                        />
+                      </div>
+                    </>
+                  )
+                )}
+              </div>
+            </Grid>
+
+            <Grid xs={3} style={{ marginLeft: "20px", marginRight: "20px" }}>
+              <Typography style={{ fontWeight: "600" }}>Nach:</Typography>
+              <div>{props.item.shipment.delivery.station.name}</div>
+              <div>
+                {props.item.shipment.delivery.allowedTimeWindows.map(
+                  (element) => (
+                    <>
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          fontSize: "small",
+                          paddingTop: "10px",
+                        }}
+                      >
+                        <AccessTime
+                          style={{
+                            width: "15px",
+                            height: "15px",
+                          }}
+                        />
+                        <Moment
+                          date={element.startTime}
+                          format="DD. MMM,  hh:mm [Uhr - ]"
+                        />
+                      </div>
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          fontSize: "small",
+                        }}
+                      >
+                        {" "}
+                        <AccessTime
+                          style={{
+                            width: "15px",
+                            height: "15px",
+                          }}
+                        />{" "}
+                        <Moment
+                          date={element.endTime}
+                          format="DD. MMM,  hh:mm [Uhr]"
+                        />
+                      </div>
+                    </>
+                  )
+                )}
+              </div>
+            </Grid>
+
+            <Grid xs={3} style={{ marginLeft: "20px" }}>
+              <Typography style={{ fontWeight: "600" }}>
+                Anforderungen:
+              </Typography>
+            </Grid>
+          </Grid>
+        </div>
+
+        <Collapse
+          sx={{ borderCollapse: "separate" }}
+          in={open}
+          timeout="auto"
+          unmountOnExit
+        >
           <List
             sx={{
               width: "100%",
@@ -76,81 +215,11 @@ export function ShipmentItem(props: {
             component="div"
             disablePadding
           >
-            <Grid container justifyContent="center">
-              <Grid xs={3}>
-                <Typography>Von:</Typography>
-                <div>{props.item.shipment.pickup.station.name}</div>
-                <div>
-                  {props.item.shipment.pickup.allowedTimeWindows.map(
-                    (element) => (
-                      <>
-                        <AccessTime />
-                        <Moment
-                          date={element.startTime}
-                          format="dddd, MMMM YY [um] hh:mm [Uhr]"
-                        />
-                        <div>bis</div>
-                        <div>
-                          <AccessTime />
-                          <Moment
-                            date={element.endTime}
-                            format="dddd, MMMM YY [um] hh:mm [Uhr]"
-                          />
-                        </div>
-                      </>
-                    )
-                  )}
-                </div>
-              </Grid>
-
-              <Grid xs={3}>
-                <Typography>Nach:</Typography>
-                <div>{props.item.shipment.delivery.station.name}</div>
-                <div>
-                  {props.item.shipment.delivery.allowedTimeWindows.map(
-                    (element) => (
-                      <>
-                        <AccessTime />
-                        <Moment
-                          date={element.startTime}
-                          format="dddd, MMMM YY [um] hh:mm [Uhr]"
-                        />
-                        <div>bis</div>
-                        <div>
-                          <AccessTime />
-                          <Moment
-                            date={element.endTime}
-                            format="dddd, MMMM YY [um] hh:mm [Uhr]"
-                          />
-                        </div>
-                      </>
-                    )
-                  )}
-                </div>
-              </Grid>
-
-              <Grid xs={3}>
-                <Typography>Anforderungen:</Typography>
-                <Requirements item={props.item} />
-              </Grid>
+            <Grid container justifyContent="center" style={{ padding: "20px" }}>
               <Grid xs={7}>
-                <Offer item={props.item} />
+                <div>Gebote.tsx</div>{" "}
               </Grid>
             </Grid>
-            {props.view === "Offers" && (
-              <>
-                <Grid>
-                  <Bid items={props.item.bids} setItems={props.setItems} />
-                </Grid>
-              </>
-            )}
-            {props.view === "Biddings" && (
-              <>
-                <Grid>
-                  <Bids items={props.item.bids} setItems={props.setItems} />
-                </Grid>
-              </>
-            )}
           </List>
         </Collapse>
       </List>

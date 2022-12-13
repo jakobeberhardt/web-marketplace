@@ -1,29 +1,57 @@
-import { LocalShipping } from "@mui/icons-material";
+import {
+  LocalShipping,
+  HealthAndSafety,
+  FormatColorReset,
+  Height,
+  Engineering,
+  Masks,
+} from "@mui/icons-material";
 import Bidding from "../../types/Bidding";
+
+import GPS from "../../assets/icons/png/gps.png";
+import Restaurant from "../../assets/icons/png/restaurant.png";
+import Logistics from "../../assets/icons/png/logistics.png";
+import EmptyTruck from "../../assets/icons/png/006-truck-1.png";
+import Clean from "../../assets/icons/png/clean.png";
+import Swap from "../../assets/icons/png/015-swap.png";
+import Boxes from "../../assets/icons/png/004-boxes.png";
+import Width from "../../assets/icons/png/012-arrows.png";
+
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import TrendingFlatIcon from "@mui/icons-material/TrendingFlat";
+import CoronavirusIcon from "@mui/icons-material/Coronavirus";
+import SyncIcon from "@mui/icons-material/Sync";
+import FoodBankIcon from "@mui/icons-material/FoodBank";
+import ScaleIcon from "@mui/icons-material/Scale";
+import ViewInArIcon from "@mui/icons-material/ViewInAr";
+import SendIcon from "@mui/icons-material/Send";
+import SpaceBarIcon from "@mui/icons-material/SpaceBar";
+import HeightIcon from "@mui/icons-material/Height";
+import FireExtinguisher from "@mui/icons-material/FireExtinguisher";
 
 export default function Requirements(props: { item: Bidding }) {
   const iconMap = new Map<string, JSX.Element>([
-    ["boxtrailer", <LocalShipping />],
-    ["cleanedVehicle", <></>],
-    ["craneLoadable", <></>],
-    ["emptyVehicle", <></>],
-    ["fireExtinguisher", <></>],
-    ["foodStuffs", <></>],
-    ["healthCert", <></>],
-    ["keepDry", <></>],
-    ["loadHeight", <></>],
-    ["loadWidth", <></>],
+    // ["boxtrailer", <LocalShipping />],
+    // ["cleanedVehicle", <Clean />],
+    // ["craneLoadable", <></>],
+    // ["emptyVehicle", <EmptyTruck />],
+    ["fireExtinguisher", <FireExtinguisher />],
+    /*  ["foodStuffs", <FoodBankIcon />],
+    ["healthCert", <HealthAndSafety />],
+    ["keepDry", <FormatColorReset />],*/
+    ["loadHeight", <HeightIcon />],
+    /* ["loadWidth", <Width />],
     ["loadLength", <></>],
-    ["mobileForklift", <></>],
-    ["palletSwap", <></>],
-    ["ppeFfp2Mask", <></>],
-    ["ppeHelmet", <></>],
+    ["mobileForklift", <Boxes />],
+    ["palletSwap", <Swap />],
+    ["ppeFfp2Mask", <Masks />],
+    ["ppeHelmet", <Engineering />],
     ["ppeShoes", <></>],
     ["sideLoadable", <></>],
     ["tailLift", <></>],
-    ["trackingLevel", <></>],
+    //["trackingLevel", <GPS />],
     ["wasteSign", <></>],
-    ["whitelabelVehicle", <></>],
+    ["whitelabelVehicle", <></>],*/
   ]);
 
   return (
@@ -35,7 +63,12 @@ export default function Requirements(props: { item: Bidding }) {
             {!element[1] && <></>}
             {/* Gib das Icon + Scopes zurück, wenn das Requirement gesetzt ist */}
             {!!element[1] && (
-              <div>
+              <div
+                style={{
+                  padding: "10px",
+                  borderRadius: "15px",
+                }}
+              >
                 {/* Icon */}
                 <div>{iconMap.get(element[0])}</div>
                 {/* Scope */}
