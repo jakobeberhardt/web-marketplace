@@ -67,7 +67,7 @@ function WhitelistItems(props: {
             borderTop: "3px solid green",
             borderBottom: "3px solid green",
             width: "100%",
-            height: "30px",
+            height: "15px",
             float: "left",
           }}
         />
