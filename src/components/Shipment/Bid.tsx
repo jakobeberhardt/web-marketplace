@@ -31,7 +31,8 @@ export function Bid(props: {
     setItems: Function
   ) => {
     const data = {
-      id: biddingID,
+      biddingId: biddingID,
+      userId: state.userId,
       value: inputValue as unknown as Number,
       currency: "Euro",
     };
@@ -43,7 +44,10 @@ export function Bid(props: {
       .post(`${process.env.REACT_APP_API_URL}/api/v1/biddings/bid`, data, {
         headers: headers,
       })
-      .then((response) => setItems(response.data.whitelist));
+      .then((response) => {
+        console.log(response);
+        setItems(response.data.biddings);
+      });
   };
 
   return (

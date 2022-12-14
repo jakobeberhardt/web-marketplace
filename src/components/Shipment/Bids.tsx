@@ -29,8 +29,8 @@ function BidItems(props: {
             data-testid="acceptOffer"
             onClick={() => acceptOffer(item, props.state, props.setItems)}
           >
-            Zuschlag erteilen
             <Handshake />
+            Zuschlag erteilen
           </ListItemButton>
         </ListItem>
       ))}
@@ -44,18 +44,20 @@ function acceptOffer(
   setItems: Function
 ) {
   const data = {
-    value: item.value,
-    user: item.userId,
-    bid: item.id,
+    bid: item,
   };
   const headers = {
     Authorization: `Bearer ${state.accessToken}`,
     "Content-Type": "application/json",
   };
   axios
-    .post(`${process.env.REACT_APP_API_URL}/api/v1/biddings/accept`, data, {
-      headers: headers,
-    })
+    .post(
+      `${process.env.REACT_APP_API_URL}/api/v1/biddings/assignBidding`,
+      data,
+      {
+        headers: headers,
+      }
+    )
     .then((response) => setItems(response));
 }
 
