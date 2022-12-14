@@ -10,6 +10,7 @@ import { Handshake } from "@mui/icons-material";
 import Bid from "../../types/Bid";
 import { useGlobalState, GlobalStateInterface } from "../GlobalStateProvider";
 import axios from "axios";
+import React from "react";
 
 function BidItems(props: {
   items: Bid[];
@@ -19,9 +20,13 @@ function BidItems(props: {
   return (
     <>
       {props.items.map((item: Bid) => (
-        <ListItem>
-          <ListItemText primary={item.value.toString()} />
+        <ListItem key={item.userId as React.Key}>
+          <ListItemText
+            primary={item.value.toString()}
+            data-testid="offerValue"
+          />
           <ListItemButton
+            data-testid="acceptOffer"
             onClick={() => acceptOffer(item, props.state, props.setItems)}
           >
             Zuschlag erteilen
