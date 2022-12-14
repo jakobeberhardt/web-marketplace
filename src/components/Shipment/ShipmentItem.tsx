@@ -40,6 +40,7 @@ export function ShipmentItem(props: {
   return (
     <>
       <List
+        key={props.item.id as React.Key}
         sx={{
           width: "100%",
           maxWidth: "100%",
@@ -64,13 +65,13 @@ export function ShipmentItem(props: {
             disablePadding
           >
             <Grid container justifyContent="center">
-              <Grid xs={10}>
+              <Grid xs={10} item={true}>
                 <Details item={props.item} />
               </Grid>
-              <Grid xs={5}>
+              <Grid xs={5} item={true}>
                 <LoadingLoc item={props.item} />
               </Grid>
-              <Grid xs={5}>
+              <Grid xs={5} item={true}>
                 <DischargeLoc item={props.item} />
               </Grid>
             </Grid>

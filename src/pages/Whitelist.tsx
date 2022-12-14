@@ -67,6 +67,7 @@ function WhitelistItems(props: {
   listItems.push(
     <ListItem
       key={0}
+      role="listitem"
       style={{
         alignContent: "center",
         margin: "auto",

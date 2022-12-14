@@ -32,7 +32,8 @@ export function Bid(props: {
   ) => {
     const data = {
       id: biddingID,
-      value: inputValue,
+      value: inputValue as unknown as Number,
+      currency: "Euro",
     };
     const headers = {
       Authorization: `Bearer ${state.accessToken}`,
@@ -59,6 +60,7 @@ export function Bid(props: {
         {!(props.items.length > 0) && (
           <CardContent>
             <TextField
+              data-testid="bidInput"
               value={inputValue}
               onChange={handleChange}
               type="number"
