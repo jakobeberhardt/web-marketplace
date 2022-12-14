@@ -1,8 +1,9 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { Box, Container, List } from "@mui/material";
 import { ShipmentItems } from "./Offers";
 import biddings from "../components/mock-shipment.json";
+import { TurnedIn } from "@mui/icons-material";
 
 test("Ich kann Shipments sehen, die für mich ausgeschrieben sind.", () => {
   const items = biddings;
@@ -20,6 +21,14 @@ test("Ich kann Shipments sehen, die für mich ausgeschrieben sind.", () => {
       </Box>
     </Container>
   );
-  const expandButton = screen.getByText("Testobjekt");
-  expect(expandButton).toBeInTheDocument();
+
+  fireEvent(
+    screen.getByText("Testobjekt"),
+    new MouseEvent("click", {
+      bubbles: true,
+    })
+  );
+
+  const detailView = screen.getByTestId("detailView");
+  expect(detailView).toBeInTheDocument();
 });
