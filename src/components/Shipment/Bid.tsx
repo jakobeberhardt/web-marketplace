@@ -32,7 +32,8 @@ export function Bid(props: {
   ) => {
     const data = {
       id: biddingID,
-      value: inputValue,
+      value: inputValue as unknown as Number,
+      currency: "Euro",
     };
     const headers = {
       Authorization: `Bearer ${state.accessToken}`,
