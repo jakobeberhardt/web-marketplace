@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import {
   Box,
   Container,
@@ -94,6 +93,7 @@ function WhitelistItems(props: {
   listItems.push(
     <ListItem
       key={0}
+      role="listitem"
       style={{
         alignContent: "center",
         margin: "auto",

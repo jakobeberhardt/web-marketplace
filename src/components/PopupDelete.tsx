@@ -1,5 +1,4 @@
 import { Card, CardContent, CardHeader, Typography } from "@mui/material";
-import Bidding from "../types/Bidding";
 
 export default function PopupDelete(props: {}) {
   return (

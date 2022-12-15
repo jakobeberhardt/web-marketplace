@@ -6,7 +6,7 @@ import { useGlobalState } from "../components/GlobalStateProvider";
 import { ShipmentItem } from "../components/Shipment/ShipmentItem";
 import Bidding from "../types/Bidding";
 
-function ShipmentItems(props: {
+export function ShipmentItems(props: {
   items: Bidding[];
   view: String;
   setItems: Function;
@@ -14,7 +14,13 @@ function ShipmentItems(props: {
   return (
     <>
       {props.items.map((item: Bidding) => (
-        <ShipmentItem item={item} view={props.view} setItems={props.setItems} />
+        <ShipmentItem
+          key={item.id as React.Key}
+          item={item}
+          view={props.view}
+          setItems={props.setItems}
+          items={props.items}
+        />
       ))}
     </>
   );

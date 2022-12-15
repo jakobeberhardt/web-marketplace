@@ -14,7 +14,12 @@ function ShipmentItems(props: {
   return (
     <>
       {props.items.map((item: Bidding) => (
-        <ShipmentItem item={item} view={props.view} setItems={props.setItems} />
+        <ShipmentItem
+          item={item}
+          view={props.view}
+          setItems={props.setItems}
+          items={props.items}
+        />
       ))}
     </>
   );
