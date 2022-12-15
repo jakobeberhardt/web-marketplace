@@ -13,17 +13,31 @@ import axios from "axios";
 import { useState } from "react";
 import BidClass from "../../types/Bid";
 import { useGlobalState } from "../GlobalStateProvider";
+import Bidding from "../../types/Bidding";
 
-export function Bid(props: { items: BidClass[]; setItems: Function }) {
+export function Bid(props: {
+  biddingID: String;
+  items: BidClass[];
+  setItems: Function;
+  biddingItems: Bidding[];
+}) {
   const [inputValue, setInputValue] = useState("");
   const { state } = useGlobalState();
   const handleChange = (event: any) => {
     setInputValue(event.target.value);
   };
 
-  const submitBidding = (inputValue: String, setItems: Function) => {
+  const submitBidding = (
+    biddingID: String,
+    inputValue: String,
+    setItems: Function,
+    items: Bidding[]
+  ) => {
     const data = {
-      value: inputValue,
+      biddingId: biddingID,
+      userId: state.userId,
+      value: inputValue as unknown as Number,
+      currency: "Euro",
     };
     const headers = {
       Authorization: `Bearer ${state.accessToken}`,
@@ -33,12 +47,23 @@ export function Bid(props: { items: BidClass[]; setItems: Function }) {
       .post(`${process.env.REACT_APP_API_URL}/api/v1/biddings/bid`, data, {
         headers: headers,
       })
-      .then((response) => setItems(response.data.whitelist));
+      .then((response) => {
+        console.log(response);
+        const found = items.find((element) => element.id === response.data.id);
+        const index = found && items.indexOf(found);
+        if (index) {
+          items.splice(index, 1);
+          items.splice(index, 0, response.data);
+          props.items.push(items[index].bids[0]);
+        }
+        setItems(items);
+      });
   };
 
   return (
     <>
-      <Card /* key={props.item.id as React.Key} */
+      <Card
+        /* key={props.items[0].id as React.Key} */
         sx={{
           mt: "30px",
           mb: "30px",
@@ -51,6 +76,7 @@ export function Bid(props: { items: BidClass[]; setItems: Function }) {
         {!(props.items.length > 0) && (
           <CardContent>
             <TextField
+              data-testid="bidInput"
               value={inputValue}
               onChange={handleChange}
               type="number"
@@ -65,7 +91,14 @@ export function Bid(props: { items: BidClass[]; setItems: Function }) {
               }}
             />
             <Button
-              onClick={() => submitBidding(inputValue, props.setItems)}
+              onClick={() =>
+                submitBidding(
+                  props.biddingID,
+                  inputValue,
+                  props.setItems,
+                  props.biddingItems
+                )
+              }
               variant="contained"
             >
               Gebot abgeben

@@ -17,7 +17,10 @@ import Bidding from "../../types/Bidding";
 export function Details(props: { item: Bidding }) {
   return (
     <>
-      <Card sx={{ mt: "30px", mb: "30px", borderRadius: "10px" }}>
+      <Card
+        sx={{ mt: "30px", mb: "30px", borderRadius: "10px" }}
+        data-testid="detailView"
+      >
         <CardContent>
           <Typography variant="body2">
             <>

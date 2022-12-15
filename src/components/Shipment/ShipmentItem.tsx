@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 
 import Offer from "./Offer";
 import Requirements from "./Requirements";
@@ -22,18 +22,19 @@ import {
   LocalShipping,
 } from "@mui/icons-material";
 import Bidding from "../../types/Bidding";
-import { Bids } from "./Bids";
 import { Bid } from "./Bid";
 import Moment from "react-moment";
 
 import ScaleIcon from "@mui/icons-material/Scale";
 import AspectRatio from "@mui/icons-material/AspectRatio";
 import Straighten from "@mui/icons-material/Straighten";
+import { Bids } from "./Bids";
 
 export function ShipmentItem(props: {
   item: Bidding;
   view: String;
   setItems: Function;
+  items: Bidding[];
 }) {
   const [open, setOpen] = React.useState(false);
 
@@ -47,6 +48,7 @@ export function ShipmentItem(props: {
   return (
     <>
       <List
+        key={props.item.id as React.Key}
         sx={{
           width: "100%",
           maxWidth: "100%",
@@ -376,7 +378,12 @@ export function ShipmentItem(props: {
               }}
             />
             {props.view === "Offers" && (
-              <Bid items={props.item.bids} setItems={props.setItems} />
+              <Bid
+                items={props.item.bids}
+                setItems={props.setItems}
+                biddingID={props.item.id}
+                biddingItems={props.items}
+              />
             )}
             {props.view === "Biddings" && (
               <Bids items={props.item.bids} setItems={props.setItems} />
