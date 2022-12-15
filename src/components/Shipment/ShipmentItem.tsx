@@ -1,7 +1,6 @@
 import * as React from "react";
 
 import Offer from "./Offer";
-import Gebote from "./Gebote";
 import Requirements from "./Requirements";
 import {
   Grid,
@@ -11,6 +10,7 @@ import {
   Collapse,
   Typography,
   Button,
+  ListItem,
 } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import {
@@ -191,11 +191,143 @@ export function ShipmentItem(props: {
                 )}
               </div>
             </Grid>
+            {/*TODO: List in Requirements.tsx einfügen &an Logik anbinden*/}
 
             <Grid xs={3} style={{ marginLeft: "20px" }}>
               <Typography style={{ fontWeight: "600" }}>
+                {" "}
                 Anforderungen:
               </Typography>
+              <div
+                style={{ display: "flex", flexWrap: "wrap", paddingLeft: "0" }}
+              >
+                <div
+                  style={{
+                    backgroundColor: "green",
+                    padding: "7px",
+                    margin: "5px",
+                    borderRadius: "25px",
+                    width: "40px",
+                  }}
+                >
+                  <ScaleIcon
+                    style={{
+                      margin: "auto",
+                      display: "flex",
+                      minWidth: "15px",
+                      minHeight: "15px",
+                      maxWidth: "20px",
+                      maxHeight: "20px",
+                    }}
+                  />
+                </div>
+                <div
+                  style={{
+                    backgroundColor: "yellow",
+                    padding: "7px",
+                    margin: "5px",
+                    borderRadius: "25px",
+                    width: "40px",
+                  }}
+                >
+                  {" "}
+                  <ScaleIcon
+                    style={{
+                      margin: "auto",
+                      display: "flex",
+                      minWidth: "15px",
+                      minHeight: "15px",
+                      maxWidth: "20px",
+                      maxHeight: "20px",
+                    }}
+                  />
+                </div>
+                <div
+                  style={{
+                    backgroundColor: "orange",
+                    padding: "7px",
+                    margin: "5px",
+                    borderRadius: "25px",
+                    width: "40px",
+                  }}
+                >
+                  {" "}
+                  <ScaleIcon
+                    style={{
+                      margin: "auto",
+                      display: "flex",
+                      minWidth: "15px",
+                      minHeight: "15px",
+                      maxWidth: "20px",
+                      maxHeight: "20px",
+                    }}
+                  />
+                </div>
+                <div
+                  style={{
+                    backgroundColor: "orange",
+                    padding: "7px",
+                    margin: "5px",
+                    borderRadius: "25px",
+                    width: "40px",
+                  }}
+                >
+                  {" "}
+                  <ScaleIcon
+                    style={{
+                      margin: "auto",
+                      display: "flex",
+                      minWidth: "15px",
+                      minHeight: "15px",
+                      maxWidth: "20px",
+                      maxHeight: "20px",
+                    }}
+                  />
+                </div>
+                <div
+                  style={{
+                    backgroundColor: "orange",
+                    padding: "7px",
+                    margin: "5px",
+                    borderRadius: "25px",
+                    width: "40px",
+                  }}
+                >
+                  {" "}
+                  <ScaleIcon
+                    style={{
+                      margin: "auto",
+                      display: "flex",
+                      minWidth: "15px",
+                      minHeight: "15px",
+                      maxWidth: "20px",
+                      maxHeight: "20px",
+                    }}
+                  />
+                </div>
+                <div
+                  style={{
+                    backgroundColor: "orange",
+                    padding: "7px",
+                    margin: "5px",
+                    borderRadius: "25px",
+                    width: "40px",
+                    float: "left",
+                  }}
+                >
+                  {" "}
+                  <ScaleIcon
+                    style={{
+                      margin: "auto",
+                      display: "flex",
+                      minWidth: "15px",
+                      minHeight: "15px",
+                      maxWidth: "20px",
+                      maxHeight: "20px",
+                    }}
+                  />
+                </div>
+              </div>
             </Grid>
           </Grid>
         </div>
@@ -216,10 +348,12 @@ export function ShipmentItem(props: {
             disablePadding
           >
             <Grid container justifyContent="center" style={{ padding: "20px" }}>
-              <Grid xs={7}>
+              <Grid xs={9}>
                 {props.view === "Offers" && (
                   <Bid items={props.item.bids} setItems={props.setItems} />
                 )}
+              </Grid>
+              <Grid xs={9}>
                 {props.view === "Biddings" && (
                   <Bids items={props.item.bids} setItems={props.setItems} />
                 )}
