@@ -36,10 +36,12 @@ export function ShipmentItem(props: {
   setItems: Function;
 }) {
   const [open, setOpen] = React.useState(false);
+  const [anzahl, setAnzahl] = React.useState(0);
 
   //toggle Function für die Sendung
   const handleClick = () => {
     setOpen(!open);
+    setAnzahl(props.item.bids.length);
   };
 
   Moment.globalLocale = "de";
@@ -99,7 +101,7 @@ export function ShipmentItem(props: {
                 marginRight: "15px",
               }}
             >
-              Anzahl Gebote: xx
+              Anzahl Gebote: {anzahl}
             </Typography>
           )}
           {open ? <ExpandLess /> : <ExpandMore />}
@@ -362,24 +364,38 @@ export function ShipmentItem(props: {
               marginTop: "4vh",
               marginBottom: "3vh",
               padding: "0",
-              height: "40vh",
+              minHeight: "28vh",
+
               justifyContent: "center",
             }}
           >
-            <CardHeader
-              title="Gebote"
-              style={{
-                backgroundColor: "#3A9B57",
-                color: "white",
-                fontWeight: "700",
-                display: "flex",
-              }}
-            />
             {props.view === "Offers" && (
-              <Bid items={props.item.bids} setItems={props.setItems} />
+              <div>
+                <CardHeader
+                  title="Angebote"
+                  style={{
+                    backgroundColor: "#3A9B57",
+                    color: "white",
+                    fontWeight: "700",
+                    display: "flex",
+                  }}
+                />
+                <Bid items={props.item.bids} setItems={props.setItems} />
+              </div>
             )}
             {props.view === "Biddings" && (
-              <Bids items={props.item.bids} setItems={props.setItems} />
+              <div>
+                <CardHeader
+                  title="Gebote"
+                  style={{
+                    backgroundColor: "#3A9B57",
+                    color: "white",
+                    fontWeight: "700",
+                    display: "flex",
+                  }}
+                />
+                <Bids items={props.item.bids} setItems={props.setItems} />
+              </div>
             )}
           </Card>
         </Collapse>

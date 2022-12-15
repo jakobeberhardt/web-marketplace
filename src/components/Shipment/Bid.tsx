@@ -33,23 +33,22 @@ export function Bid(props: { items: BidClass[]; setItems: Function }) {
       .post(`${process.env.REACT_APP_API_URL}/api/v1/biddings/bid`, data, {
         headers: headers,
       })
-      .then((response) => setItems(response.data.whitelist));
+      .then((response) => setItems(response.data.whitelist))
+      .then(() => (data.value = ""));
   };
 
   return (
     <>
       <Card /* key={props.item.id as React.Key} */
         sx={{
-          mt: "30px",
-          mb: "30px",
-          mr: "30px",
+          margin: "50px",
           borderRadius: "10px",
-          backgroundColor: "grey",
+          backgroundColor: "white",
         }}
       >
         {/*Display Action for placing a bid*/}
         {!(props.items.length > 0) && (
-          <CardContent>
+          <CardContent style={{ display: "flex" }}>
             <TextField
               value={inputValue}
               onChange={handleChange}
@@ -57,7 +56,7 @@ export function Bid(props: { items: BidClass[]; setItems: Function }) {
               label="Gebot"
               InputProps={{
                 inputProps: { min: 0 },
-                startAdornment: (
+                endAdornment: (
                   <InputAdornment position="start">
                     <Euro />
                   </InputAdornment>
@@ -65,6 +64,7 @@ export function Bid(props: { items: BidClass[]; setItems: Function }) {
               }}
             />
             <Button
+              style={{ marginLeft: "auto", marginRight: "0" }}
               onClick={() => submitBidding(inputValue, props.setItems)}
               variant="contained"
             >
