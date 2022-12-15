@@ -74,17 +74,32 @@ export function ShipmentItem(props: {
           <div style={{ marginRight: "30px", marginLeft: "10px" }}>
             {props.item.shipment.totalVolume?.toString()} m³
           </div>
-          <Typography
-            sx={{
-              backgroundColor: "#1E90FF",
-              color: "white",
-              padding: "7px 10px 7px 10px",
-              borderRadius: "25px",
-              marginRight: "15px",
-            }}
-          >
-            Gebote: xxx
-          </Typography>
+          {props.view === "Offers" && (
+            <Typography
+              sx={{
+                backgroundColor: "#1E90FF",
+                color: "white",
+                padding: "7px 10px 7px 10px",
+                borderRadius: "25px",
+                marginRight: "15px",
+              }}
+            >
+              Ihr Gebot: xx €
+            </Typography>
+          )}
+          {props.view === "Biddings" && (
+            <Typography
+              sx={{
+                backgroundColor: "#1E90FF",
+                color: "white",
+                padding: "7px 10px 7px 10px",
+                borderRadius: "25px",
+                marginRight: "15px",
+              }}
+            >
+              Anzahl Gebote: xx
+            </Typography>
+          )}
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
         <div className="quickinfo" style={{ backgroundColor: "#FFFFFF" }}>
