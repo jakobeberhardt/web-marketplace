@@ -78,7 +78,10 @@ export function ShipmentItem(props: {
                 marginRight: "15px",
               }}
             >
-              {`Ihr Gebot: ${props.item.bids[0].value} €`}
+              {props.item.bids.length > 0 && (
+                <>{`Ihr Gebot: ${props.item.bids[0].value} €`}</>
+              )}
+              {props.item.bids.length === 0 && <>Kein Gebot abgegeben</>}
             </Typography>
           )}
           {props.view === "Biddings" && (
