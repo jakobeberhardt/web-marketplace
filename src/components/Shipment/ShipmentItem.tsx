@@ -364,22 +364,24 @@ export function ShipmentItem(props: {
               justifyContent: "center",
             }}
           >
-            <CardHeader
-              title="Auf Sendung bieten"
-              style={{
-                backgroundColor: "#3A9B57",
-                color: "white",
-                fontWeight: "700",
-                display: "flex",
-              }}
-            />
             {props.view === "Offers" && (
-              <Bid
-                items={props.item.bids}
-                setItems={props.setItems}
-                biddingID={props.item.id}
-                biddingItems={props.items}
-              />
+              <div>
+                <CardHeader
+                  title="Auf Sendung bieten"
+                  style={{
+                    backgroundColor: "#3A9B57",
+                    color: "white",
+                    fontWeight: "700",
+                    display: "flex",
+                  }}
+                />
+                <Bid
+                  items={props.item.bids}
+                  setItems={props.setItems}
+                  biddingID={props.item.id}
+                  biddingItems={props.items}
+                />
+              </div>
             )}
             {props.view === "Biddings" && (
               <div>
