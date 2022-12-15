@@ -63,7 +63,6 @@ export function Bid(props: {
   return (
     <>
       <Card
-        /* key={props.items[0].id as React.Key} */
         sx={{
           mt: "30px",
           mb: "30px",

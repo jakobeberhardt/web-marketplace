@@ -1,14 +1,5 @@
-import {
-  Button,
-  Card,
-  CardContent,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
-  Typography,
-} from "@mui/material";
-import { CheckCircle, Handshake } from "@mui/icons-material";
+import { List, ListItem, ListItemButton, Typography } from "@mui/material";
+import { CheckCircle } from "@mui/icons-material";
 import Bid from "../../types/Bid";
 import { useGlobalState, GlobalStateInterface } from "../GlobalStateProvider";
 import axios from "axios";
@@ -31,18 +22,28 @@ function BidItems(props: {
             alignItems: "center",
           }}
         >
-          <div>
+          <div
+            style={{ margin: "auto", marginRight: "30rem", padding: "1rem" }}
+          >
             {/* <Typography style={{}}>Spedition Mustermann</Typography> */}
-            <Typography>{item.value.toString()}</Typography>
+            <Typography>{item.value.toString()} €</Typography>
           </div>
           <ListItemButton
-            data-testid="acceptOffer"
-            style={{ marginLeft: "auto", marginRight: "0" }}
             onClick={() => acceptOffer(item, props.state, props.setItems)}
+            style={{
+              marginLeft: "auto",
+              marginRight: "0",
+              alignSelf: "stretch",
+            }}
           >
-            <CheckCircle color="success" />
-            <Handshake />
-            Zuschlag erteilen
+            <CheckCircle
+              style={{
+                margin: "auto",
+                height: "30px",
+                width: "30px",
+              }}
+              color="success"
+            />
           </ListItemButton>
         </ListItem>
       ))}
@@ -84,13 +85,13 @@ export function Bids(props: { items: Array<Bid>; setItems: Function }) {
           height: "100%",
         }}
       >
-        {props.items && (
+        {
           <BidItems
             items={props.items}
             state={state}
             setItems={props.setItems}
           />
-        )}
+        }
       </List>
     </>
   );

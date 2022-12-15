@@ -1,7 +1,5 @@
 import React from "react";
 
-import Offer from "./Offer";
-import Requirements from "./Requirements";
 import {
   Grid,
   List,
@@ -9,18 +7,10 @@ import {
   ListItemText,
   Collapse,
   Typography,
-  Button,
-  ListItem,
   Card,
   CardHeader,
 } from "@mui/material";
-import SendIcon from "@mui/icons-material/Send";
-import {
-  ExpandLess,
-  ExpandMore,
-  AccessTime,
-  LocalShipping,
-} from "@mui/icons-material";
+import { ExpandLess, ExpandMore, AccessTime } from "@mui/icons-material";
 import Bidding from "../../types/Bidding";
 import { Bid } from "./Bid";
 import Moment from "react-moment";
@@ -88,7 +78,7 @@ export function ShipmentItem(props: {
                 marginRight: "15px",
               }}
             >
-              Ihr Gebot: xx €
+              {`Ihr Gebot: ${props.item.bids[0].value} €`}
             </Typography>
           )}
           {props.view === "Biddings" && (
