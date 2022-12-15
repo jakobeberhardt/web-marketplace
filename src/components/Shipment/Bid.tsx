@@ -88,6 +88,7 @@ export function Bid(props: {
               }}
             />
             <Button
+              style={{ marginLeft: "auto" }}
               onClick={() =>
                 submitBidding(
                   props.biddingID,

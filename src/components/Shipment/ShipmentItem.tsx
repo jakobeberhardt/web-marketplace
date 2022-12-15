@@ -365,7 +365,7 @@ export function ShipmentItem(props: {
             }}
           >
             <CardHeader
-              title="Gebote"
+              title="Auf Sendung bieten"
               style={{
                 backgroundColor: "#3A9B57",
                 color: "white",
