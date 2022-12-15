@@ -19,6 +19,7 @@ export function ShipmentItems(props: {
           item={item}
           view={props.view}
           setItems={props.setItems}
+          items={props.items}
         />
       ))}
     </>

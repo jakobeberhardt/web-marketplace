@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React from "react";
 
 import LoadingLoc from "./LoadingLoc";
 import { DischargeLoc } from "./DischargeLoc";
@@ -13,22 +13,14 @@ import {
 import SendIcon from "@mui/icons-material/Send";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import Bidding from "../../types/Bidding";
-
-const Bid = lazy(() =>
-  import("./Bid").then((module) => {
-    return { default: module.Bid };
-  })
-);
-const Bids = lazy(() =>
-  import("./Bids").then((module) => {
-    return { default: module.Bids };
-  })
-);
+import { Bid } from "./Bid";
+import { Bids } from "./Bids";
 
 export function ShipmentItem(props: {
   item: Bidding;
   view: String;
   setItems: Function;
+  items: Bidding[];
 }) {
   const [open, setOpen] = React.useState(false);
 
@@ -75,26 +67,26 @@ export function ShipmentItem(props: {
                 <DischargeLoc item={props.item} />
               </Grid>
             </Grid>
-            <Suspense>
-              {props.view === "Offers" && (
-                <>
-                  <Grid>
-                    <Bid
-                      biddingID={props.item.id}
-                      items={props.item.bids}
-                      setItems={props.setItems}
-                    />
-                  </Grid>
-                </>
-              )}
-              {props.view === "Biddings" && (
-                <>
-                  <Grid>
-                    <Bids items={props.item.bids} setItems={props.setItems} />
-                  </Grid>
-                </>
-              )}
-            </Suspense>
+
+            {props.view === "Offers" && (
+              <>
+                <Grid>
+                  <Bid
+                    biddingID={props.item.id}
+                    items={props.item.bids}
+                    setItems={props.setItems}
+                    biddingItems={props.items}
+                  />
+                </Grid>
+              </>
+            )}
+            {props.view === "Biddings" && (
+              <>
+                <Grid>
+                  <Bids items={props.item.bids} setItems={props.setItems} />
+                </Grid>
+              </>
+            )}
           </List>
         </Collapse>
       </List>

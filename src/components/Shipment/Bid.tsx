@@ -13,11 +13,13 @@ import axios from "axios";
 import { useState } from "react";
 import BidClass from "../../types/Bid";
 import { useGlobalState } from "../GlobalStateProvider";
+import Bidding from "../../types/Bidding";
 
 export function Bid(props: {
   biddingID: String;
   items: BidClass[];
   setItems: Function;
+  biddingItems: Bidding[];
 }) {
   const [inputValue, setInputValue] = useState("");
   const { state } = useGlobalState();
@@ -28,7 +30,8 @@ export function Bid(props: {
   const submitBidding = (
     biddingID: String,
     inputValue: String,
-    setItems: Function
+    setItems: Function,
+    items: Bidding[]
   ) => {
     const data = {
       biddingId: biddingID,
@@ -46,13 +49,21 @@ export function Bid(props: {
       })
       .then((response) => {
         console.log(response);
-        setItems(response.data.biddings);
+        const found = items.find((element) => element.id === response.data.id);
+        const index = found && items.indexOf(found);
+        if (index) {
+          items.splice(index, 1);
+          items.splice(index, 0, response.data);
+          props.items.push(items[index].bids[0]);
+        }
+        setItems(items);
       });
   };
 
   return (
     <>
-      <Card /* key={props.item.id as React.Key} */
+      <Card
+        /* key={props.items[0].id as React.Key} */
         sx={{
           mt: "30px",
           mb: "30px",
@@ -80,7 +91,12 @@ export function Bid(props: {
             />
             <Button
               onClick={() =>
-                submitBidding(props.biddingID, inputValue, props.setItems)
+                submitBidding(
+                  props.biddingID,
+                  inputValue,
+                  props.setItems,
+                  props.biddingItems
+                )
               }
               variant="contained"
             >

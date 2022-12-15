@@ -5,7 +5,9 @@ import { Bids } from "./Bids";
 
 test("Ich kann bei jedem Gebot den Button zum Zuschlag erteilen sehen", () => {
   const setItems = () => {};
-  const items: BidClass[] = [{ id: "123", userId: "456", value: 500.0 }];
+  const items: BidClass[] = [
+    { id: "123", userId: "456", value: 500.0, currency: "Euro" },
+  ];
 
   render(<Bids setItems={setItems} items={items} />);
   const bidItem = screen.getByText("Zuschlag erteilen");
@@ -14,7 +16,9 @@ test("Ich kann bei jedem Gebot den Button zum Zuschlag erteilen sehen", () => {
 
 test("Ich kann den Wert von jedem Gebot sehen und es ist formattiert", () => {
   const setItems = () => {};
-  const items: BidClass[] = [{ id: "123", userId: "456", value: 500.0 }];
+  const items: BidClass[] = [
+    { id: "123", userId: "456", value: 500.0, currency: "Euro" },
+  ];
   render(<Bids setItems={setItems} items={items} />);
 
   const bidValue = screen.getByTestId("offerValue");
@@ -23,7 +27,9 @@ test("Ich kann den Wert von jedem Gebot sehen und es ist formattiert", () => {
 
 test("Ich kann den Wert von jedem Gebot sehen und es ist formattiert mit Nachkommastellen", () => {
   const setItems = () => {};
-  const items: BidClass[] = [{ id: "123", userId: "456", value: 500.5 }];
+  const items: BidClass[] = [
+    { id: "123", userId: "456", value: 500.5, currency: "Euro" },
+  ];
   render(<Bids setItems={setItems} items={items} />);
 
   const bidValue = screen.getByTestId("offerValue");
