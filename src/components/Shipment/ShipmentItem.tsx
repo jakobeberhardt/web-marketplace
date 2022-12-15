@@ -11,6 +11,8 @@ import {
   Typography,
   Button,
   ListItem,
+  Card,
+  CardHeader,
 } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import {
@@ -353,28 +355,33 @@ export function ShipmentItem(props: {
           timeout="auto"
           unmountOnExit
         >
-          <List
-            sx={{
-              width: "100%",
-              maxWidth: "100%",
-              bgcolor: "#ffffff",
+          <Card
+            style={{
+              marginLeft: "12vh",
+              marginRight: "12vh",
+              marginTop: "4vh",
+              marginBottom: "3vh",
+              padding: "0",
+              height: "40vh",
+              justifyContent: "center",
             }}
-            component="div"
-            disablePadding
           >
-            <Grid container justifyContent="center" style={{ padding: "20px" }}>
-              <Grid xs={9}>
-                {props.view === "Offers" && (
-                  <Bid items={props.item.bids} setItems={props.setItems} />
-                )}
-              </Grid>
-              <Grid xs={9}>
-                {props.view === "Biddings" && (
-                  <Bids items={props.item.bids} setItems={props.setItems} />
-                )}
-              </Grid>
-            </Grid>
-          </List>
+            <CardHeader
+              title="Gebote"
+              style={{
+                backgroundColor: "#3A9B57",
+                color: "white",
+                fontWeight: "700",
+                display: "flex",
+              }}
+            />
+            {props.view === "Offers" && (
+              <Bid items={props.item.bids} setItems={props.setItems} />
+            )}
+            {props.view === "Biddings" && (
+              <Bids items={props.item.bids} setItems={props.setItems} />
+            )}
+          </Card>
         </Collapse>
       </List>
     </>

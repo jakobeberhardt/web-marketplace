@@ -67,6 +67,7 @@ export default function Requirements(props: { item: Bidding }) {
                 style={{
                   padding: "10px",
                   borderRadius: "15px",
+                  backgroundColor: "yellow",
                 }}
               >
                 {/* Icon */}
@@ -83,3 +84,22 @@ export default function Requirements(props: { item: Bidding }) {
     </>
   );
 }
+/*
+ <List>
+                  <ListItem>
+                    <div style={{ backgroundColor: "green" }}>
+                      {" "}
+                      {props.item.shipment.totalLoadMeters?.toString()} icon
+                    </div>
+                    <div style={{ backgroundColor: "yellow" }}>
+                      {" "}
+                      {props.item.shipment.totalLoadMeters?.toString()} icon
+                    </div>
+                    <div style={{ backgroundColor: "orange" }}>
+                      {" "}
+                      {props.item.shipment.totalLoadMeters?.toString()} icon
+                    </div>
+                  </ListItem>
+                </List>
+
+                */

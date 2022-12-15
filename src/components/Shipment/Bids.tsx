@@ -1,12 +1,14 @@
 import {
+  Button,
   Card,
   CardContent,
   List,
   ListItem,
   ListItemButton,
   ListItemText,
+  Typography,
 } from "@mui/material";
-import { Handshake } from "@mui/icons-material";
+import { CheckCircle, Handshake } from "@mui/icons-material";
 import Bid from "../../types/Bid";
 import { useGlobalState, GlobalStateInterface } from "../GlobalStateProvider";
 import axios from "axios";
@@ -19,12 +21,23 @@ function BidItems(props: {
   return (
     <>
       {props.items.map((item: Bid) => (
-        <ListItem>
-          <ListItemText primary={item.value.toString()} />
+        <ListItem
+          style={{
+            backgroundColor: "white",
+            margin: "40px",
+            width: "auto",
+            alignItems: "center",
+          }}
+        >
+          <div>
+            <Typography style={{}}>Spedition Mustermann</Typography>
+            <Typography></Typography>
+          </div>
           <ListItemButton
+            style={{ marginLeft: "auto", marginRight: "0" }}
             onClick={() => acceptOffer(item, props.state, props.setItems)}
           >
-            Zuschlag erteilen
+            <CheckCircle color="success" />
             <Handshake />
           </ListItemButton>
         </ListItem>
@@ -58,24 +71,79 @@ export function Bids(props: { items: Array<Bid>; setItems: Function }) {
   const { state } = useGlobalState();
   return (
     <>
-      <Card
-        sx={{
-          mt: "30px",
-          mb: "30px",
-          mr: "30px",
-          borderRadius: "10px",
+      <List
+        style={{
+          backgroundColor: "#D9D9D9",
+          margin: "0",
+          height: "100%",
         }}
       >
-        <CardContent>
-          <List>
-            <BidItems
-              items={props.items}
-              state={state}
-              setItems={props.setItems}
+        {/*
+        <BidItems items={props.items} state={state} setItems={props.setItems} />
+         */}
+        <ListItem
+          style={{
+            backgroundColor: "white",
+            margin: "40px",
+            width: "auto",
+            alignItems: "center",
+          }}
+        >
+          <div
+            style={{ margin: "auto", marginRight: "30rem", padding: "1rem" }}
+          >
+            <Typography style={{}}>Spedition Mustermann</Typography>
+            <Typography>Gebot: xxx EUR</Typography>
+          </div>
+          <ListItemButton
+            style={{
+              marginLeft: "auto",
+              marginRight: "0",
+              alignSelf: "stretch",
+            }}
+          >
+            <CheckCircle
+              style={{
+                margin: "auto",
+                height: "30px",
+                width: "30px",
+              }}
+              color="success"
             />
-          </List>
-        </CardContent>
-      </Card>
+          </ListItemButton>
+        </ListItem>
+        <ListItem
+          style={{
+            backgroundColor: "white",
+            margin: "40px",
+            width: "auto",
+            alignItems: "center",
+          }}
+        >
+          <div
+            style={{ margin: "auto", marginRight: "30rem", padding: "1rem" }}
+          >
+            <Typography style={{}}>Spedition Mustermann</Typography>
+            <Typography>Gebot: xxx EUR</Typography>
+          </div>
+          <ListItemButton
+            style={{
+              marginLeft: "auto",
+              marginRight: "0",
+              alignSelf: "stretch",
+            }}
+          >
+            <CheckCircle
+              style={{
+                margin: "auto",
+                height: "30px",
+                width: "30px",
+              }}
+              color="success"
+            />
+          </ListItemButton>
+        </ListItem>
+      </List>
     </>
   );
 }
