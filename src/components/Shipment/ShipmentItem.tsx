@@ -27,12 +27,10 @@ export function ShipmentItem(props: {
   items: Bidding[];
 }) {
   const [open, setOpen] = React.useState(false);
-  const [anzahl, setAnzahl] = React.useState(0);
 
   //toggle Function für die Sendung
   const handleClick = () => {
     setOpen(!open);
-    setAnzahl(props.item.bids.length);
   };
 
   Moment.globalLocale = "de";
@@ -40,7 +38,6 @@ export function ShipmentItem(props: {
   return (
     <>
       <List
-        key={props.item.id as React.Key}
         sx={{
           width: "100%",
           maxWidth: "100%",
@@ -96,7 +93,7 @@ export function ShipmentItem(props: {
                 marginRight: "15px",
               }}
             >
-              Anzahl Gebote: {anzahl}
+              Anzahl Gebote: {props.item.bids.length}
             </Typography>
           )}
           {open ? <ExpandLess /> : <ExpandMore />}
@@ -104,7 +101,7 @@ export function ShipmentItem(props: {
         <div className="quickinfo" style={{ backgroundColor: "#FFFFFF" }}>
           {" "}
           <Grid container justifyContent="center" style={{ padding: "20px" }}>
-            <Grid xs={3} style={{ marginRight: "20px" }}>
+            <Grid xs={3} style={{ marginRight: "20px" }} item={true}>
               <Typography style={{ fontWeight: "600" }}>Von:</Typography>
               <div>{props.item.shipment.pickup.station.name}</div>
               <div>
@@ -155,7 +152,11 @@ export function ShipmentItem(props: {
               </div>
             </Grid>
 
-            <Grid xs={3} style={{ marginLeft: "20px", marginRight: "20px" }}>
+            <Grid
+              xs={3}
+              style={{ marginLeft: "20px", marginRight: "20px" }}
+              item={true}
+            >
               <Typography style={{ fontWeight: "600" }}>Nach:</Typography>
               <div>{props.item.shipment.delivery.station.name}</div>
               <div>
@@ -207,7 +208,7 @@ export function ShipmentItem(props: {
             </Grid>
             {/*TODO: List in Requirements.tsx einfügen &an Logik anbinden*/}
 
-            <Grid xs={3} style={{ marginLeft: "20px" }}>
+            <Grid xs={3} style={{ marginLeft: "20px" }} item={true}>
               <Typography style={{ fontWeight: "600" }}>
                 {" "}
                 Anforderungen:

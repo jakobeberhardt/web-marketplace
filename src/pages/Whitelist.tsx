@@ -6,8 +6,6 @@ import {
   ListItemButton,
   ListItemIcon,
   Input,
-  Card,
-  CardContent,
   Typography,
   CardActions,
   TextField,
@@ -22,7 +20,6 @@ import {
 } from "../components/GlobalStateProvider";
 import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import PopupDelete from "../components/PopupDelete";
 
 function WhitelistItems(props: {
   items: string[];
@@ -200,9 +197,6 @@ export default function Whitelist() {
             {items && <WhitelistItems items={items} setItems={setItems} />}
           </List>
         </Box>
-        <PopupDelete
-        //    if triggered from delete button, open popup window to ask confirmation
-        />
       </Container>
     </>
   );

@@ -48,7 +48,6 @@ export function Bid(props: {
         headers: headers,
       })
       .then((response) => {
-        console.log(response);
         const found = items.find((element) => element.id === response.data.id);
         const index = found && items.indexOf(found);
         if (index) {
@@ -108,7 +107,9 @@ export function Bid(props: {
           <CardContent>
             <List>
               <ListItem>
-                <ListItemText primary={props.items[0].value.toString()} />
+                <ListItemText
+                  primary={`Ihr Gebot: ${props.items[0].value.toString()} €`}
+                />
               </ListItem>
             </List>
           </CardContent>

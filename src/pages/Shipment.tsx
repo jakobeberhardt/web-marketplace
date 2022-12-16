@@ -15,6 +15,7 @@ function ShipmentItems(props: {
     <>
       {props.items.map((item: Bidding) => (
         <ShipmentItem
+          key={item.id as React.Key}
           item={item}
           view={props.view}
           setItems={props.setItems}
@@ -39,7 +40,7 @@ export default function ShipmentContainer() {
         },
       })
       .then((reponse) => setItems(reponse.data));
-  }, [state.accessToken]);
+  }, [state.accessToken, items]);
 
   return (
     <>

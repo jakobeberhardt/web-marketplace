@@ -1,14 +1,8 @@
 import { Card, CardContent, CardHeader, Typography } from "@mui/material";
-import Bidding from "../../types/Bidding";
 import { useGlobalState } from "../GlobalStateProvider";
 
 export default function UserSidebar(props: {}) {
   const { state } = useGlobalState();
-
-  /* Unterscheiden des eingeloggten Users
-    const [ "Bieter",
-        "Anbieter"] = LoginStatus();
-*/
 
   return (
     <>

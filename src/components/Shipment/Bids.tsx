@@ -1,9 +1,9 @@
 import { List, ListItem, ListItemButton, Typography } from "@mui/material";
-import { CheckCircle } from "@mui/icons-material";
 import Bid from "../../types/Bid";
 import { useGlobalState, GlobalStateInterface } from "../GlobalStateProvider";
 import axios from "axios";
 import React from "react";
+import HandshakeIcon from "@mui/icons-material/Handshake";
 
 function BidItems(props: {
   items: Bid[];
@@ -17,15 +17,14 @@ function BidItems(props: {
           key={item.userId as React.Key}
           style={{
             backgroundColor: "white",
-            margin: "40px",
+            margin: "35px",
             width: "auto",
             alignItems: "center",
           }}
         >
           <div
-            style={{ margin: "auto", marginRight: "30rem", padding: "1rem" }}
+            style={{ margin: "auto", marginRight: "20rem", padding: "1rem" }}
           >
-            {/* <Typography style={{}}>Spedition Mustermann</Typography> */}
             <Typography>{item.value.toString()} €</Typography>
           </div>
           <ListItemButton
@@ -36,14 +35,15 @@ function BidItems(props: {
               alignSelf: "stretch",
             }}
           >
-            <CheckCircle
+            <HandshakeIcon
               style={{
                 margin: "auto",
-                height: "30px",
-                width: "30px",
+                height: "35px",
+                width: "35px",
               }}
               color="success"
             />
+            Zuschlag erteilen
           </ListItemButton>
         </ListItem>
       ))}
