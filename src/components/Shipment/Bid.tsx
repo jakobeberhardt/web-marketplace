@@ -48,14 +48,16 @@ export function Bid(props: {
         headers: headers,
       })
       .then((response) => {
-        const found = items.find((element) => element.id === response.data.id);
-        const index = found && items.indexOf(found);
-        if (index) {
-          items.splice(index, 1);
-          items.splice(index, 0, response.data);
-          props.items.push(items[index].bids[0]);
+        if (response.status === 201) {
+          axios
+            .get(`${process.env.REACT_APP_API_URL}/api/v1/biddings/assigned`, {
+              headers: {
+                Authorization: `Bearer ${state.accessToken}`,
+                "Content-Type": "application/json",
+              },
+            })
+            .then((reponse) => setItems(reponse.data));
         }
-        setItems(items);
       });
   };
 

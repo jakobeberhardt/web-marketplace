@@ -40,7 +40,7 @@ export default function Offers() {
         },
       })
       .then((reponse) => setItems(reponse.data));
-  }, [state.accessToken, items]);
+  }, [state.accessToken]);
 
   return (
     <>

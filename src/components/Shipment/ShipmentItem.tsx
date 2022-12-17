@@ -381,6 +381,7 @@ export function ShipmentItem(props: {
                   items={props.item.bids}
                   setItems={props.setItems}
                   biddingID={props.item.id}
+                  biddingItems={props.items}
                 />
               </div>
             )}

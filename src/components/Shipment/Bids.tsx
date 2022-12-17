@@ -56,9 +56,7 @@ function acceptOffer(
   state: Partial<GlobalStateInterface>,
   setItems: Function
 ) {
-  const data = {
-    bid: item,
-  };
+  const data = item;
   const headers = {
     Authorization: `Bearer ${state.accessToken}`,
     "Content-Type": "application/json",
@@ -71,7 +69,18 @@ function acceptOffer(
         headers: headers,
       }
     )
-    .then((response) => setItems(response));
+    .then((response) => {
+      if (response.status === 200) {
+        axios
+          .get(`${process.env.REACT_APP_API_URL}/api/v1/biddings/`, {
+            headers: {
+              Authorization: `Bearer ${state.accessToken}`,
+              "Content-Type": "application/json",
+            },
+          })
+          .then((getreponse) => setItems(getreponse.data));
+      }
+    });
 }
 
 export function Bids(props: { items: Array<Bid>; setItems: Function }) {

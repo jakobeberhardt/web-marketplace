@@ -137,18 +137,18 @@ const Navbar = ({ children }: Props) => {
       icon: <Home />,
     },
     {
-      path: "/whitelist",
+      path: "/allowlist",
       name: "Bieterkreis",
       icon: <People />,
     },
     {
       path: "/shipments",
-      name: "Ausschreibungen",
+      name: "Meine Ausschreibungen",
       icon: <LocalShipping />,
     },
     {
       path: "/offers",
-      name: "Angebote",
+      name: "Meine Gebote",
       icon: <Campaign />,
     },
   ];

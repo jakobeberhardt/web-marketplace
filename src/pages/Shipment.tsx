@@ -40,7 +40,7 @@ export default function ShipmentContainer() {
         },
       })
       .then((reponse) => setItems(reponse.data));
-  }, [state.accessToken, items]);
+  }, [state.accessToken]);
 
   return (
     <>

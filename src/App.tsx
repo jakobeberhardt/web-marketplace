@@ -5,7 +5,7 @@ import "./App.css";
 import { GlobalStateProvider } from "./components/GlobalStateProvider";
 import Home from "./pages/Home";
 import Offers from "./pages/Offers";
-import Whitelist from "./pages/Whitelist";
+import Allowlist from "./pages/Whitelist";
 import ShipmentContainer from "./pages/Shipment";
 
 export default function App() {
@@ -16,7 +16,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />
-            <Route path="/whitelist" element={<Whitelist />} />
+            <Route path="/allowlist" element={<Allowlist />} />
             <Route path="/shipments" element={<ShipmentContainer />} />
             <Route path="/offers" element={<Offers />} />
           </Routes>

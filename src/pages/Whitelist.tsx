@@ -21,7 +21,7 @@ import {
 import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-function WhitelistItems(props: {
+function AllowlistItems(props: {
   items: string[];
   setItems: Dispatch<SetStateAction<string[]>>;
 }) {
@@ -77,7 +77,7 @@ function WhitelistItems(props: {
           }}
         >
           <ButtonBase
-            onClick={() => removeWhiteListItem(item, state, props.setItems)}
+            onClick={() => removeAllowListItem(item, state, props.setItems)}
           >
             <IconButton aria-label="delete" disabled style={{ color: "white" }}>
               <DeleteIcon style={{ width: "20px", height: "20px" }} />
@@ -114,7 +114,7 @@ function WhitelistItems(props: {
       <ListItemButton
         style={{ float: "right" }}
         alignItems="center"
-        onClick={() => addWhiteListItem(inputValue, state, props.setItems)}
+        onClick={() => addAllowListItem(inputValue, state, props.setItems)}
       >
         <ListItemIcon>
           <AddCircleOutline
@@ -131,7 +131,7 @@ function WhitelistItems(props: {
   return <>{listItems}</>;
 }
 
-function addWhiteListItem(
+function addAllowListItem(
   item: string,
   state: Partial<GlobalStateInterface>,
   setItems: Dispatch<SetStateAction<string[]>>
@@ -150,7 +150,7 @@ function addWhiteListItem(
     .then((response) => setItems(response.data.whitelist));
 }
 
-function removeWhiteListItem(
+function removeAllowListItem(
   item: string,
   state: Partial<GlobalStateInterface>,
   setItems: Dispatch<SetStateAction<string[]>>
@@ -172,7 +172,7 @@ function removeWhiteListItem(
     });
 }
 
-export default function Whitelist() {
+export default function Allowlist() {
   const [items, setItems] = useState<string[]>([]);
   const { state } = useGlobalState();
 
@@ -194,7 +194,7 @@ export default function Whitelist() {
       <Container maxWidth="lg">
         <Box sx={{ bgcolor: "#fafafa", height: "100vh", p: 2 }}>
           <List>
-            {items && <WhitelistItems items={items} setItems={setItems} />}
+            {items && <AllowlistItems items={items} setItems={setItems} />}
           </List>
         </Box>
       </Container>
