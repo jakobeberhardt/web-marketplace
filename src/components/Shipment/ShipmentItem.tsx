@@ -104,6 +104,7 @@ export function ShipmentItem(props: {
             <Grid xs={3} style={{ marginRight: "20px" }} item={true}>
               <Typography style={{ fontWeight: "600" }}>Von:</Typography>
               <div>{props.item.shipment.pickup.station.name}</div>
+              <div>{`${props.item.shipment.pickup.station.address?.zipcode} ${props.item.shipment.pickup.station.address?.city} ${props.item.shipment.pickup.station.address?.country}`}</div>
               <div>
                 {props.item.shipment.pickup.allowedTimeWindows.map(
                   (element, index) => (
@@ -160,6 +161,8 @@ export function ShipmentItem(props: {
             >
               <Typography style={{ fontWeight: "600" }}>Nach:</Typography>
               <div>{props.item.shipment.delivery.station.name}</div>
+              {/* TODO: Map this differently */}
+              <div>{`${props.item.shipment.delivery.station.address?.zipcode} ${props.item.shipment.delivery.station.address?.city} ${props.item.shipment.delivery.station.address?.country}`}</div>
               <div>
                 {props.item.shipment.delivery.allowedTimeWindows.map(
                   (element, index) => (
