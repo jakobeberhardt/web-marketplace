@@ -279,7 +279,7 @@ const Navbar = ({ children }: Props) => {
               </Link>
             ))}
           </List>
-          <UserSidebar />
+          <UserSidebar userName={username} />
           <div
             style={{
               width: "-webkit-fill-available",
