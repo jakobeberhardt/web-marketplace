@@ -24,7 +24,6 @@ export function ShipmentItem(props: {
   item: Bidding;
   view: String;
   setItems: Function;
-  items: Bidding[];
 }) {
   const [open, setOpen] = React.useState(false);
 
@@ -381,7 +380,6 @@ export function ShipmentItem(props: {
                   items={props.item.bids}
                   setItems={props.setItems}
                   biddingID={props.item.id}
-                  biddingItems={props.items}
                 />
               </div>
             )}

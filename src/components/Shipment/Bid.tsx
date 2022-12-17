@@ -13,13 +13,11 @@ import axios from "axios";
 import { useState } from "react";
 import BidClass from "../../types/Bid";
 import { useGlobalState } from "../GlobalStateProvider";
-import Bidding from "../../types/Bidding";
 
 export function Bid(props: {
   biddingID: String;
   items: BidClass[];
   setItems: Function;
-  biddingItems: Bidding[];
 }) {
   const [inputValue, setInputValue] = useState("");
   const { state } = useGlobalState();
@@ -30,8 +28,7 @@ export function Bid(props: {
   const submitBidding = (
     biddingID: String,
     inputValue: String,
-    setItems: Function,
-    items: Bidding[]
+    setItems: Function
   ) => {
     const data = {
       biddingId: biddingID,
@@ -91,12 +88,7 @@ export function Bid(props: {
             <Button
               style={{ marginLeft: "auto" }}
               onClick={() =>
-                submitBidding(
-                  props.biddingID,
-                  inputValue,
-                  props.setItems,
-                  props.biddingItems
-                )
+                submitBidding(props.biddingID, inputValue, props.setItems)
               }
               variant="contained"
             >
