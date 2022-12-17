@@ -37,6 +37,7 @@ export function ShipmentItem(props: {
   return (
     <>
       <List
+        key={props.item.id as React.Key}
         sx={{
           width: "100%",
           maxWidth: "100%",
@@ -105,9 +106,10 @@ export function ShipmentItem(props: {
               <div>{props.item.shipment.pickup.station.name}</div>
               <div>
                 {props.item.shipment.pickup.allowedTimeWindows.map(
-                  (element) => (
+                  (element, index) => (
                     <>
                       <div
+                        key={index}
                         style={{
                           display: "flex",
                           alignItems: "center",
@@ -160,9 +162,10 @@ export function ShipmentItem(props: {
               <div>{props.item.shipment.delivery.station.name}</div>
               <div>
                 {props.item.shipment.delivery.allowedTimeWindows.map(
-                  (element) => (
+                  (element, index) => (
                     <>
                       <div
+                        key={index}
                         style={{
                           display: "flex",
                           alignItems: "center",

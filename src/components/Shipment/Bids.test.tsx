@@ -22,7 +22,7 @@ test("Ich kann den Wert von jedem Gebot sehen und es ist formattiert", () => {
   render(<Bids setItems={setItems} items={items} />);
 
   const bidValue = screen.getByTestId("offerValue");
-  expect(bidValue.textContent).toBe("500");
+  expect(bidValue.textContent).toBe("500 €");
 });
 
 test("Ich kann den Wert von jedem Gebot sehen und es ist formattiert mit Nachkommastellen", () => {
@@ -33,5 +33,5 @@ test("Ich kann den Wert von jedem Gebot sehen und es ist formattiert mit Nachkom
   render(<Bids setItems={setItems} items={items} />);
 
   const bidValue = screen.getByTestId("offerValue");
-  expect(bidValue.textContent).toBe("500.5");
+  expect(bidValue.textContent).toBe("500.5 €");
 });

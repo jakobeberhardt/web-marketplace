@@ -25,7 +25,9 @@ function BidItems(props: {
           <div
             style={{ margin: "auto", marginRight: "20rem", padding: "1rem" }}
           >
-            <Typography>{item.value.toString()} €</Typography>
+            <Typography data-testid="offerValue">
+              {item.value.toString()} €
+            </Typography>
           </div>
           <ListItemButton
             onClick={() => acceptOffer(item, props.state, props.setItems)}
