@@ -13,11 +13,13 @@ export default function UserSidebar(props: { userName: String }) {
           <CardHeader />
           <CardContent>
             <Typography
+              component={"span"}
               variant="body2"
-              style={{ fontWeight: "1000", fontSize: "40" }}
+              style={{ fontWeight: "10000", fontSize: "40" }}
             >
-              <div>{`User: ${props.userName}`} </div>
-              <div>{`NeoCargo ID: 00000`}</div>
+              <>{`User: ${props.userName}`} </>
+              <br />
+              <>{`NeoCargo ID: 00000`}</>
             </Typography>
           </CardContent>
         </Card>
