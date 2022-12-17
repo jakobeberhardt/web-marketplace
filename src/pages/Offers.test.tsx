@@ -22,7 +22,7 @@ test("Ich kann Shipments sehen, die für mich ausgeschrieben sind.", () => {
   );
 
   fireEvent(
-    screen.getByText("Testobjekt"),
+    screen.getByText("LKW Convoy"),
     new MouseEvent("click", {
       bubbles: true,
     })

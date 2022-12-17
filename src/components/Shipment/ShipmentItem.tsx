@@ -52,7 +52,7 @@ export function ShipmentItem(props: {
           <Typography sx={{ mr: "20px", fontWeight: "700" }}>
             Sendung:{" "}
           </Typography>
-          <ListItemText primary={props.item.shipment.id} />
+          <ListItemText primary={props.item.shipment.tmsReference} />
 
           <Straighten />
           <div style={{ marginRight: "30px", marginLeft: "10px" }}>
@@ -360,7 +360,7 @@ export function ShipmentItem(props: {
               marginTop: "4vh",
               marginBottom: "3vh",
               padding: "0",
-              minHeight: "28vh",
+              minHeight: "20vh",
 
               justifyContent: "center",
             }}
@@ -369,6 +369,7 @@ export function ShipmentItem(props: {
               <div>
                 <CardHeader
                   title="Auf Sendung bieten"
+                  data-testid="detailView"
                   style={{
                     backgroundColor: "#3A9B57",
                     color: "white",
@@ -380,7 +381,6 @@ export function ShipmentItem(props: {
                   items={props.item.bids}
                   setItems={props.setItems}
                   biddingID={props.item.id}
-                  biddingItems={props.items}
                 />
               </div>
             )}
