@@ -85,7 +85,7 @@ function acceptOffer(
     });
 }
 
-export function Bids(props: { items: Array<Bid>; setItems: Function }) {
+export function BidsActive(props: { items: Array<Bid>; setItems: Function }) {
   const { state } = useGlobalState();
   return (
     <>

@@ -32,7 +32,7 @@ export default function ShipmentRevoked() {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/api/v1/biddings/revoked/`, {
+      .get(`${process.env.REACT_APP_API_URL}/api/v1/biddings/`, {
         headers: {
           Authorization: `Bearer ${state.accessToken}`,
           "Content-Type": "application/json",

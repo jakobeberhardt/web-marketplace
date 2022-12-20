@@ -9,6 +9,7 @@ import {
   Typography,
   Card,
   CardHeader,
+  Button,
 } from "@mui/material";
 import { ExpandLess, ExpandMore, AccessTime } from "@mui/icons-material";
 import Bidding from "../../types/Bidding";
@@ -18,8 +19,10 @@ import Moment from "react-moment";
 import ScaleIcon from "@mui/icons-material/Scale";
 import AspectRatio from "@mui/icons-material/AspectRatio";
 import Straighten from "@mui/icons-material/Straighten";
-import { Bids } from "./Bids";
+import { BidsActive } from "./BidsActive";
 import { BidFinished } from "./BidFinished";
+import { BidsFinished } from "./BidsFinished";
+import { BidsRevoked } from "./BidsRevoked";
 
 export function ShipmentItem(props: {
   item: Bidding;
@@ -68,7 +71,8 @@ export function ShipmentItem(props: {
           <div style={{ marginRight: "30px", marginLeft: "10px" }}>
             {props.item.shipment.totalVolume?.toString()} m³
           </div>
-          {props.view === "Offers" && (
+          {(props.view === "OffersActive" ||
+            props.view === "OffersFinished") && (
             <Typography
               sx={{
                 backgroundColor: "#1E90FF",
@@ -84,7 +88,8 @@ export function ShipmentItem(props: {
               {props.item.bids.length === 0 && <>Kein Gebot abgegeben</>}
             </Typography>
           )}
-          {props.view === "BiddingsActive" && (
+          {(props.view === "BiddingsActive" ||
+            props.view === "BiddingsFinished") && (
             <Typography
               sx={{
                 backgroundColor: "#1E90FF",
@@ -96,6 +101,9 @@ export function ShipmentItem(props: {
             >
               Anzahl Gebote: {props.item.bids.length}
             </Typography>
+          )}
+          {props.view === "BiddingsRevoked" && (
+            <Button variant="contained">Auktion erneut aufnehmen</Button>
           )}
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
@@ -419,7 +427,35 @@ export function ShipmentItem(props: {
                     display: "flex",
                   }}
                 />
-                <Bids items={props.item.bids} setItems={props.setItems} />
+                <BidsActive items={props.item.bids} setItems={props.setItems} />
+              </div>
+            )}
+            {props.view === "BiddingsFinished" && (
+              <div>
+                <CardHeader
+                  title="Gebote"
+                  style={{
+                    backgroundColor: "#3A9B57",
+                    color: "white",
+                    fontWeight: "700",
+                    display: "flex",
+                  }}
+                />
+                <BidsFinished items={props.item.bids} />
+              </div>
+            )}
+            {props.view === "BiddingsRevoked" && (
+              <div>
+                <CardHeader
+                  title="Gebote"
+                  style={{
+                    backgroundColor: "#3A9B57",
+                    color: "white",
+                    fontWeight: "700",
+                    display: "flex",
+                  }}
+                />
+                <BidsRevoked items={props.item.bids} />
               </div>
             )}
           </Card>
