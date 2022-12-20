@@ -17,8 +17,11 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />
             <Route path="/allowlist" element={<Allowlist />} />
-            <Route path="/shipments" element={<ShipmentContainer />} />
-            <Route path="/offers" element={<Offers />} />
+            <Route path="/shipments/active" element={<ShipmentContainer />} />
+            <Route path="/shipments/revoked" element={<ShipmentContainer />} />
+            <Route path="/shipments/finished" element={<ShipmentContainer />} />
+            <Route path="/offers/active" element={<Offers />} />
+            <Route path="/offers/finished" element={<Offers />} />
           </Routes>
         </Navbar>
       </GlobalStateProvider>

@@ -13,14 +13,23 @@ import {
   Alert,
   ListItemIcon,
   ListItemText,
+  Collapse,
 } from "@mui/material";
-import { People, Campaign, LocalShipping, Home } from "@mui/icons-material";
+import {
+  People,
+  Campaign,
+  LocalShipping,
+  Home,
+  ExpandMore,
+  ExpandLess,
+} from "@mui/icons-material";
 import Logo from "./NeoCargoLogo.png";
-import { Link } from "react-router-dom";
+import { Link, Path } from "react-router-dom";
 import { useState, ReactNode } from "react";
 import axios from "axios";
 import { useGlobalState, GlobalStateInterface } from "../GlobalStateProvider";
 import UserSidebar from "./UserSidebar";
+import { ReactJSXElement } from "@emotion/react/types/jsx-namespace";
 
 type Props = {
   title: string;
@@ -74,20 +83,12 @@ async function login(
 }
 
 const Navbar = ({ children }: Props) => {
-  const [selectedIndex, setSelectedIndex] = useState(1);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { setState } = useGlobalState();
   const [openSnack, setSnack] = useState(false);
   const [show, setShow] = useState(true);
   const [openSnackError, setSnackError] = useState(false);
-
-  const handleListItemClick = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    index: number
-  ) => {
-    setSelectedIndex(index);
-  };
 
   const submitFunction = (data: Partial<GlobalStateInterface>) => {
     setState((prev) => ({ ...prev, ...data }));
@@ -142,14 +143,41 @@ const Navbar = ({ children }: Props) => {
       icon: <People />,
     },
     {
-      path: "/shipments",
       name: "Meine Ausschreibungen",
       icon: <LocalShipping />,
+      children: [
+        {
+          path: "/shipments/active",
+          name: "Laufende",
+          icon: <LocalShipping />,
+        },
+        {
+          path: "/shipments/revoked",
+          name: "Abgebrochene",
+          icon: <LocalShipping />,
+        },
+        {
+          path: "/shipments/finished",
+          name: "Beendete",
+          icon: <LocalShipping />,
+        },
+      ],
     },
     {
-      path: "/offers",
       name: "Meine Gebote",
       icon: <Campaign />,
+      children: [
+        {
+          path: "/offers/active",
+          name: "Laufende",
+          icon: <Campaign />,
+        },
+        {
+          path: "/offers/finished",
+          name: "Beendete",
+          icon: <Campaign />,
+        },
+      ],
     },
   ];
 
@@ -256,27 +284,12 @@ const Navbar = ({ children }: Props) => {
         >
           <List style={{ backgroundColor: "#75b989", minHeight: "80vh" }}>
             {menuItem.map((item) => (
-              <Link
-                key={item.name}
-                to={item.path}
-                style={{
-                  textDecoration: "none",
-                }}
-              >
-                <ListItemButton
-                  selected={selectedIndex === 1}
-                  onClick={(event) => handleListItemClick(event, 1)}
-                >
-                  <ListItemIcon>{item.icon}</ListItemIcon>
-                  <ListItemText
-                    style={{
-                      color: "white",
-                    }}
-                  >
-                    {item.name}
-                  </ListItemText>
-                </ListItemButton>
-              </Link>
+              <NavbarItem
+                path={item.path}
+                name={item.name}
+                icon={item.icon}
+                children={item.children || []}
+              />
             ))}
           </List>
           <UserSidebar userName={username} />
@@ -296,5 +309,93 @@ const Navbar = ({ children }: Props) => {
     </Box>
   );
 };
+
+function NavbarItem(props: {
+  name: String;
+  path: String | undefined;
+  icon: ReactJSXElement;
+  children: { name: String; path: String; icon: ReactJSXElement }[];
+}) {
+  const [selectedIndex, setSelectedIndex] = useState(1);
+  const handleListItemClick = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    index: number
+  ) => {
+    setSelectedIndex(index);
+  };
+  const [open, setOpen] = React.useState(true);
+
+  const handleClick = () => {
+    setOpen(!open);
+  };
+
+  if (props.children.length === 0 && !!props.path) {
+    return (
+      <Link
+        key={props.name as React.Key}
+        to={props.path as unknown as Partial<Path>}
+        style={{
+          textDecoration: "none",
+        }}
+      >
+        <ListItemButton
+          selected={selectedIndex === 1}
+          onClick={(event) => handleListItemClick(event, 1)}
+        >
+          <ListItemIcon>{props.icon}</ListItemIcon>
+          <ListItemText
+            style={{
+              color: "white",
+            }}
+          >
+            {props.name}
+          </ListItemText>
+        </ListItemButton>
+      </Link>
+    );
+  } else {
+    return (
+      <>
+        <ListItemButton onClick={handleClick}>
+          <ListItemIcon>{props.icon}</ListItemIcon>
+          <ListItemText
+            primary={props.name}
+            style={{
+              color: "white",
+            }}
+          />
+          {open ? <ExpandLess /> : <ExpandMore />}
+        </ListItemButton>
+        <Collapse in={open} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            {props.children.map((element) => (
+              <Link
+                key={element.name as React.Key}
+                to={element.path as unknown as Partial<Path>}
+                style={{
+                  textDecoration: "none",
+                }}
+              >
+                <ListItemButton
+                  selected={true}
+                  onClick={(event) => handleListItemClick(event, 1)}
+                >
+                  <ListItemIcon>{element.icon}</ListItemIcon>
+                  <ListItemText
+                    style={{
+                      color: "black",
+                    }}
+                  >
+                    {element.name}
+                  </ListItemText>
+                </ListItemButton>
+              </Link>
+            ))}
+          </List>
+        </Collapse>
+      </>
+    );
+  }
+}
 
 export default Navbar;
