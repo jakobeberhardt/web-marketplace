@@ -28,11 +28,11 @@ function ShipmentItems(props: {
 export default function ShipmentFinished() {
   const [items, setItems] = useState<Bidding[]>([]);
   const { state } = useGlobalState();
-  const view = "BiddingsRevoked";
+  const view = "BiddingsFinished";
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/api/v1/biddings/`, {
+      .get(`${process.env.REACT_APP_API_URL}/api/v1/biddings/finished/`, {
         headers: {
           Authorization: `Bearer ${state.accessToken}`,
           "Content-Type": "application/json",

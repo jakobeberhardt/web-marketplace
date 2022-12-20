@@ -22,9 +22,9 @@ import {
   Home,
   ExpandMore,
   ExpandLess,
-  HourglassDisabled,
   AccessTime,
   HourglassEmpty,
+  Gavel,
 } from "@mui/icons-material";
 import Logo from "./NeoCargoLogo.png";
 import { Link, Path } from "react-router-dom";
@@ -151,18 +151,18 @@ const Navbar = ({ children }: Props) => {
       children: [
         {
           path: "/shipments/active",
-          name: "Laufende",
+          name: "Laufend",
           icon: <AccessTime />,
         },
         {
           path: "/shipments/revoked",
-          name: "Pausierte",
+          name: "Pausiert",
           icon: <HourglassEmpty />,
         },
         {
           path: "/shipments/finished",
-          name: "Beendete",
-          icon: <HourglassDisabled />,
+          name: "Beendet",
+          icon: <Gavel />,
         },
       ],
     },
@@ -172,13 +172,13 @@ const Navbar = ({ children }: Props) => {
       children: [
         {
           path: "/offers/active",
-          name: "Laufende",
+          name: "Laufend",
           icon: <AccessTime />,
         },
         {
           path: "/offers/finished",
-          name: "Beendete",
-          icon: <HourglassEmpty />,
+          name: "Beendet",
+          icon: <Gavel />,
         },
       ],
     },

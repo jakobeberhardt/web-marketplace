@@ -19,6 +19,7 @@ import ScaleIcon from "@mui/icons-material/Scale";
 import AspectRatio from "@mui/icons-material/AspectRatio";
 import Straighten from "@mui/icons-material/Straighten";
 import { Bids } from "./Bids";
+import { BidFinished } from "./BidFinished";
 
 export function ShipmentItem(props: {
   item: Bidding;
@@ -83,7 +84,7 @@ export function ShipmentItem(props: {
               {props.item.bids.length === 0 && <>Kein Gebot abgegeben</>}
             </Typography>
           )}
-          {props.view === "Biddings" && (
+          {props.view === "BiddingsActive" && (
             <Typography
               sx={{
                 backgroundColor: "#1E90FF",
@@ -370,7 +371,7 @@ export function ShipmentItem(props: {
               justifyContent: "center",
             }}
           >
-            {props.view === "Offers" && (
+            {props.view === "OffersActive" && (
               <div>
                 <CardHeader
                   title="Auf Sendung bieten"
@@ -389,7 +390,25 @@ export function ShipmentItem(props: {
                 />
               </div>
             )}
-            {props.view === "Biddings" && (
+            {props.view === "OffersFinished" && (
+              <div>
+                <CardHeader
+                  title="Damaliges Gebot"
+                  data-testid="detailView"
+                  style={{
+                    backgroundColor: "#3A9B57",
+                    color: "white",
+                    fontWeight: "700",
+                    display: "flex",
+                  }}
+                />
+                <BidFinished
+                  items={props.item.bids}
+                  biddingID={props.item.id}
+                />
+              </div>
+            )}
+            {props.view === "BiddingsActive" && (
               <div>
                 <CardHeader
                   title="Gebote"

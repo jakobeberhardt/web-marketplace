@@ -28,7 +28,7 @@ function ShipmentItems(props: {
 export default function ShipmentActive() {
   const [items, setItems] = useState<Bidding[]>([]);
   const { state } = useGlobalState();
-  const view = "Biddings";
+  const view = "BiddingsActive";
 
   useEffect(() => {
     axios

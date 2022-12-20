@@ -25,19 +25,22 @@ export function ShipmentItems(props: {
   );
 }
 
-export default function Offers() {
+export default function OffersFinished() {
   const [items, setItems] = useState<Bidding[]>([]);
   const { state } = useGlobalState();
-  const view = "Offers";
+  const view = "OffersFinished";
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/api/v1/biddings/assigned`, {
-        headers: {
-          Authorization: `Bearer ${state.accessToken}`,
-          "Content-Type": "application/json",
-        },
-      })
+      .get(
+        `${process.env.REACT_APP_API_URL}/api/v1/biddings/assigned/finished/`,
+        {
+          headers: {
+            Authorization: `Bearer ${state.accessToken}`,
+            "Content-Type": "application/json",
+          },
+        }
+      )
       .then((reponse) => setItems(reponse.data));
   }, [state.accessToken]);
 

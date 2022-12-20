@@ -25,10 +25,10 @@ export function ShipmentItems(props: {
   );
 }
 
-export default function Offers() {
+export default function OffersActive() {
   const [items, setItems] = useState<Bidding[]>([]);
   const { state } = useGlobalState();
-  const view = "Offers";
+  const view = "OffersActive";
 
   useEffect(() => {
     axios

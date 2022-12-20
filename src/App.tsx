@@ -4,11 +4,12 @@ import Navbar from "./components/navbar/Navbar";
 import "./App.css";
 import { GlobalStateProvider } from "./components/GlobalStateProvider";
 import Home from "./pages/Home";
-import Offers from "./pages/OffersActive";
+import OffersActive from "./pages/OffersActive";
 import Allowlist from "./pages/Whitelist";
 import ShipmentActive from "./pages/ShipmentActive";
 import ShipmentRevoked from "./pages/ShipmentRevoked";
 import ShipmentFinished from "./pages/ShipmentFinished";
+import OffersFinished from "./pages/OffersFinished";
 
 export default function App() {
   return (
@@ -22,8 +23,8 @@ export default function App() {
             <Route path="/shipments/active" element={<ShipmentActive />} />
             <Route path="/shipments/revoked" element={<ShipmentRevoked />} />
             <Route path="/shipments/finished" element={<ShipmentFinished />} />
-            <Route path="/offers/active" element={<Offers />} />
-            <Route path="/offers/finished" element={<Offers />} />
+            <Route path="/offers/active" element={<OffersActive />} />
+            <Route path="/offers/finished" element={<OffersFinished />} />
           </Routes>
         </Navbar>
       </GlobalStateProvider>
