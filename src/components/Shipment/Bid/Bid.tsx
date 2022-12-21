@@ -11,8 +11,8 @@ import {
 import { Euro } from "@mui/icons-material";
 import axios from "axios";
 import { useState } from "react";
-import BidClass from "../../types/Bid";
-import { useGlobalState } from "../GlobalStateProvider";
+import BidClass from "../../../types/Bid";
+import { useGlobalState } from "../../GlobalStateProvider";
 
 export function Bid(props: {
   biddingID: String;

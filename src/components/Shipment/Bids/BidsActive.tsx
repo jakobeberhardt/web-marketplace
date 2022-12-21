@@ -1,6 +1,9 @@
 import { List, ListItem, ListItemButton, Typography } from "@mui/material";
-import Bid from "../../types/Bid";
-import { useGlobalState, GlobalStateInterface } from "../GlobalStateProvider";
+import Bid from "../../../types/Bid";
+import {
+  useGlobalState,
+  GlobalStateInterface,
+} from "../../GlobalStateProvider";
 import axios from "axios";
 import React from "react";
 import HandshakeIcon from "@mui/icons-material/Handshake";

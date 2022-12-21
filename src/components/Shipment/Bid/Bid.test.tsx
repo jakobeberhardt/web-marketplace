@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import { Bid } from "./Bid";
-import BidClass from "../../types/Bid";
+import BidClass from "../../../types/Bid";
 
 test("Wenn ein Gebot abgegeben wurde, dann sehe ich den Input nicht.", () => {
   const setItems = () => {};

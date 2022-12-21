@@ -1,12 +1,12 @@
 import * as React from "react";
-import { ShipmentItem } from "../components/Shipment/ShipmentItem";
 import { Box, Container, List } from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Bidding from "../types/Bidding";
-import { useGlobalState } from "../components/GlobalStateProvider";
+import { useGlobalState } from "../../components/GlobalStateProvider";
+import { ShipmentItem } from "../../components/Shipment/ShipmentItem";
+import Bidding from "../../types/Bidding";
 
-function ShipmentItems(props: {
+export function ShipmentItems(props: {
   items: Bidding[];
   view: String;
   setItems: Function;
@@ -25,14 +25,14 @@ function ShipmentItems(props: {
   );
 }
 
-export default function ShipmentActive() {
+export default function OffersActive() {
   const [items, setItems] = useState<Bidding[]>([]);
   const { state } = useGlobalState();
-  const view = "BiddingsActive";
+  const view = "OffersActive";
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/api/v1/biddings/`, {
+      .get(`${process.env.REACT_APP_API_URL}/api/v1/biddings/assigned`, {
         headers: {
           Authorization: `Bearer ${state.accessToken}`,
           "Content-Type": "application/json",

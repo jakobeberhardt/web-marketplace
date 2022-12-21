@@ -4,12 +4,12 @@ import Navbar from "./components/navbar/Navbar";
 import "./App.css";
 import { GlobalStateProvider } from "./components/GlobalStateProvider";
 import Home from "./pages/Home";
-import OffersActive from "./pages/OffersActive";
+import OffersActive from "./pages/Offers/OffersActive";
 import Allowlist from "./pages/Whitelist";
-import ShipmentActive from "./pages/ShipmentActive";
-import ShipmentRevoked from "./pages/ShipmentRevoked";
-import ShipmentFinished from "./pages/ShipmentFinished";
-import OffersFinished from "./pages/OffersFinished";
+import ShipmentActive from "./pages/Shipment/ShipmentActive";
+import ShipmentRevoked from "./pages/Shipment/ShipmentRevoked";
+import ShipmentFinished from "./pages/Shipment/ShipmentFinished";
+import OffersFinished from "./pages/Offers/OffersFinished";
 
 export default function App() {
   return (

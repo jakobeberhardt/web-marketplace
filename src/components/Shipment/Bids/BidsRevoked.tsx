@@ -1,5 +1,5 @@
 import { List, ListItem, Typography } from "@mui/material";
-import Bid from "../../types/Bid";
+import Bid from "../../../types/Bid";
 import React from "react";
 
 function BidItems(props: { items: Bid[] }) {
@@ -28,7 +28,7 @@ function BidItems(props: { items: Bid[] }) {
   );
 }
 
-export function BidsFinished(props: { items: Array<Bid> }) {
+export function BidsRevoked(props: { items: Array<Bid> }) {
   return (
     <>
       <List

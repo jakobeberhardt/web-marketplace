@@ -1,5 +1,5 @@
 import { Card, CardContent, List, ListItem, ListItemText } from "@mui/material";
-import BidClass from "../../types/Bid";
+import BidClass from "../../../types/Bid";
 
 export function BidFinished(props: { biddingID: String; items: BidClass[] }) {
   return (

@@ -1,10 +1,10 @@
 import * as React from "react";
-import { ShipmentItem } from "../components/Shipment/ShipmentItem";
+import { ShipmentItem } from "../../components/Shipment/ShipmentItem";
 import { Box, Container, List } from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Bidding from "../types/Bidding";
-import { useGlobalState } from "../components/GlobalStateProvider";
+import Bidding from "../../types/Bidding";
+import { useGlobalState } from "../../components/GlobalStateProvider";
 
 function ShipmentItems(props: {
   items: Bidding[];

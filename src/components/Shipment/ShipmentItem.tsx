@@ -13,16 +13,16 @@ import {
 } from "@mui/material";
 import { ExpandLess, ExpandMore, AccessTime } from "@mui/icons-material";
 import Bidding from "../../types/Bidding";
-import { Bid } from "./Bid";
+import { Bid } from "./Bid/Bid";
 import Moment from "react-moment";
 
 import ScaleIcon from "@mui/icons-material/Scale";
 import AspectRatio from "@mui/icons-material/AspectRatio";
 import Straighten from "@mui/icons-material/Straighten";
-import { BidsActive } from "./BidsActive";
-import { BidFinished } from "./BidFinished";
-import { BidsFinished } from "./BidsFinished";
-import { BidsRevoked } from "./BidsRevoked";
+import { BidsActive } from "./Bids/BidsActive";
+import { BidFinished } from "./Bid/BidFinished";
+import { BidsFinished } from "./Bids/BidsFinished";
+import { BidsRevoked } from "./Bids/BidsRevoked";
 
 export function ShipmentItem(props: {
   item: Bidding;

@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import BidClass from "../../types/Bid";
+import BidClass from "../../../types/Bid";
 import { BidsActive } from "./BidsActive";
 
 test("Ich kann bei jedem Gebot den Button zum Zuschlag erteilen sehen", () => {

@@ -2,7 +2,7 @@ import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { Box, Container, List } from "@mui/material";
 import { ShipmentItems } from "./OffersActive";
-import biddings from "../components/mock-shipment.json";
+import biddings from "../../components/mock-shipment.json";
 
 test("Ich kann Shipments sehen, die für mich ausgeschrieben sind.", () => {
   const items = biddings;

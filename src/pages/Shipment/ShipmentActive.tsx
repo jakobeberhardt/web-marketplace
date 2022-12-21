@@ -1,10 +1,10 @@
 import * as React from "react";
-import { ShipmentItem } from "../components/Shipment/ShipmentItem";
+import { ShipmentItem } from "../../components/Shipment/ShipmentItem";
 import { Box, Container, List } from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Bidding from "../types/Bidding";
-import { useGlobalState } from "../components/GlobalStateProvider";
+import Bidding from "../../types/Bidding";
+import { useGlobalState } from "../../components/GlobalStateProvider";
 
 function ShipmentItems(props: {
   items: Bidding[];
@@ -25,10 +25,10 @@ function ShipmentItems(props: {
   );
 }
 
-export default function ShipmentRevoked() {
+export default function ShipmentActive() {
   const [items, setItems] = useState<Bidding[]>([]);
   const { state } = useGlobalState();
-  const view = "BiddingsRevoked";
+  const view = "BiddingsActive";
 
   useEffect(() => {
     axios
