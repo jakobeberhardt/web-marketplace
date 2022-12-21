@@ -139,11 +139,13 @@ const Navbar = ({ children }: Props) => {
       path: "/",
       name: "Start",
       icon: <Home />,
+      index: 1,
     },
     {
       path: "/allowlist",
       name: "Bieterkreis",
       icon: <People />,
+      index: 2,
     },
     {
       name: "Meine Ausschreibungen",
@@ -153,16 +155,19 @@ const Navbar = ({ children }: Props) => {
           path: "/shipments/active",
           name: "Laufend",
           icon: <AccessTime />,
+          index: 3,
         },
         {
           path: "/shipments/revoked",
           name: "Pausiert",
           icon: <HourglassEmpty />,
+          index: 4,
         },
         {
           path: "/shipments/finished",
           name: "Beendet",
           icon: <Gavel />,
+          index: 5,
         },
       ],
     },
@@ -174,11 +179,13 @@ const Navbar = ({ children }: Props) => {
           path: "/offers/active",
           name: "Laufend",
           icon: <AccessTime />,
+          index: 6,
         },
         {
           path: "/offers/finished",
           name: "Beendet",
           icon: <Gavel />,
+          index: 7,
         },
       ],
     },
@@ -285,13 +292,31 @@ const Navbar = ({ children }: Props) => {
             overflow: "auto",
           }}
         >
-          <List style={{ backgroundColor: "#75b989", minHeight: "80vh" }}>
+          <List
+            sx={{
+              // selected and (selected + hover) states
+              "&& .Mui-selected, && .Mui-selected:hover": {
+                bgcolor: "darkgreen",
+                "&, & .MuiListItemIcon-root": {
+                  color: "green",
+                },
+              },
+              // hover states
+              "& .MuiListItemButton-root:hover": {
+                bgcolor: "lightgreen",
+                "&, & .MuiListItemIcon-root": {
+                  color: "green",
+                },
+              },
+            }}
+          >
             {menuItem.map((item) => (
               <NavbarItem
                 path={item.path}
                 name={item.name}
                 icon={item.icon}
                 children={item.children || []}
+                index={item.index || -1}
               />
             ))}
           </List>
@@ -317,9 +342,15 @@ function NavbarItem(props: {
   name: String;
   path: String | undefined;
   icon: ReactJSXElement;
-  children: { name: String; path: String; icon: ReactJSXElement }[];
+  children: {
+    name: String;
+    path: String;
+    icon: ReactJSXElement;
+    index: number;
+  }[];
+  index: number;
 }) {
-  const [selectedIndex, setSelectedIndex] = useState(1);
+  const [selectedIndex, setSelectedIndex] = useState(0);
   const handleListItemClick = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
     index: number
@@ -342,8 +373,8 @@ function NavbarItem(props: {
         }}
       >
         <ListItemButton
-          selected={selectedIndex === 1}
-          onClick={(event) => handleListItemClick(event, 1)}
+          selected={props.index === selectedIndex}
+          onClick={(event) => handleListItemClick(event, props.index)}
         >
           <ListItemIcon>{props.icon}</ListItemIcon>
           <ListItemText
@@ -359,7 +390,10 @@ function NavbarItem(props: {
   } else {
     return (
       <>
-        <ListItemButton onClick={handleClick}>
+        <ListItemButton
+          onClick={handleClick}
+          style={{ backgroundColor: "#3A9B57" }}
+        >
           <ListItemIcon>{props.icon}</ListItemIcon>
           <ListItemText
             primary={props.name}
@@ -380,8 +414,10 @@ function NavbarItem(props: {
                 }}
               >
                 <ListItemButton
-                  selected={true}
-                  onClick={(event) => handleListItemClick(event, 1)}
+                  selected={element.index === selectedIndex}
+                  onClick={(
+                    event: React.MouseEvent<HTMLDivElement, MouseEvent>
+                  ) => handleListItemClick(event, element.index)}
                 >
                   <ListItemIcon>{element.icon}</ListItemIcon>
                   <ListItemText
