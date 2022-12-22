@@ -10,8 +10,20 @@ import {
   CardActions,
   TextField,
   ButtonBase,
+  TableHead,
+  TableRow,
+  TableCell,
+  Paper,
+  TableBody,
+  Button,
 } from "@mui/material";
 import { AddCircleOutline } from "@mui/icons-material";
+import {
+  DataGrid,
+  GridColDef,
+  GridSelectionModel,
+  GridToolbarContainer,
+} from "@mui/x-data-grid";
 import axios from "axios";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import {
@@ -21,85 +33,17 @@ import {
 import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-function AllowlistItems(props: {
-  items: string[];
+function DeleteSelectedItemsComponent(props: {
+  selectionModel: GridSelectionModel;
+  state: Partial<GlobalStateInterface>;
   setItems: Dispatch<SetStateAction<string[]>>;
 }) {
   const [inputValue, setInputValue] = useState("");
-  const { state } = useGlobalState();
   const handleChange = (event: any) => {
     setInputValue(event.target.value);
   };
-
-  let listItems = props.items.map((item: string) => (
-    <ListItem key={item as React.Key}>
-      <div
-        style={{
-          alignContent: "center",
-          margin: "auto",
-          width: "88%",
-          marginTop: "15px",
-          minWidth: 275,
-          display: "flex",
-          alignItems: "center",
-        }}
-      >
-        <Typography
-          style={{
-            fontWeight: "600",
-            float: "left",
-            fontSize: "medium",
-            padding: "10px",
-            border: "3px solid green",
-            borderRadius: "7px",
-          }}
-        >
-          {item}
-        </Typography>
-
-        <div
-          style={{
-            backgroundColor: "#FFFFFF",
-            borderTop: "3px solid green",
-            borderBottom: "3px solid green",
-            width: "100%",
-            height: "15px",
-            float: "left",
-          }}
-        />
-        <CardActions
-          style={{
-            float: "left",
-            backgroundColor: "black",
-            border: "3px solid green",
-            borderRadius: "7px",
-            padding: "2px",
-          }}
-        >
-          <ButtonBase
-            onClick={() => removeAllowListItem(item, state, props.setItems)}
-          >
-            <IconButton aria-label="delete" disabled style={{ color: "white" }}>
-              <DeleteIcon style={{ width: "20px", height: "20px" }} />
-            </IconButton>
-          </ButtonBase>
-        </CardActions>
-      </div>
-    </ListItem>
-  ));
-  listItems.push(
-    <ListItem
-      key={0}
-      role="listitem"
-      style={{
-        alignContent: "center",
-        margin: "auto",
-        width: "88%",
-        border: "3px solid green",
-        marginTop: "15px",
-        minWidth: 275,
-      }}
-    >
+  return (
+    <GridToolbarContainer>
       <TextField
         id="basic"
         label="Bieter zur Liste hinzufügen"
@@ -114,7 +58,9 @@ function AllowlistItems(props: {
       <ListItemButton
         style={{ float: "right" }}
         alignItems="center"
-        onClick={() => addAllowListItem(inputValue, state, props.setItems)}
+        onClick={() =>
+          addAllowListItem(inputValue, props.state, props.setItems)
+        }
       >
         <ListItemIcon>
           <AddCircleOutline
@@ -126,9 +72,28 @@ function AllowlistItems(props: {
           />
         </ListItemIcon>
       </ListItemButton>
-    </ListItem>
+      {props.selectionModel.length > 0 && (
+        <ButtonBase
+          onClick={() =>
+            removeAllowListItem(
+              props.selectionModel,
+              props.state,
+              props.setItems
+            )
+          }
+        >
+          <IconButton
+            aria-label="delete"
+            disabled
+            style={{ color: "black", opacity: "0.3" }}
+          >
+            {`Delete ${props.selectionModel.length} items`}
+            <DeleteIcon style={{ width: "20px", height: "20px" }} />
+          </IconButton>
+        </ButtonBase>
+      )}
+    </GridToolbarContainer>
   );
-  return <>{listItems}</>;
 }
 
 function addAllowListItem(
@@ -151,7 +116,7 @@ function addAllowListItem(
 }
 
 function removeAllowListItem(
-  item: string,
+  items: GridSelectionModel,
   state: Partial<GlobalStateInterface>,
   setItems: Dispatch<SetStateAction<string[]>>
 ) {
@@ -160,7 +125,7 @@ function removeAllowListItem(
     "Content-Type": "application/json",
   };
   const data = {
-    id: item,
+    id: items[0].toString(),
   };
   axios
     .delete(`${process.env.REACT_APP_API_URL}/api/v1/whitelist/`, {
@@ -175,6 +140,12 @@ function removeAllowListItem(
 export default function Allowlist() {
   const [items, setItems] = useState<string[]>([]);
   const { state } = useGlobalState();
+  const [inputValue, setInputValue] = useState("");
+  const handleChange = (event: any) => {
+    setInputValue(event.target.value);
+  };
+
+  const [selectionModel, setSelectionModel] = useState<GridSelectionModel>([]);
 
   useEffect(() => {
     axios
@@ -189,15 +160,121 @@ export default function Allowlist() {
       });
   }, [state.accessToken]);
 
+  const columns: GridColDef[] = [
+    { field: "allowlistgroup", headerName: "Bieterkreisgruppe", width: 300 },
+    { field: "ffid", headerName: "NeoCargo-ID", width: 300 },
+    { field: "mail", headerName: "Email", width: 300 },
+  ];
+
+  const rows = items.map((item) => {
+    return {
+      id: item,
+      allowlistgroup: "Beispielbieterkreis",
+      ffid: item,
+      mail: "example@neocargo.de",
+    };
+  });
+
   return (
     <>
-      <Container maxWidth="lg">
-        <Box sx={{ bgcolor: "#fafafa", height: "100vh", p: 2 }}>
-          <List>
-            {items && <AllowlistItems items={items} setItems={setItems} />}
-          </List>
-        </Box>
-      </Container>
+      {/* <Box sx={{ width: "100%" }}>
+        <Paper sx={{ width: "100%", mb: 2 }}>
+          <TableHead>
+            <TableRow>
+              <TableCell align="left" padding="normal">
+                Bieterkreisgruppe
+              </TableCell>
+              <TableCell align="center" padding="normal">
+                FF-ID
+              </TableCell>
+              <TableCell align="center" padding="normal">
+                Mail
+              </TableCell>
+              <TableCell align="right" padding="none" />
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {items &&
+              items.map((item) => {
+                return (
+                  <TableRow hover>
+                    <TableCell align="left">Beispielgruppe</TableCell>
+                    <TableCell component="th" id={item}>
+                      {item}
+                    </TableCell>
+                    <TableCell align="right">example@neocargo.de</TableCell>
+                    <TableCell align="right">
+                      <ButtonBase
+                        onClick={() =>
+                          removeAllowListItem(item, state, setItems)
+                        }
+                      >
+                        <IconButton
+                          aria-label="delete"
+                          disabled
+                          style={{ color: "black", opacity: "0.3" }}
+                        >
+                          <DeleteIcon
+                            style={{ width: "20px", height: "20px" }}
+                          />
+                        </IconButton>
+                      </ButtonBase>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
+            <TableRow>
+              <TableCell>
+                <TextField
+                  id="basic"
+                  label="Bieter zur Liste hinzufügen"
+                  style={{ alignContent: "center" }}
+                  onChange={handleChange}
+                >
+                  <Input value={inputValue} />
+                </TextField>
+              </TableCell>
+              <TableCell>
+                <ListItemButton
+                  style={{ float: "right" }}
+                  alignItems="center"
+                  onClick={() => addAllowListItem(inputValue, state, setItems)}
+                >
+                  <ListItemIcon>
+                    <AddCircleOutline
+                      style={{
+                        width: "25px",
+                        height: "25px",
+                        color: "black",
+                      }}
+                    />
+                  </ListItemIcon>
+                </ListItemButton>
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Paper>
+      </Box> */}
+      <Box sx={{ height: 400, width: "100%" }}>
+        <DataGrid
+          pageSize={5}
+          columns={columns}
+          rowsPerPageOptions={[5]}
+          rows={items && rows}
+          checkboxSelection
+          onSelectionModelChange={(newSelectionModel) => {
+            setSelectionModel(newSelectionModel);
+          }}
+          selectionModel={selectionModel}
+          disableSelectionOnClick
+          components={{
+            Toolbar: DeleteSelectedItemsComponent,
+          }}
+          componentsProps={{
+            toolbar: { selectionModel, state, setItems },
+          }}
+        ></DataGrid>
+      </Box>
     </>
   );
 }
