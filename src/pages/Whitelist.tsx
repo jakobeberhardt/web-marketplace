@@ -1,21 +1,10 @@
 import {
   Box,
-  Container,
-  List,
-  ListItem,
   ListItemButton,
   ListItemIcon,
   Input,
-  Typography,
-  CardActions,
   TextField,
   ButtonBase,
-  TableHead,
-  TableRow,
-  TableCell,
-  Paper,
-  TableBody,
-  Button,
 } from "@mui/material";
 import { AddCircleOutline } from "@mui/icons-material";
 import {
@@ -33,7 +22,7 @@ import {
 import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-function DeleteSelectedItemsComponent(props: {
+function CustomToolbarComponent(props: {
   selectionModel: GridSelectionModel;
   state: Partial<GlobalStateInterface>;
   setItems: Dispatch<SetStateAction<string[]>>;
@@ -140,11 +129,6 @@ function removeAllowListItem(
 export default function Allowlist() {
   const [items, setItems] = useState<string[]>([]);
   const { state } = useGlobalState();
-  const [inputValue, setInputValue] = useState("");
-  const handleChange = (event: any) => {
-    setInputValue(event.target.value);
-  };
-
   const [selectionModel, setSelectionModel] = useState<GridSelectionModel>([]);
 
   useEffect(() => {
@@ -268,7 +252,7 @@ export default function Allowlist() {
           selectionModel={selectionModel}
           disableSelectionOnClick
           components={{
-            Toolbar: DeleteSelectedItemsComponent,
+            Toolbar: CustomToolbarComponent,
           }}
           componentsProps={{
             toolbar: { selectionModel, state, setItems },
