@@ -32,7 +32,7 @@ export default function ShipmentFinished() {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/api/v1/biddings/`, {
+      .get(`${process.env.REACT_APP_API_URL_LOCAL_AUTH}/api/v1/biddings/`, {
         headers: {
           Authorization: `Bearer ${state.accessToken}`,
           "Content-Type": "application/json",

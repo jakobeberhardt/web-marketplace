@@ -98,9 +98,13 @@ function addAllowListItem(
     id: item,
   };
   axios
-    .post(`${process.env.REACT_APP_API_URL}/api/v1/whitelist`, data, {
-      headers: headers,
-    })
+    .post(
+      `${process.env.REACT_APP_API_URL_LOCAL_AUTH}/api/v1/whitelist`,
+      data,
+      {
+        headers: headers,
+      }
+    )
     .then((response) => setItems(response.data.whitelist));
 }
 
@@ -117,7 +121,7 @@ function removeAllowListItem(
     id: items[0].toString(),
   };
   axios
-    .delete(`${process.env.REACT_APP_API_URL}/api/v1/whitelist/`, {
+    .delete(`${process.env.REACT_APP_API_URL_LOCAL_AUTH}/api/v1/whitelist/`, {
       headers: headers,
       data: data,
     })
@@ -133,7 +137,7 @@ export default function Allowlist() {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/api/v1/whitelist/`, {
+      .get(`${process.env.REACT_APP_API_URL_LOCAL_AUTH}/api/v1/whitelist/`, {
         headers: {
           Authorization: `Bearer ${state.accessToken}`,
           "Content-Type": "application/json",

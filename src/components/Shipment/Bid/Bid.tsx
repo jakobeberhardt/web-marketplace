@@ -41,18 +41,25 @@ export function Bid(props: {
       "Content-Type": "application/json",
     };
     axios
-      .post(`${process.env.REACT_APP_API_URL}/api/v1/biddings/bid`, data, {
-        headers: headers,
-      })
+      .post(
+        `${process.env.REACT_APP_API_URL_LOCAL_AUTH}/api/v1/biddings/bid`,
+        data,
+        {
+          headers: headers,
+        }
+      )
       .then((response) => {
         if (response.status === 201) {
           axios
-            .get(`${process.env.REACT_APP_API_URL}/api/v1/biddings/assigned`, {
-              headers: {
-                Authorization: `Bearer ${state.accessToken}`,
-                "Content-Type": "application/json",
-              },
-            })
+            .get(
+              `${process.env.REACT_APP_API_URL_LOCAL_AUTH}/api/v1/biddings/assigned`,
+              {
+                headers: {
+                  Authorization: `Bearer ${state.accessToken}`,
+                  "Content-Type": "application/json",
+                },
+              }
+            )
             .then((reponse) => setItems(reponse.data));
         }
       });

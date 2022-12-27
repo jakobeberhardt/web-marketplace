@@ -32,12 +32,15 @@ export default function OffersActive() {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/api/v1/biddings/assigned`, {
-        headers: {
-          Authorization: `Bearer ${state.accessToken}`,
-          "Content-Type": "application/json",
-        },
-      })
+      .get(
+        `${process.env.REACT_APP_API_URL_LOCAL_AUTH}/api/v1/biddings/assigned`,
+        {
+          headers: {
+            Authorization: `Bearer ${state.accessToken}`,
+            "Content-Type": "application/json",
+          },
+        }
+      )
       .then((reponse) => setItems(reponse.data));
   }, [state.accessToken]);
 

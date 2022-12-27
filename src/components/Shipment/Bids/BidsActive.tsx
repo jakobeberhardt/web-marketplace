@@ -68,7 +68,7 @@ function acceptOffer(
   };
   axios
     .post(
-      `${process.env.REACT_APP_API_URL}/api/v1/biddings/assignBidding`,
+      `${process.env.REACT_APP_API_URL_LOCAL_AUTH}/api/v1/biddings/assignBidding`,
       data,
       {
         headers: headers,
@@ -77,7 +77,7 @@ function acceptOffer(
     .then((response) => {
       if (response.status === 200) {
         axios
-          .get(`${process.env.REACT_APP_API_URL}/api/v1/biddings/`, {
+          .get(`${process.env.REACT_APP_API_URL_LOCAL_AUTH}/api/v1/biddings/`, {
             headers: {
               Authorization: `Bearer ${state.accessToken}`,
               "Content-Type": "application/json",

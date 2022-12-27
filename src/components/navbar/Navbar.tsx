@@ -42,7 +42,7 @@ type Props = {
 function register(username: String, password: String) {
   axios
     .post(
-      `${process.env.REACT_APP_API_URL}/api/v1/auth/register`,
+      `${process.env.REACT_APP_API_URL_LOCAL_AUTH}/api/v1/auth/register`,
       { username: username, password: password },
       {
         headers: {
@@ -63,7 +63,7 @@ async function login(
 ) {
   axios
     .post(
-      `${process.env.REACT_APP_API_URL}/api/v1/auth/login`,
+      `${process.env.REACT_APP_API_URL_LOCAL_AUTH}/api/v1/auth/login`,
       {
         username: username,
         password: password,
@@ -92,6 +92,14 @@ const Navbar = ({ children }: Props) => {
   const [openSnack, setSnack] = useState(false);
   const [show, setShow] = useState(true);
   const [openSnackError, setSnackError] = useState(false);
+
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const handleListItemClick = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    index: number
+  ) => {
+    setSelectedIndex(index);
+  };
 
   const submitFunction = (data: Partial<GlobalStateInterface>) => {
     setState((prev) => ({ ...prev, ...data }));
@@ -316,6 +324,8 @@ const Navbar = ({ children }: Props) => {
                 path={item.path}
                 name={item.name}
                 icon={item.icon}
+                selectedIndex={selectedIndex}
+                handleListItemClick={handleListItemClick}
                 children={item.children || []}
                 index={item.index || -1}
               />
@@ -343,6 +353,8 @@ function NavbarItem(props: {
   name: String;
   path: String | undefined;
   icon: ReactJSXElement;
+  selectedIndex: number;
+  handleListItemClick: Function;
   children: {
     name: String;
     path: String;
@@ -351,13 +363,6 @@ function NavbarItem(props: {
   }[];
   index: number;
 }) {
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const handleListItemClick = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    index: number
-  ) => {
-    setSelectedIndex(index);
-  };
   const [open, setOpen] = React.useState(true);
 
   const handleClick = () => {
@@ -374,8 +379,8 @@ function NavbarItem(props: {
         }}
       >
         <ListItemButton
-          selected={props.index === selectedIndex}
-          onClick={(event) => handleListItemClick(event, props.index)}
+          selected={props.index === props.selectedIndex}
+          onClick={(event) => props.handleListItemClick(event, props.index)}
         >
           <ListItemIcon>{props.icon}</ListItemIcon>
           <ListItemText
@@ -415,10 +420,10 @@ function NavbarItem(props: {
                 }}
               >
                 <ListItemButton
-                  selected={element.index === selectedIndex}
+                  selected={element.index === props.selectedIndex}
                   onClick={(
                     event: React.MouseEvent<HTMLDivElement, MouseEvent>
-                  ) => handleListItemClick(event, element.index)}
+                  ) => props.handleListItemClick(event, element.index)}
                 >
                   <ListItemIcon>{element.icon}</ListItemIcon>
                   <ListItemText
