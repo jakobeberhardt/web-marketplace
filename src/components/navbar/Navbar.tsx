@@ -361,14 +361,14 @@ const Navbar = ({ children }: Props) => {
               "&& .Mui-selected, && .Mui-selected:hover": {
                 bgcolor: "darkgreen",
                 "&, & .MuiListItemIcon-root": {
-                  color: "green",
+                  color: "#0000008a",
                 },
               },
               // hover states
               "& .MuiListItemButton-root:hover": {
-                bgcolor: "lightgreen",
+                bgcolor: "#75b989",
                 "&, & .MuiListItemIcon-root": {
-                  color: "green",
+                  color: "#0000008a",
                 },
               },
             }}
@@ -417,7 +417,7 @@ function NavbarItem(props: {
   }[];
   index: number;
 }) {
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
 
   const handleClick = () => {
     setOpen(!open);
@@ -430,20 +430,16 @@ function NavbarItem(props: {
         to={props.path as unknown as Partial<Path>}
         style={{
           textDecoration: "none",
+          color: "white",
         }}
       >
         <ListItemButton
+          sx={{ backgroundColor: "#3A9B57" }}
           selected={props.index === props.selectedIndex}
           onClick={(event) => props.handleListItemClick(event, props.index)}
         >
           <ListItemIcon>{props.icon}</ListItemIcon>
-          <ListItemText
-            style={{
-              color: "white",
-            }}
-          >
-            {props.name}
-          </ListItemText>
+          <ListItemText>{props.name}</ListItemText>
         </ListItemButton>
       </Link>
     );
@@ -457,13 +453,19 @@ function NavbarItem(props: {
           <ListItemIcon>{props.icon}</ListItemIcon>
           <ListItemText
             primary={props.name}
-            style={{
+            sx={{
               color: "white",
+              fontWeight: "700",
             }}
           />
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
-        <Collapse in={open} timeout="auto" unmountOnExit>
+        <Collapse
+          sx={{ backgroundColor: "#f4fff759" }}
+          in={open}
+          timeout="auto"
+          unmountOnExit
+        >
           <List component="div" disablePadding>
             {props.children.map((element) => (
               <Link
@@ -481,8 +483,9 @@ function NavbarItem(props: {
                 >
                   <ListItemIcon>{element.icon}</ListItemIcon>
                   <ListItemText
-                    style={{
-                      color: "black",
+                    sx={{
+                      color: "white",
+                      fontWeight: "400",
                     }}
                   >
                     {element.name}
