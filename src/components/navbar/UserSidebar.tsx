@@ -19,7 +19,7 @@ export default function UserSidebar(props: { userName: String }) {
             >
               <>{`User: ${props.userName}`} </>
               <br />
-              <>{`NeoCargo ID: 00000`}</>
+              <>{`NeoCargo ID: ${state.userId}`}</>
             </Typography>
           </CardContent>
         </Card>

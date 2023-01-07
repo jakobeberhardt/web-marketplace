@@ -28,7 +28,7 @@ import {
 } from "@mui/icons-material";
 import Logo from "./NeoCargoLogo.png";
 import { Link, Path } from "react-router-dom";
-import { useState, ReactNode } from "react";
+import { useState, ReactNode, useEffect, useCallback } from "react";
 import axios from "axios";
 import { useGlobalState, GlobalStateInterface } from "../GlobalStateProvider";
 import UserSidebar from "./UserSidebar";
@@ -59,7 +59,8 @@ async function login(
   submitFunction: Function,
   setShow: Function,
   setSnack: Function,
-  setSnackError: Function
+  setSnackError: Function,
+  setCookie: Function
 ) {
   axios
     .post(
@@ -76,8 +77,10 @@ async function login(
     )
     .then((response) => {
       submitFunction(response.data);
-      setShow((prev: Boolean) => !prev);
+      setShow((prev: Boolean) => false);
       setSnack(true);
+      setCookie("username", username, 1);
+      setCookie("password", password, 1);
     })
     .catch((err) => {
       console.log(err);
@@ -101,9 +104,12 @@ const Navbar = ({ children }: Props) => {
     setSelectedIndex(index);
   };
 
-  const submitFunction = (data: Partial<GlobalStateInterface>) => {
-    setState((prev) => ({ ...prev, ...data }));
-  };
+  const submitFunction = useCallback(
+    (data: Partial<GlobalStateInterface>) => {
+      setState((prev) => ({ ...prev, ...data }));
+    },
+    [setState]
+  );
 
   const handleChangeUsername = (event: {
     target: { value: React.SetStateAction<string> };
@@ -118,7 +124,15 @@ const Navbar = ({ children }: Props) => {
   };
 
   const loginButtonClick = () => {
-    login(username, password, submitFunction, setShow, setSnack, setSnackError);
+    login(
+      username,
+      password,
+      submitFunction,
+      setShow,
+      setSnack,
+      setSnackError,
+      setCookie
+    );
   };
 
   const handleSnackbarClose = (
@@ -201,6 +215,46 @@ const Navbar = ({ children }: Props) => {
 
   const drawerWidth = 240;
 
+  function setCookie(cname: string, cvalue: string, exdays: number) {
+    const d = new Date();
+    d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+    let expires = "expires=" + d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  }
+
+  function getCookie(cname: string) {
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(";");
+    for (let i = 0; i < ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) === " ") {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) === 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }
+
+  useEffect(() => {
+    let username = getCookie("username");
+    if (username === "") return;
+
+    let password = getCookie("password");
+
+    login(
+      username,
+      password,
+      submitFunction,
+      setShow,
+      setSnack,
+      setSnackError,
+      setCookie
+    );
+  }, [submitFunction, username, password]);
+
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -266,7 +320,7 @@ const Navbar = ({ children }: Props) => {
           severity="success"
           sx={{ width: "100%" }}
         >
-          Du bist erfolgreich eingeloggt, {username} !
+          Du bist erfolgreich eingeloggt, {getCookie("username")} !
         </Alert>
       </Snackbar>
       <Snackbar
@@ -331,7 +385,7 @@ const Navbar = ({ children }: Props) => {
               />
             ))}
           </List>
-          <UserSidebar userName={username} />
+          <UserSidebar userName={getCookie("username")} />
           <div
             style={{
               width: "-webkit-fill-available",
