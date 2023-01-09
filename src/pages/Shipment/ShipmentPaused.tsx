@@ -25,7 +25,7 @@ function ShipmentItems(props: {
   );
 }
 
-export default function ShipmentRevoked() {
+export default function ShipmentPaused() {
   const [items, setItems] = useState<Bidding[]>([]);
   const { state } = useGlobalState();
   const view = "BiddingsRevoked";

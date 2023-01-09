@@ -7,9 +7,10 @@ import Home from "./pages/Home";
 import OffersActive from "./pages/Offers/OffersActive";
 import Allowlist from "./pages/Whitelist";
 import ShipmentActive from "./pages/Shipment/ShipmentActive";
-import ShipmentRevoked from "./pages/Shipment/ShipmentRevoked";
+import ShipmentPaused from "./pages/Shipment/ShipmentPaused";
 import ShipmentFinished from "./pages/Shipment/ShipmentFinished";
 import OffersFinished from "./pages/Offers/OffersFinished";
+import OffersPaused from "./pages/Offers/OffersPaused";
 
 export default function App() {
   return (
@@ -21,9 +22,10 @@ export default function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/allowlist" element={<Allowlist />} />
             <Route path="/shipments/active" element={<ShipmentActive />} />
-            <Route path="/shipments/revoked" element={<ShipmentRevoked />} />
+            <Route path="/shipments/paused" element={<ShipmentPaused />} />
             <Route path="/shipments/finished" element={<ShipmentFinished />} />
             <Route path="/offers/active" element={<OffersActive />} />
+            <Route path="/offers/paused" element={<OffersPaused />} />
             <Route path="/offers/finished" element={<OffersFinished />} />
           </Routes>
         </Navbar>

@@ -398,7 +398,8 @@ export function ShipmentItem(props: {
                 />
               </div>
             )}
-            {props.view === "OffersFinished" && (
+            {(props.view === "OffersFinished" ||
+              props.view === "OffersPaused") && (
               <div>
                 <CardHeader
                   title="Damaliges Gebot"

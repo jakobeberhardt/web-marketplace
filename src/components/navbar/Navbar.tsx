@@ -180,7 +180,7 @@ const Navbar = ({ children }: Props) => {
           index: 3,
         },
         {
-          path: "/shipments/revoked",
+          path: "/shipments/paused",
           name: "Pausiert",
           icon: <HourglassEmpty />,
           index: 4,
@@ -204,10 +204,16 @@ const Navbar = ({ children }: Props) => {
           index: 6,
         },
         {
+          path: "/offers/paused",
+          name: "Pausiert",
+          icon: <HourglassEmpty />,
+          index: 7,
+        },
+        {
           path: "/offers/finished",
           name: "Beendet",
           icon: <Gavel />,
-          index: 7,
+          index: 8,
         },
       ],
     },
