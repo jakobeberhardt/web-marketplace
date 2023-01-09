@@ -102,8 +102,20 @@ export function ShipmentItem(props: {
               Anzahl Gebote: {props.item.bids.length}
             </Typography>
           )}
+          {/*<Button variant="contained">Auktion erneut aufnehmen</Button>*/}
+
           {props.view === "BiddingsRevoked" && (
-            <Button variant="contained">Auktion erneut aufnehmen</Button>
+            <Typography
+              sx={{
+                backgroundColor: "#1E90FF",
+                color: "white",
+                padding: "7px 10px 7px 10px",
+                borderRadius: "25px",
+                marginRight: "15px",
+              }}
+            >
+              Pausierte Gebote: {props.item.bids.length}
+            </Typography>
           )}
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>

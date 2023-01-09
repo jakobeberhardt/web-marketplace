@@ -361,7 +361,11 @@ const Navbar = ({ children }: Props) => {
           }}
         >
           <List
-            style={{ backgroundColor: "#75b989", minHeight: "80vh" }}
+            style={{
+              backgroundColor: "#75b989",
+              minHeight: "65vh",
+              paddingTop: "unset",
+            }}
             sx={{
               // selected and (selected + hover) states
               "&& .Mui-selected, && .Mui-selected:hover": {
