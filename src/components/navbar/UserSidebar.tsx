@@ -8,18 +8,40 @@ export default function UserSidebar(props: { userName: String }) {
     <>
       {state.userId && (
         <Card
-          sx={{ marginLeft: "30px", marginRight: "30px", borderRadius: "10px" }}
+          sx={{
+            marginLeft: "30px",
+            marginRight: "30px",
+            borderRadius: "10px",
+            borderStyle: "inset",
+            borderColor: "green",
+          }}
         >
-          <CardHeader />
-          <CardContent>
+          <CardHeader
+            sx={{
+              textDecorationLine: "underline",
+              alignItems: "center",
+              margin: "auto",
+              fontWeight: "700",
+            }}
+            title="Account:"
+          />
+          <CardContent sx={{ padding: "20px" }}>
             <Typography
               component={"span"}
               variant="body2"
-              style={{ fontWeight: "10000", fontSize: "40" }}
+              style={{
+                fontWeight: "10000",
+                fontSize: "40",
+                wordWrap: "break-word",
+              }}
             >
-              <>{`User: ${props.userName}`} </>
+              <span style={{ float: "left", fontWeight: "bolder" }}>
+                User:{"  "}
+              </span>
+              <span>{props.userName}</span>
               <br />
-              <>{`NeoCargo ID: ${state.userId}`}</>
+              <span style={{ fontWeight: "bolder" }}>NeoCargo ID: </span>
+              <span>{state.userId}</span>
             </Typography>
           </CardContent>
         </Card>
