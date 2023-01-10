@@ -23,6 +23,8 @@ import { BidsActive } from "./Bids/BidsActive";
 import { BidFinished } from "./Bid/BidFinished";
 import { BidsFinished } from "./Bids/BidsFinished";
 import { BidsRevoked } from "./Bids/BidsRevoked";
+import { useGlobalState } from "../GlobalStateProvider";
+import axios from "axios";
 
 export function ShipmentItem(props: {
   item: Bidding;
@@ -36,7 +38,44 @@ export function ShipmentItem(props: {
     setOpen(!open);
   };
 
+  const { state } = useGlobalState();
+
   Moment.globalLocale = "de";
+
+  const changeBiddingState = (biddingID: String, status: String) => {
+    const data = {
+      biddingId: biddingID,
+      newStatus: status,
+    };
+    const statusGet = status === "active" ? "paused" : "active";
+    const headers = {
+      Authorization: `Bearer ${state.accessToken}`,
+      "Content-Type": "application/json",
+    };
+    axios
+      .put(
+        `${process.env.REACT_APP_API_URL_LOCAL_AUTH}/api/v1/biddings/status`,
+        data,
+        {
+          headers: headers,
+        }
+      )
+      .then((response) => {
+        if (response.status === 200) {
+          axios
+            .get(
+              `${process.env.REACT_APP_API_URL_LOCAL_AUTH}/api/v1/biddings/${statusGet}/`,
+              {
+                headers: {
+                  Authorization: `Bearer ${state.accessToken}`,
+                  "Content-Type": "application/json",
+                },
+              }
+            )
+            .then((getreponse) => props.setItems(getreponse.data));
+        }
+      });
+  };
 
   return (
     <>
@@ -56,7 +95,7 @@ export function ShipmentItem(props: {
           <Typography sx={{ mr: "20px", fontWeight: "700" }}>
             Sendung:{" "}
           </Typography>
-          <ListItemText primary={props.item.shipment.tmsReference} />
+          <ListItemText primary={props.item.shipment.id} />
 
           <Straighten />
           <div style={{ marginRight: "30px", marginLeft: "10px" }}>
@@ -89,7 +128,8 @@ export function ShipmentItem(props: {
             </Typography>
           )}
           {(props.view === "BiddingsActive" ||
-            props.view === "BiddingsFinished") && (
+            props.view === "BiddingsFinished" ||
+            props.view === "BiddingsRevoked") && (
             <Typography
               sx={{
                 backgroundColor: "#1E90FF",
@@ -102,21 +142,23 @@ export function ShipmentItem(props: {
               Anzahl Gebote: {props.item.bids.length}
             </Typography>
           )}
-          {/*<Button variant="contained">Auktion erneut aufnehmen</Button>*/}
-
-          {props.view === "BiddingsRevoked" && (
-            <Typography
-              sx={{
-                backgroundColor: "#1E90FF",
-                color: "white",
-                padding: "7px 10px 7px 10px",
-                borderRadius: "25px",
-                marginRight: "15px",
-              }}
+          {props.view === "BiddingsActive" && (
+            <Button
+              variant="contained"
+              onClick={() => changeBiddingState(props.item.id, "paused")}
             >
-              Pausierte Gebote: {props.item.bids.length}
-            </Typography>
+              Auktion pausieren
+            </Button>
           )}
+          {props.view === "BiddingsRevoked" && (
+            <Button
+              variant="contained"
+              onClick={() => changeBiddingState(props.item.id, "active")}
+            >
+              Auktion erneut aufnehmen
+            </Button>
+          )}
+
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
         <div className="quickinfo" style={{ backgroundColor: "#FFFFFF" }}>

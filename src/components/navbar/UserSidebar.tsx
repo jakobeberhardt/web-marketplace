@@ -16,7 +16,7 @@ export default function UserSidebar(props: { userName: String }) {
             borderColor: "green",
           }}
         >
-          <CardHeader
+          {/* <CardHeader
             sx={{
               textDecorationLine: "underline",
               alignItems: "center",
@@ -24,7 +24,7 @@ export default function UserSidebar(props: { userName: String }) {
               fontWeight: "700",
             }}
             title="Account:"
-          />
+          /> */}
           <CardContent sx={{ padding: "20px" }}>
             <Typography
               component={"span"}
@@ -36,11 +36,11 @@ export default function UserSidebar(props: { userName: String }) {
               }}
             >
               <span style={{ float: "left", fontWeight: "bolder" }}>
-                User:{"  "}
+                Benutzername:{"  "}
               </span>
               <span>{props.userName}</span>
               <br />
-              <span style={{ fontWeight: "bolder" }}>NeoCargo ID: </span>
+              <span style={{ fontWeight: "bolder" }}>NeoCargo-ID: </span>
               <span>{state.userId}</span>
             </Typography>
           </CardContent>

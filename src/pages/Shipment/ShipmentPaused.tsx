@@ -32,12 +32,15 @@ export default function ShipmentPaused() {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_URL_LOCAL_AUTH}/api/v1/biddings/`, {
-        headers: {
-          Authorization: `Bearer ${state.accessToken}`,
-          "Content-Type": "application/json",
-        },
-      })
+      .get(
+        `${process.env.REACT_APP_API_URL_LOCAL_AUTH}/api/v1/biddings/paused/`,
+        {
+          headers: {
+            Authorization: `Bearer ${state.accessToken}`,
+            "Content-Type": "application/json",
+          },
+        }
+      )
       .then((reponse) => setItems(reponse.data));
   }, [state.accessToken]);
 
