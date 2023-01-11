@@ -1,15 +1,4 @@
-import {
-  Box,
-  ListItemButton,
-  ListItemIcon,
-  Input,
-  TextField,
-  withStyles,
-  Button,
-  InputAdornment,
-} from "@mui/material";
-
-import { AddCircleOutline } from "@mui/icons-material";
+import { Box, TextField } from "@mui/material";
 import {
   DataGrid,
   GridColDef,
@@ -22,8 +11,6 @@ import {
   GlobalStateInterface,
   useGlobalState,
 } from "../components/GlobalStateProvider";
-import { IconButton } from "@mui/material";
-import ControlPointIcon from "@mui/icons-material/ControlPoint";
 //import "./Whitelist.sass";
 
 function CustomToolbarComponent(props: {
@@ -59,21 +46,30 @@ function CustomToolbarComponent(props: {
           addAllowListItem(inputValue, props.state, props.setItems)
         }
       >
-        Hinzufügen
+        Nutzer hinzufügen
       </button>
       <TextField
         id="basic"
-        style={{ marginLeft: "15px", marginRight: "auto", width: "500px" }}
+        style={{
+          marginLeft: "15px",
+          marginRight: "auto",
+          marginBottom: "20px",
+          width: "250px",
+          height: "50px",
+        }}
         onChange={handleChange}
         value={inputValue}
-        helperText="Bieter zur Liste hinzufügen"
+        label="NeoCargo ID z.B.: 12345"
         InputProps={{
+          inputProps: { maxLength: 5 },
+        }}
+        /* InputProps={{
           startAdornment: (
             <InputAdornment position="start">
               <ControlPointIcon />
             </InputAdornment>
           ),
-        }}
+        }} */
       />
 
       {props.selectionModel.length > 0 && (
