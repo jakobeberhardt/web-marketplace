@@ -92,7 +92,7 @@ function CustomToolbarComponent(props: {
             )
           }
         >
-          {`Lösche ${props.selectionModel.length} Einträge`}
+          {`Entferne ${props.selectionModel.length} Nutzer`}
         </button>
       )}
     </GridToolbarContainer>

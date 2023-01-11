@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, Typography } from "@mui/material";
+import { Card, CardContent, Typography } from "@mui/material";
 import { useGlobalState } from "../GlobalStateProvider";
 
 export default function UserSidebar(props: { userName: String }) {
@@ -16,15 +16,6 @@ export default function UserSidebar(props: { userName: String }) {
             borderColor: "green",
           }}
         >
-          {/* <CardHeader
-            sx={{
-              textDecorationLine: "underline",
-              alignItems: "center",
-              margin: "auto",
-              fontWeight: "700",
-            }}
-            title="Account:"
-          /> */}
           <CardContent sx={{ padding: "20px" }}>
             <Typography
               component={"span"}
