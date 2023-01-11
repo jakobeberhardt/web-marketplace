@@ -19,7 +19,7 @@ function BidItems(props: { items: Bid[] }) {
             style={{ margin: "auto", marginRight: "20rem", padding: "1rem" }}
           >
             <Typography data-testid="offerValue">
-              {item.value.toString()} €
+              {item.userId}: {item.value.toString()} €
             </Typography>
           </div>
         </ListItem>
