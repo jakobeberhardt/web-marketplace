@@ -4,8 +4,11 @@ import {
   ListItemIcon,
   Input,
   TextField,
-  ButtonBase,
+  withStyles,
+  Button,
+  InputAdornment,
 } from "@mui/material";
+
 import { AddCircleOutline } from "@mui/icons-material";
 import {
   DataGrid,
@@ -20,7 +23,8 @@ import {
   useGlobalState,
 } from "../components/GlobalStateProvider";
 import { IconButton } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
+import ControlPointIcon from "@mui/icons-material/ControlPoint";
+//import "./Whitelist.sass";
 
 function CustomToolbarComponent(props: {
   selectionModel: GridSelectionModel;
@@ -31,38 +35,59 @@ function CustomToolbarComponent(props: {
   const handleChange = (event: any) => {
     setInputValue(event.target.value);
   };
+
   return (
-    <GridToolbarContainer>
-      <TextField
-        id="basic"
-        label="Bieter zur Liste hinzufügen"
-        style={{ alignContent: "center" }}
-        onChange={handleChange}
-      >
-        <Input
-          style={{ margin: "6px", borderWidth: "0", width: "100%" }}
-          value={inputValue}
-        />
-      </TextField>
-      <ListItemButton
-        style={{ float: "right" }}
-        alignItems="center"
+    <GridToolbarContainer
+      sx={{
+        margin: "20px",
+        padding: "4px",
+        borderBottom: "2px green solid",
+      }}
+    >
+      <button
+        style={{
+          backgroundColor: "green",
+          color: "white",
+          padding: "10px 15px ",
+          borderRadius: "25px",
+          marginLeft: "15px",
+          marginRight: "0",
+          border: "none",
+          fontFamily: "monospace",
+        }}
         onClick={() =>
           addAllowListItem(inputValue, props.state, props.setItems)
         }
       >
-        <ListItemIcon>
-          <AddCircleOutline
-            style={{
-              width: "50px",
-              height: "50px",
-              color: "black",
-            }}
-          />
-        </ListItemIcon>
-      </ListItemButton>
+        Hinzufügen
+      </button>
+      <TextField
+        id="basic"
+        style={{ marginLeft: "15px", marginRight: "auto", width: "500px" }}
+        onChange={handleChange}
+        value={inputValue}
+        helperText="Bieter zur Liste hinzufügen"
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <ControlPointIcon />
+            </InputAdornment>
+          ),
+        }}
+      />
+
       {props.selectionModel.length > 0 && (
-        <ButtonBase
+        <button
+          style={{
+            backgroundColor: "green",
+            color: "white",
+            padding: "10px 15px ",
+            borderRadius: "25px",
+            marginLeft: "auto",
+            marginRight: "15px",
+            border: "none",
+            fontFamily: "monospace",
+          }}
           onClick={() =>
             removeAllowListItem(
               props.selectionModel,
@@ -71,15 +96,8 @@ function CustomToolbarComponent(props: {
             )
           }
         >
-          <IconButton
-            aria-label="delete"
-            disabled
-            style={{ color: "black", opacity: "0.3" }}
-          >
-            {`Delete ${props.selectionModel.length} items`}
-            <DeleteIcon style={{ width: "20px", height: "20px" }} />
-          </IconButton>
-        </ButtonBase>
+          {`Lösche ${props.selectionModel.length} Einträge`}
+        </button>
       )}
     </GridToolbarContainer>
   );
@@ -149,9 +167,19 @@ export default function Allowlist() {
   }, [state.accessToken]);
 
   const columns: GridColDef[] = [
-    { field: "allowlistgroup", headerName: "Bieterkreisgruppe", width: 300 },
-    { field: "ffid", headerName: "NeoCargo-ID", width: 300 },
-    { field: "mail", headerName: "Email", width: 300 },
+    {
+      field: "allowlistgroup",
+      headerName: "Bieterkreisgruppe",
+      minWidth: 300,
+      maxWidth: Infinity,
+    },
+    {
+      field: "ffid",
+      headerName: "NeoCargo-ID",
+      minWidth: 300,
+      maxWidth: Infinity,
+    },
+    { field: "mail", headerName: "Email", minWidth: 300, maxWidth: Infinity },
   ];
 
   const rows = items.map((item) => {
@@ -243,8 +271,13 @@ export default function Allowlist() {
           </TableBody>
         </Paper>
       </Box> */}
-      <Box sx={{ height: 400, width: "100%" }}>
+      <Box sx={{ height: "83vh", width: "100%" }}>
         <DataGrid
+          sx={{
+            border: "solid",
+            borderWidth: 2,
+            borderColor: "green",
+          }}
           pageSize={5}
           columns={columns}
           rowsPerPageOptions={[5]}
@@ -261,7 +294,7 @@ export default function Allowlist() {
           componentsProps={{
             toolbar: { selectionModel, state, setItems },
           }}
-        ></DataGrid>
+        />
       </Box>
     </>
   );

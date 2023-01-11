@@ -35,9 +35,7 @@ export default function UserSidebar(props: { userName: String }) {
                 wordWrap: "break-word",
               }}
             >
-              <span style={{ float: "left", fontWeight: "bolder" }}>
-                Benutzername:{"  "}
-              </span>
+              <span style={{ fontWeight: "bolder" }}>Benutzername:{"  "}</span>
               <span>{props.userName}</span>
               <br />
               <span style={{ fontWeight: "bolder" }}>NeoCargo-ID: </span>
