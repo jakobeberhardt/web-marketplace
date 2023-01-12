@@ -25,6 +25,8 @@ import { BidsFinished } from "./Bids/BidsFinished";
 import { BidsRevoked } from "./Bids/BidsRevoked";
 import { useGlobalState } from "../GlobalStateProvider";
 import axios from "axios";
+import icons from "./../../assets/icons/selection.json";
+import IcomoonReact, { iconList } from "icomoon-react";
 
 export function ShipmentItem(props: {
   item: Bidding;
@@ -142,22 +144,24 @@ export function ShipmentItem(props: {
               Anzahl Gebote: {props.item.bids.length}
             </Typography>
           )}
-          {props.view === "BiddingsActive" && (
-            <Button
-              variant="contained"
-              onClick={() => changeBiddingState(props.item.id, "paused")}
-            >
-              Auktion pausieren
-            </Button>
-          )}
-          {props.view === "BiddingsRevoked" && (
-            <Button
-              variant="contained"
-              onClick={() => changeBiddingState(props.item.id, "active")}
-            >
-              Auktion erneut aufnehmen
-            </Button>
-          )}
+          <div>
+            {props.view === "BiddingsActive" && (
+              <button
+                onClick={() => changeBiddingState(props.item.id, "paused")}
+              >
+                Auktion pausieren
+              </button>
+            )}
+          </div>
+          <div>
+            {props.view === "BiddingsRevoked" && (
+              <button
+                onClick={() => changeBiddingState(props.item.id, "active")}
+              >
+                Auktion erneut aufnehmen
+              </button>
+            )}
+          </div>
 
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
@@ -286,120 +290,18 @@ export function ShipmentItem(props: {
               >
                 <div
                   style={{
-                    backgroundColor: "green",
+                    backgroundColor: "lightgrey",
                     padding: "7px",
                     margin: "5px",
                     borderRadius: "25px",
                     width: "40px",
                   }}
                 >
-                  <ScaleIcon
-                    style={{
-                      margin: "auto",
-                      display: "flex",
-                      minWidth: "15px",
-                      minHeight: "15px",
-                      maxWidth: "20px",
-                      maxHeight: "20px",
-                    }}
-                  />
-                </div>
-                <div
-                  style={{
-                    backgroundColor: "yellow",
-                    padding: "7px",
-                    margin: "5px",
-                    borderRadius: "25px",
-                    width: "40px",
-                  }}
-                >
-                  {" "}
-                  <ScaleIcon
-                    style={{
-                      margin: "auto",
-                      display: "flex",
-                      minWidth: "15px",
-                      minHeight: "15px",
-                      maxWidth: "20px",
-                      maxHeight: "20px",
-                    }}
-                  />
-                </div>
-                <div
-                  style={{
-                    backgroundColor: "orange",
-                    padding: "7px",
-                    margin: "5px",
-                    borderRadius: "25px",
-                    width: "40px",
-                  }}
-                >
-                  {" "}
-                  <ScaleIcon
-                    style={{
-                      margin: "auto",
-                      display: "flex",
-                      minWidth: "15px",
-                      minHeight: "15px",
-                      maxWidth: "20px",
-                      maxHeight: "20px",
-                    }}
-                  />
-                </div>
-                <div
-                  style={{
-                    backgroundColor: "orange",
-                    padding: "7px",
-                    margin: "5px",
-                    borderRadius: "25px",
-                    width: "40px",
-                  }}
-                >
-                  {" "}
-                  <ScaleIcon
-                    style={{
-                      margin: "auto",
-                      display: "flex",
-                      minWidth: "15px",
-                      minHeight: "15px",
-                      maxWidth: "20px",
-                      maxHeight: "20px",
-                    }}
-                  />
-                </div>
-                <div
-                  style={{
-                    backgroundColor: "orange",
-                    padding: "7px",
-                    margin: "5px",
-                    borderRadius: "25px",
-                    width: "40px",
-                  }}
-                >
-                  {" "}
-                  <ScaleIcon
-                    style={{
-                      margin: "auto",
-                      display: "flex",
-                      minWidth: "15px",
-                      minHeight: "15px",
-                      maxWidth: "20px",
-                      maxHeight: "20px",
-                    }}
-                  />
-                </div>
-                <div
-                  style={{
-                    backgroundColor: "orange",
-                    padding: "7px",
-                    margin: "5px",
-                    borderRadius: "25px",
-                    width: "40px",
-                    float: "left",
-                  }}
-                >
-                  {" "}
-                  <ScaleIcon
+                  <IcomoonReact
+                    iconSet={icons}
+                    color="black"
+                    size={100}
+                    icon="BOX_TRAILER"
                     style={{
                       margin: "auto",
                       display: "flex",

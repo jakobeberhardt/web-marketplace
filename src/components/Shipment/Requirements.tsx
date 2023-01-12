@@ -29,29 +29,142 @@ import SpaceBarIcon from "@mui/icons-material/SpaceBar";
 import HeightIcon from "@mui/icons-material/Height";
 import FireExtinguisher from "@mui/icons-material/FireExtinguisher";
 
+import icons from "./../../assets/icons/selection.json";
+import IcomoonReact from "icomoon-react";
+
 export default function Requirements(props: { item: Bidding }) {
   const iconMap = new Map<string, JSX.Element>([
-    // ["boxtrailer", <LocalShipping />],
-    // ["cleanedVehicle", <Clean />],
-    // ["craneLoadable", <></>],
-    // ["emptyVehicle", <EmptyTruck />],
-    ["fireExtinguisher", <FireExtinguisher />],
-    /*  ["foodStuffs", <FoodBankIcon />],
-    ["healthCert", <HealthAndSafety />],
-    ["keepDry", <FormatColorReset />],*/
-    ["loadHeight", <HeightIcon />],
-    /* ["loadWidth", <Width />],
-    ["loadLength", <></>],
-    ["mobileForklift", <Boxes />],
-    ["palletSwap", <Swap />],
-    ["ppeFfp2Mask", <Masks />],
-    ["ppeHelmet", <Engineering />],
-    ["ppeShoes", <></>],
-    ["sideLoadable", <></>],
-    ["tailLift", <></>],
-    //["trackingLevel", <GPS />],
-    ["wasteSign", <></>],
-    ["whitelabelVehicle", <></>],*/
+    [
+      "boxtrailer",
+      <IcomoonReact
+        iconSet={icons}
+        color="black"
+        size={100}
+        icon="BOX_TRAILER"
+      />,
+    ],
+    ["cleanedVehicle", <Clean />],
+    [
+      "craneLoadable",
+      <IcomoonReact
+        iconSet={icons}
+        color="black"
+        size={100}
+        icon="CRANE_LOADABLE"
+      />,
+    ],
+    [
+      "emptyVehicle",
+      <IcomoonReact
+        iconSet={icons}
+        color="black"
+        size={100}
+        icon="EMPTY_VEHICLE"
+      />,
+    ],
+    [
+      "fireExtinguisher",
+      <IcomoonReact iconSet={icons} color="black" size={100} icon="" />,
+    ],
+    [
+      "foodStuffs",
+      <IcomoonReact
+        iconSet={icons}
+        color="black"
+        size={100}
+        icon="FOODSTUFFS"
+      />,
+    ],
+    [
+      "healthCert",
+      <IcomoonReact iconSet={icons} color="black" size={100} icon="" />,
+    ],
+    [
+      "keepDry",
+      <IcomoonReact iconSet={icons} color="black" size={100} icon="" />,
+    ],
+    [
+      "loadHeight",
+      <IcomoonReact
+        iconSet={icons}
+        color="black"
+        size={100}
+        icon="LOAD_HEIGHT"
+      />,
+    ],
+    [
+      "loadWidth",
+      <IcomoonReact
+        iconSet={icons}
+        color="black"
+        size={100}
+        icon="LOAD_WIDTH"
+      />,
+    ],
+    [
+      "loadLength",
+      <IcomoonReact iconSet={icons} color="black" size={100} icon="" />,
+    ],
+    [
+      "mobileForklift",
+      <IcomoonReact
+        iconSet={icons}
+        color="black"
+        size={100}
+        icon="MOBILE_FORKLIFT"
+      />,
+    ],
+    [
+      "palletSwap",
+      <IcomoonReact
+        iconSet={icons}
+        color="black"
+        size={100}
+        icon="PALLET_SWAP"
+      />,
+    ],
+    [
+      "ppeFfp2Mask",
+      <IcomoonReact iconSet={icons} color="black" size={100} icon="" />,
+    ],
+    [
+      "ppeHelmet",
+      <IcomoonReact iconSet={icons} color="black" size={100} icon="" />,
+    ],
+    [
+      "ppeShoes",
+      <IcomoonReact iconSet={icons} color="black" size={100} icon="" />,
+    ],
+    [
+      "sideLoadable",
+      <IcomoonReact
+        iconSet={icons}
+        color="black"
+        size={100}
+        icon="SIDE_LOADABLE"
+      />,
+    ],
+    [
+      "tailLift",
+      <IcomoonReact
+        iconSet={icons}
+        color="black"
+        size={100}
+        icon="TAIL_LIFT"
+      />,
+    ],
+    [
+      "trackingLevel",
+      <IcomoonReact iconSet={icons} color="black" size={100} icon="" />,
+    ],
+    [
+      "wasteSign",
+      <IcomoonReact iconSet={icons} color="black" size={100} icon="" />,
+    ],
+    [
+      "whitelabelVehicle",
+      <IcomoonReact iconSet={icons} color="black" size={100} icon="" />,
+    ],
   ]);
 
   return (
@@ -74,6 +187,9 @@ export default function Requirements(props: { item: Bidding }) {
                 <div>{iconMap.get(element[0])}</div>
                 {/* Scope */}
                 <div>{element[1].scopes}</div>
+                <div style={{ backgroundColor: "red" }}>
+                  {(element[1].scopes = "ENROUTE")}
+                </div>
                 {/* Params bei IntRequirement z.B Ladehöhe in m */}
                 <div>{element[1].params}</div>
               </div>
