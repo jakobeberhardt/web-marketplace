@@ -14,6 +14,8 @@ export default function UserSidebar(props: { userName: String }) {
             borderRadius: "10px",
             borderStyle: "inset",
             borderColor: "green",
+            position: "absolute",
+            bottom: "10px",
           }}
         >
           <CardContent sx={{ padding: "20px" }}>
