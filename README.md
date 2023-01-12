@@ -8,6 +8,23 @@
 | `types`                  | types in the scope of bidding / shipments       |
 | `readme.md`              | this getting started guide                      |
 
+| Pages       | Purpose                                                               |
+| ----------- | --------------------------------------------------------------------- |
+| `Offers`    | Alle Ausschreibungen für die ein Nutzer auf dem Bieterkreis erscheint |
+| `Shipment`  | Alle Ausschreibungen die ein Nutzer selbst veröffentlicht hat         |
+| `Home`      | Landingpage                                                           |
+| `Whitelist` | Seite zum Anzeigen und Verwalten des Bieterkreises                    |
+
+| Components            | Purpose                                                                               |
+| --------------------- | ------------------------------------------------------------------------------------- |
+| `Navbar`              | Navigationsleiste (+ Login Logik)                                                     |
+| `UserSidebar`         | Anzeige von Informationen des momentanen Nutzers                                      |
+| `Bids`                | Anzeigen von mehreren Geboten, Logik zur Annahme eines Gebots                         |
+| `Bid`                 | Anzeige es Gebots, Logik zum Bieten und Einsehen des abgegebenen Gebots eines Nutzers |
+| `Requirements`        | Mappen der Icons zu verschiedenen Anforderungen eines Shipments                       |
+| `ShipmentItem`        | Darstellung aller relevanten Informationen eines Shipments                            |
+| `GlobalStateProvider` | Globales Objekt von Nutzerinformationen                                               |
+
 ## Available Scripts
 
 In the project directory, you can run:
