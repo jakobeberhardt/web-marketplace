@@ -1,6 +1,9 @@
 import { List, ListItem, ListItemButton, Typography } from "@mui/material";
-import Bid from "../../types/Bid";
-import { useGlobalState, GlobalStateInterface } from "../GlobalStateProvider";
+import Bid from "../../../types/Bid";
+import {
+  useGlobalState,
+  GlobalStateInterface,
+} from "../../GlobalStateProvider";
 import axios from "axios";
 import React from "react";
 import HandshakeIcon from "@mui/icons-material/Handshake";
@@ -25,6 +28,7 @@ function BidItems(props: {
           <div
             style={{ margin: "auto", marginRight: "20rem", padding: "1rem" }}
           >
+            <Typography data-testid="userID">{item.userId}</Typography>
             <Typography data-testid="offerValue">
               {item.value.toString()} €
             </Typography>
@@ -65,7 +69,7 @@ function acceptOffer(
   };
   axios
     .post(
-      `${process.env.REACT_APP_API_URL}/api/v1/biddings/assignBidding`,
+      `${process.env.REACT_APP_API_URL_LOCAL_AUTH}/api/v1/biddings/assignBidding`,
       data,
       {
         headers: headers,
@@ -74,7 +78,7 @@ function acceptOffer(
     .then((response) => {
       if (response.status === 200) {
         axios
-          .get(`${process.env.REACT_APP_API_URL}/api/v1/biddings/`, {
+          .get(`${process.env.REACT_APP_API_URL_LOCAL_AUTH}/api/v1/biddings/`, {
             headers: {
               Authorization: `Bearer ${state.accessToken}`,
               "Content-Type": "application/json",
@@ -85,7 +89,7 @@ function acceptOffer(
     });
 }
 
-export function Bids(props: { items: Array<Bid>; setItems: Function }) {
+export function BidsActive(props: { items: Array<Bid>; setItems: Function }) {
   const { state } = useGlobalState();
   return (
     <>

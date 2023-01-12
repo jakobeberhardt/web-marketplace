@@ -1,10 +1,10 @@
 import * as React from "react";
-import { ShipmentItem } from "../components/Shipment/ShipmentItem";
+import { ShipmentItem } from "../../components/Shipment/ShipmentItem";
 import { Box, Container, List } from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Bidding from "../types/Bidding";
-import { useGlobalState } from "../components/GlobalStateProvider";
+import Bidding from "../../types/Bidding";
+import { useGlobalState } from "../../components/GlobalStateProvider";
 
 function ShipmentItems(props: {
   items: Bidding[];
@@ -25,19 +25,22 @@ function ShipmentItems(props: {
   );
 }
 
-export default function ShipmentContainer() {
+export default function ShipmentFinished() {
   const [items, setItems] = useState<Bidding[]>([]);
   const { state } = useGlobalState();
-  const view = "Biddings";
+  const view = "BiddingsFinished";
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/api/v1/biddings/`, {
-        headers: {
-          Authorization: `Bearer ${state.accessToken}`,
-          "Content-Type": "application/json",
-        },
-      })
+      .get(
+        `${process.env.REACT_APP_API_URL_LOCAL_AUTH}/api/v1/biddings/finished/`,
+        {
+          headers: {
+            Authorization: `Bearer ${state.accessToken}`,
+            "Content-Type": "application/json",
+          },
+        }
+      )
       .then((reponse) => setItems(reponse.data));
   }, [state.accessToken]);
 

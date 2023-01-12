@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, Typography } from "@mui/material";
+import { Card, CardContent, Typography } from "@mui/material";
 import { useGlobalState } from "../GlobalStateProvider";
 
 export default function UserSidebar(props: { userName: String }) {
@@ -8,18 +8,31 @@ export default function UserSidebar(props: { userName: String }) {
     <>
       {state.userId && (
         <Card
-          sx={{ marginLeft: "30px", marginRight: "30px", borderRadius: "10px" }}
+          sx={{
+            marginLeft: "30px",
+            marginRight: "30px",
+            borderRadius: "10px",
+            borderStyle: "inset",
+            borderColor: "green",
+            position: "absolute",
+            bottom: "10px",
+          }}
         >
-          <CardHeader />
-          <CardContent>
+          <CardContent sx={{ padding: "20px" }}>
             <Typography
               component={"span"}
               variant="body2"
-              style={{ fontWeight: "10000", fontSize: "40" }}
+              style={{
+                fontWeight: "10000",
+                fontSize: "40",
+                wordWrap: "break-word",
+              }}
             >
-              <>{`User: ${props.userName}`} </>
+              <span style={{ fontWeight: "bolder" }}>Benutzername:{"  "}</span>
+              <span>{props.userName}</span>
               <br />
-              <>{`NeoCargo ID: 00000`}</>
+              <span style={{ fontWeight: "bolder" }}>NeoCargo-ID: </span>
+              <span>{state.userId}</span>
             </Typography>
           </CardContent>
         </Card>

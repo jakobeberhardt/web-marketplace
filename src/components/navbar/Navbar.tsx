@@ -13,14 +13,26 @@ import {
   Alert,
   ListItemIcon,
   ListItemText,
+  Collapse,
 } from "@mui/material";
-import { People, Campaign, LocalShipping, Home } from "@mui/icons-material";
-import Logo from "./NeoCargoLogo.png";
-import { Link } from "react-router-dom";
-import { useState, ReactNode } from "react";
+import {
+  People,
+  Campaign,
+  LocalShipping,
+  Home,
+  ExpandMore,
+  ExpandLess,
+  AccessTime,
+  HourglassEmpty,
+  Gavel,
+} from "@mui/icons-material";
+import Logo from "../../assets/NeoCargoLogo.png";
+import { Link, Path } from "react-router-dom";
+import { useState, ReactNode, useEffect, useCallback } from "react";
 import axios from "axios";
 import { useGlobalState, GlobalStateInterface } from "../GlobalStateProvider";
 import UserSidebar from "./UserSidebar";
+import { ReactJSXElement } from "@emotion/react/types/jsx-namespace";
 
 type Props = {
   title: string;
@@ -30,7 +42,7 @@ type Props = {
 function register(username: String, password: String) {
   axios
     .post(
-      `${process.env.REACT_APP_API_URL}/api/v1/auth/register`,
+      `${process.env.REACT_APP_API_URL_LOCAL_AUTH}/api/v1/auth/register`,
       { username: username, password: password },
       {
         headers: {
@@ -47,11 +59,12 @@ async function login(
   submitFunction: Function,
   setShow: Function,
   setSnack: Function,
-  setSnackError: Function
+  setSnackError: Function,
+  setCookie: Function
 ) {
   axios
     .post(
-      `${process.env.REACT_APP_API_URL}/api/v1/auth/login`,
+      `${process.env.REACT_APP_API_URL_LOCAL_AUTH}/api/v1/auth/login`,
       {
         username: username,
         password: password,
@@ -64,8 +77,10 @@ async function login(
     )
     .then((response) => {
       submitFunction(response.data);
-      setShow((prev: Boolean) => !prev);
+      setShow((prev: Boolean) => false);
       setSnack(true);
+      setCookie("username", username, 1);
+      setCookie("password", password, 1);
     })
     .catch((err) => {
       console.log(err);
@@ -74,7 +89,6 @@ async function login(
 }
 
 const Navbar = ({ children }: Props) => {
-  const [selectedIndex, setSelectedIndex] = useState(1);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { setState } = useGlobalState();
@@ -82,6 +96,7 @@ const Navbar = ({ children }: Props) => {
   const [show, setShow] = useState(true);
   const [openSnackError, setSnackError] = useState(false);
 
+  const [selectedIndex, setSelectedIndex] = useState(0);
   const handleListItemClick = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
     index: number
@@ -89,9 +104,12 @@ const Navbar = ({ children }: Props) => {
     setSelectedIndex(index);
   };
 
-  const submitFunction = (data: Partial<GlobalStateInterface>) => {
-    setState((prev) => ({ ...prev, ...data }));
-  };
+  const submitFunction = useCallback(
+    (data: Partial<GlobalStateInterface>) => {
+      setState((prev) => ({ ...prev, ...data }));
+    },
+    [setState]
+  );
 
   const handleChangeUsername = (event: {
     target: { value: React.SetStateAction<string> };
@@ -106,7 +124,15 @@ const Navbar = ({ children }: Props) => {
   };
 
   const loginButtonClick = () => {
-    login(username, password, submitFunction, setShow, setSnack, setSnackError);
+    login(
+      username,
+      password,
+      submitFunction,
+      setShow,
+      setSnack,
+      setSnackError,
+      setCookie
+    );
   };
 
   const handleSnackbarClose = (
@@ -135,25 +161,107 @@ const Navbar = ({ children }: Props) => {
       path: "/",
       name: "Start",
       icon: <Home />,
+      index: 1,
     },
     {
       path: "/allowlist",
       name: "Bieterkreis",
       icon: <People />,
+      index: 2,
     },
     {
-      path: "/shipments",
       name: "Meine Ausschreibungen",
       icon: <LocalShipping />,
+      children: [
+        {
+          path: "/shipments/active",
+          name: "Laufend",
+          icon: <AccessTime />,
+          index: 3,
+        },
+        {
+          path: "/shipments/paused",
+          name: "Pausiert",
+          icon: <HourglassEmpty />,
+          index: 4,
+        },
+        {
+          path: "/shipments/finished",
+          name: "Beendet",
+          icon: <Gavel />,
+          index: 5,
+        },
+      ],
     },
     {
-      path: "/offers",
       name: "Meine Gebote",
       icon: <Campaign />,
+      children: [
+        {
+          path: "/offers/active",
+          name: "Laufend",
+          icon: <AccessTime />,
+          index: 6,
+        },
+        {
+          path: "/offers/paused",
+          name: "Pausiert",
+          icon: <HourglassEmpty />,
+          index: 7,
+        },
+        {
+          path: "/offers/finished",
+          name: "Beendet",
+          icon: <Gavel />,
+          index: 8,
+        },
+      ],
     },
   ];
 
   const drawerWidth = 240;
+
+  //Setter and Getter for cookies
+  function setCookie(cname: string, cvalue: string, exdays: number) {
+    const d = new Date();
+    d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+    let expires = "expires=" + d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  }
+
+  function getCookie(cname: string) {
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(";");
+    for (let i = 0; i < ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) === " ") {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) === 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }
+
+  //Immediately login when cookies exist
+  useEffect(() => {
+    let username = getCookie("username");
+    if (username === "") return;
+
+    let password = getCookie("password");
+
+    login(
+      username,
+      password,
+      submitFunction,
+      setShow,
+      setSnack,
+      setSnackError,
+      setCookie
+    );
+  }, [submitFunction, username, password]);
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -220,7 +328,7 @@ const Navbar = ({ children }: Props) => {
           severity="success"
           sx={{ width: "100%" }}
         >
-          Du bist erfolgreich eingeloggt, {username} !
+          Du bist erfolgreich eingeloggt, {getCookie("username")} !
         </Alert>
       </Snackbar>
       <Snackbar
@@ -254,32 +362,42 @@ const Navbar = ({ children }: Props) => {
             overflow: "auto",
           }}
         >
-          <List style={{ backgroundColor: "#75b989", minHeight: "80vh" }}>
+          <List
+            style={{
+              backgroundColor: "#75b989",
+              minHeight: "65vh",
+              paddingTop: "unset",
+            }}
+            sx={{
+              // selected and (selected + hover) states
+              "&& .Mui-selected, && .Mui-selected:hover": {
+                bgcolor: "darkgreen",
+                "&, & .MuiListItemIcon-root": {
+                  color: "#0000008a",
+                },
+              },
+              // hover states
+              "& .MuiListItemButton-root:hover": {
+                bgcolor: "#75b989",
+                "&, & .MuiListItemIcon-root": {
+                  color: "#0000008a",
+                },
+              },
+            }}
+          >
             {menuItem.map((item) => (
-              <Link
-                key={item.name}
-                to={item.path}
-                style={{
-                  textDecoration: "none",
-                }}
-              >
-                <ListItemButton
-                  selected={selectedIndex === 1}
-                  onClick={(event) => handleListItemClick(event, 1)}
-                >
-                  <ListItemIcon>{item.icon}</ListItemIcon>
-                  <ListItemText
-                    style={{
-                      color: "white",
-                    }}
-                  >
-                    {item.name}
-                  </ListItemText>
-                </ListItemButton>
-              </Link>
+              <NavbarItem
+                path={item.path}
+                name={item.name}
+                icon={item.icon}
+                selectedIndex={selectedIndex}
+                handleListItemClick={handleListItemClick}
+                children={item.children || []}
+                index={item.index || -1}
+              />
             ))}
           </List>
-          <UserSidebar userName={username} />
+          <UserSidebar userName={getCookie("username")} />
           <div
             style={{
               width: "-webkit-fill-available",
@@ -296,5 +414,102 @@ const Navbar = ({ children }: Props) => {
     </Box>
   );
 };
+
+function NavbarItem(props: {
+  name: String;
+  path: String | undefined;
+  icon: ReactJSXElement;
+  selectedIndex: number;
+  handleListItemClick: Function;
+  children: {
+    name: String;
+    path: String;
+    icon: ReactJSXElement;
+    index: number;
+  }[];
+  index: number;
+}) {
+  const [open, setOpen] = React.useState(false);
+
+  const handleClick = () => {
+    setOpen(!open);
+  };
+
+  if (props.children.length === 0 && !!props.path) {
+    return (
+      <Link
+        key={props.name as React.Key}
+        to={props.path as unknown as Partial<Path>}
+        style={{
+          textDecoration: "none",
+          color: "white",
+        }}
+      >
+        <ListItemButton
+          sx={{ backgroundColor: "#3A9B57" }}
+          selected={props.index === props.selectedIndex}
+          onClick={(event) => props.handleListItemClick(event, props.index)}
+        >
+          <ListItemIcon>{props.icon}</ListItemIcon>
+          <ListItemText>{props.name}</ListItemText>
+        </ListItemButton>
+      </Link>
+    );
+  } else {
+    return (
+      <>
+        <ListItemButton
+          onClick={handleClick}
+          style={{ backgroundColor: "#3A9B57" }}
+        >
+          <ListItemIcon>{props.icon}</ListItemIcon>
+          <ListItemText
+            primary={props.name}
+            sx={{
+              color: "white",
+              fontWeight: "700",
+            }}
+          />
+          {open ? <ExpandLess /> : <ExpandMore />}
+        </ListItemButton>
+        <Collapse
+          sx={{ backgroundColor: "#f4fff759" }}
+          in={open}
+          timeout="auto"
+          unmountOnExit
+        >
+          <List component="div" disablePadding>
+            {props.children.map((element) => (
+              <Link
+                key={element.name as React.Key}
+                to={element.path as unknown as Partial<Path>}
+                style={{
+                  textDecoration: "none",
+                }}
+              >
+                <ListItemButton
+                  selected={element.index === props.selectedIndex}
+                  onClick={(
+                    event: React.MouseEvent<HTMLDivElement, MouseEvent>
+                  ) => props.handleListItemClick(event, element.index)}
+                >
+                  <ListItemIcon>{element.icon}</ListItemIcon>
+                  <ListItemText
+                    sx={{
+                      color: "white",
+                      fontWeight: "400",
+                    }}
+                  >
+                    {element.name}
+                  </ListItemText>
+                </ListItemButton>
+              </Link>
+            ))}
+          </List>
+        </Collapse>
+      </>
+    );
+  }
+}
 
 export default Navbar;

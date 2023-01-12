@@ -11,8 +11,8 @@ import {
 import { Euro } from "@mui/icons-material";
 import axios from "axios";
 import { useState } from "react";
-import BidClass from "../../types/Bid";
-import { useGlobalState } from "../GlobalStateProvider";
+import BidClass from "../../../types/Bid";
+import { useGlobalState } from "../../GlobalStateProvider";
 
 export function Bid(props: {
   biddingID: String;
@@ -25,7 +25,7 @@ export function Bid(props: {
     setInputValue(event.target.value);
   };
 
-  const submitBidding = (
+  const submitBid = (
     biddingID: String,
     inputValue: String,
     setItems: Function
@@ -41,18 +41,25 @@ export function Bid(props: {
       "Content-Type": "application/json",
     };
     axios
-      .post(`${process.env.REACT_APP_API_URL}/api/v1/biddings/bid`, data, {
-        headers: headers,
-      })
+      .post(
+        `${process.env.REACT_APP_API_URL_LOCAL_AUTH}/api/v1/biddings/bid`,
+        data,
+        {
+          headers: headers,
+        }
+      )
       .then((response) => {
         if (response.status === 201) {
           axios
-            .get(`${process.env.REACT_APP_API_URL}/api/v1/biddings/assigned`, {
-              headers: {
-                Authorization: `Bearer ${state.accessToken}`,
-                "Content-Type": "application/json",
-              },
-            })
+            .get(
+              `${process.env.REACT_APP_API_URL_LOCAL_AUTH}/api/v1/biddings/assigned`,
+              {
+                headers: {
+                  Authorization: `Bearer ${state.accessToken}`,
+                  "Content-Type": "application/json",
+                },
+              }
+            )
             .then((reponse) => setItems(reponse.data));
         }
       });
@@ -88,7 +95,7 @@ export function Bid(props: {
             <Button
               style={{ marginLeft: "auto" }}
               onClick={() =>
-                submitBidding(props.biddingID, inputValue, props.setItems)
+                submitBid(props.biddingID, inputValue, props.setItems)
               }
               variant="contained"
             >

@@ -9,16 +9,24 @@ import {
   Typography,
   Card,
   CardHeader,
+  Button,
 } from "@mui/material";
 import { ExpandLess, ExpandMore, AccessTime } from "@mui/icons-material";
 import Bidding from "../../types/Bidding";
-import { Bid } from "./Bid";
+import { Bid } from "./Bid/Bid";
 import Moment from "react-moment";
 
 import ScaleIcon from "@mui/icons-material/Scale";
 import AspectRatio from "@mui/icons-material/AspectRatio";
 import Straighten from "@mui/icons-material/Straighten";
-import { Bids } from "./Bids";
+import { BidsActive } from "./Bids/BidsActive";
+import { BidFinished } from "./Bid/BidFinished";
+import { BidsFinished } from "./Bids/BidsFinished";
+import { BidsRevoked } from "./Bids/BidsRevoked";
+import { useGlobalState } from "../GlobalStateProvider";
+import axios from "axios";
+import icons from "./../../assets/icons/selection.json";
+import IcomoonReact, { iconList } from "icomoon-react";
 
 export function ShipmentItem(props: {
   item: Bidding;
@@ -32,7 +40,44 @@ export function ShipmentItem(props: {
     setOpen(!open);
   };
 
+  const { state } = useGlobalState();
+
   Moment.globalLocale = "de";
+
+  const changeBiddingState = (biddingID: String, status: String) => {
+    const data = {
+      biddingId: biddingID,
+      newStatus: status,
+    };
+    const statusGet = status === "active" ? "paused" : "active";
+    const headers = {
+      Authorization: `Bearer ${state.accessToken}`,
+      "Content-Type": "application/json",
+    };
+    axios
+      .put(
+        `${process.env.REACT_APP_API_URL_LOCAL_AUTH}/api/v1/biddings/status`,
+        data,
+        {
+          headers: headers,
+        }
+      )
+      .then((response) => {
+        if (response.status === 200) {
+          axios
+            .get(
+              `${process.env.REACT_APP_API_URL_LOCAL_AUTH}/api/v1/biddings/${statusGet}/`,
+              {
+                headers: {
+                  Authorization: `Bearer ${state.accessToken}`,
+                  "Content-Type": "application/json",
+                },
+              }
+            )
+            .then((getreponse) => props.setItems(getreponse.data));
+        }
+      });
+  };
 
   return (
     <>
@@ -48,11 +93,11 @@ export function ShipmentItem(props: {
         }}
         component="nav"
       >
-        <ListItemButton onClick={handleClick}>
+        <ListItemButton onClick={handleClick} role="button">
           <Typography sx={{ mr: "20px", fontWeight: "700" }}>
             Sendung:{" "}
           </Typography>
-          <ListItemText primary={props.item.shipment.tmsReference} />
+          <ListItemText primary={props.item.shipment.id} />
 
           <Straighten />
           <div style={{ marginRight: "30px", marginLeft: "10px" }}>
@@ -67,8 +112,10 @@ export function ShipmentItem(props: {
           <div style={{ marginRight: "30px", marginLeft: "10px" }}>
             {props.item.shipment.totalVolume?.toString()} m³
           </div>
-          {props.view === "Offers" && (
+          {(props.view === "OffersActive" ||
+            props.view === "OffersFinished") && (
             <Typography
+              data-testid="offerView"
               sx={{
                 backgroundColor: "#1E90FF",
                 color: "white",
@@ -83,7 +130,9 @@ export function ShipmentItem(props: {
               {props.item.bids.length === 0 && <>Kein Gebot abgegeben</>}
             </Typography>
           )}
-          {props.view === "Biddings" && (
+          {(props.view === "BiddingsActive" ||
+            props.view === "BiddingsFinished" ||
+            props.view === "BiddingsRevoked") && (
             <Typography
               sx={{
                 backgroundColor: "#1E90FF",
@@ -96,6 +145,40 @@ export function ShipmentItem(props: {
               Anzahl Gebote: {props.item.bids.length}
             </Typography>
           )}
+          <div>
+            {props.view === "BiddingsActive" && (
+              <Button
+                sx={{
+                  background: "grey",
+                  "&:hover": {
+                    background: "#1976d2",
+                  },
+                  color: "white",
+                  fontSize: "small",
+                  marginRight: "15px",
+                }}
+                onClick={() => changeBiddingState(props.item.id, "paused")}
+              >
+                Auktion pausieren
+              </Button>
+            )}
+          </div>
+          <div>
+            {props.view === "BiddingsRevoked" && (
+              <Button
+                sx={{
+                  backgroundColor: "grey",
+                  color: "white",
+                  fontSize: "small",
+                  marginRight: "15px",
+                }}
+                onClick={() => changeBiddingState(props.item.id, "active")}
+              >
+                Auktion erneut aufnehmen
+              </Button>
+            )}
+          </div>
+
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
         <div className="quickinfo" style={{ backgroundColor: "#FFFFFF" }}>
@@ -161,7 +244,6 @@ export function ShipmentItem(props: {
             >
               <Typography style={{ fontWeight: "600" }}>Nach:</Typography>
               <div>{props.item.shipment.delivery.station.name}</div>
-              {/* TODO: Map this differently */}
               <div>{`${props.item.shipment.delivery.station.address?.zipcode} ${props.item.shipment.delivery.station.address?.city} ${props.item.shipment.delivery.station.address?.country}`}</div>
               <div>
                 {props.item.shipment.delivery.allowedTimeWindows.map(
@@ -211,8 +293,7 @@ export function ShipmentItem(props: {
                 )}
               </div>
             </Grid>
-            {/*TODO: List in Requirements.tsx einfügen &an Logik anbinden*/}
-
+            {/*TODO: List in Requirements.tsx einfügen & an Logik anbinden*/}
             <Grid xs={3} style={{ marginLeft: "20px" }} item={true}>
               <Typography style={{ fontWeight: "600" }}>
                 {" "}
@@ -223,120 +304,18 @@ export function ShipmentItem(props: {
               >
                 <div
                   style={{
-                    backgroundColor: "green",
+                    backgroundColor: "lightgrey",
                     padding: "7px",
                     margin: "5px",
                     borderRadius: "25px",
                     width: "40px",
                   }}
                 >
-                  <ScaleIcon
-                    style={{
-                      margin: "auto",
-                      display: "flex",
-                      minWidth: "15px",
-                      minHeight: "15px",
-                      maxWidth: "20px",
-                      maxHeight: "20px",
-                    }}
-                  />
-                </div>
-                <div
-                  style={{
-                    backgroundColor: "yellow",
-                    padding: "7px",
-                    margin: "5px",
-                    borderRadius: "25px",
-                    width: "40px",
-                  }}
-                >
-                  {" "}
-                  <ScaleIcon
-                    style={{
-                      margin: "auto",
-                      display: "flex",
-                      minWidth: "15px",
-                      minHeight: "15px",
-                      maxWidth: "20px",
-                      maxHeight: "20px",
-                    }}
-                  />
-                </div>
-                <div
-                  style={{
-                    backgroundColor: "orange",
-                    padding: "7px",
-                    margin: "5px",
-                    borderRadius: "25px",
-                    width: "40px",
-                  }}
-                >
-                  {" "}
-                  <ScaleIcon
-                    style={{
-                      margin: "auto",
-                      display: "flex",
-                      minWidth: "15px",
-                      minHeight: "15px",
-                      maxWidth: "20px",
-                      maxHeight: "20px",
-                    }}
-                  />
-                </div>
-                <div
-                  style={{
-                    backgroundColor: "orange",
-                    padding: "7px",
-                    margin: "5px",
-                    borderRadius: "25px",
-                    width: "40px",
-                  }}
-                >
-                  {" "}
-                  <ScaleIcon
-                    style={{
-                      margin: "auto",
-                      display: "flex",
-                      minWidth: "15px",
-                      minHeight: "15px",
-                      maxWidth: "20px",
-                      maxHeight: "20px",
-                    }}
-                  />
-                </div>
-                <div
-                  style={{
-                    backgroundColor: "orange",
-                    padding: "7px",
-                    margin: "5px",
-                    borderRadius: "25px",
-                    width: "40px",
-                  }}
-                >
-                  {" "}
-                  <ScaleIcon
-                    style={{
-                      margin: "auto",
-                      display: "flex",
-                      minWidth: "15px",
-                      minHeight: "15px",
-                      maxWidth: "20px",
-                      maxHeight: "20px",
-                    }}
-                  />
-                </div>
-                <div
-                  style={{
-                    backgroundColor: "orange",
-                    padding: "7px",
-                    margin: "5px",
-                    borderRadius: "25px",
-                    width: "40px",
-                    float: "left",
-                  }}
-                >
-                  {" "}
-                  <ScaleIcon
+                  <IcomoonReact
+                    iconSet={icons}
+                    color="black"
+                    size={100}
+                    icon="BOX_TRAILER"
                     style={{
                       margin: "auto",
                       display: "flex",
@@ -370,7 +349,7 @@ export function ShipmentItem(props: {
               justifyContent: "center",
             }}
           >
-            {props.view === "Offers" && (
+            {props.view === "OffersActive" && (
               <div>
                 <CardHeader
                   title="Auf Sendung bieten"
@@ -389,7 +368,26 @@ export function ShipmentItem(props: {
                 />
               </div>
             )}
-            {props.view === "Biddings" && (
+            {(props.view === "OffersFinished" ||
+              props.view === "OffersPaused") && (
+              <div>
+                <CardHeader
+                  title="Damaliges Gebot"
+                  data-testid="detailView"
+                  style={{
+                    backgroundColor: "#3A9B57",
+                    color: "white",
+                    fontWeight: "700",
+                    display: "flex",
+                  }}
+                />
+                <BidFinished
+                  items={props.item.bids}
+                  biddingID={props.item.id}
+                />
+              </div>
+            )}
+            {props.view === "BiddingsActive" && (
               <div>
                 <CardHeader
                   title="Gebote"
@@ -400,7 +398,35 @@ export function ShipmentItem(props: {
                     display: "flex",
                   }}
                 />
-                <Bids items={props.item.bids} setItems={props.setItems} />
+                <BidsActive items={props.item.bids} setItems={props.setItems} />
+              </div>
+            )}
+            {props.view === "BiddingsFinished" && (
+              <div>
+                <CardHeader
+                  title="Gebote"
+                  style={{
+                    backgroundColor: "#3A9B57",
+                    color: "white",
+                    fontWeight: "700",
+                    display: "flex",
+                  }}
+                />
+                <BidsFinished items={props.item.bids} />
+              </div>
+            )}
+            {props.view === "BiddingsRevoked" && (
+              <div>
+                <CardHeader
+                  title="Gebote"
+                  style={{
+                    backgroundColor: "#3A9B57",
+                    color: "white",
+                    fontWeight: "700",
+                    display: "flex",
+                  }}
+                />
+                <BidsRevoked items={props.item.bids} />
               </div>
             )}
           </Card>
