@@ -26,7 +26,7 @@ import {
   HourglassEmpty,
   Gavel,
 } from "@mui/icons-material";
-import Logo from "./NeoCargoLogo.png";
+import Logo from "../../assets/NeoCargoLogo.png";
 import { Link, Path } from "react-router-dom";
 import { useState, ReactNode, useEffect, useCallback } from "react";
 import axios from "axios";

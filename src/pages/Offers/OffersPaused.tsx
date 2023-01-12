@@ -33,7 +33,7 @@ export default function OffersPaused() {
   useEffect(() => {
     axios
       .get(
-        `${process.env.REACT_APP_API_URL_LOCAL_AUTH}/api/v1/biddings/assigned/`,
+        `${process.env.REACT_APP_API_URL_LOCAL_AUTH}/api/v1/biddings/assigned/paused/`,
         {
           headers: {
             Authorization: `Bearer ${state.accessToken}`,

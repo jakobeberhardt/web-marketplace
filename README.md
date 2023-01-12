@@ -1,6 +1,12 @@
-# Getting Started with Create React App
+# NEOCARGO MARKETPLACE
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+| File or Folder in `src/` | Purpose                                         |
+| ------------------------ | ----------------------------------------------- |
+| `assets`                 | content for images and other blobs              |
+| `components`             | single reused components throughout the project |
+| `pages`                  | all main pages in the router                    |
+| `types`                  | types in the scope of bidding / shipments       |
+| `readme.md`              | this getting started guide                      |
 
 ## Available Scripts
 
