@@ -146,20 +146,35 @@ export function ShipmentItem(props: {
           )}
           <div>
             {props.view === "BiddingsActive" && (
-              <button
+              <Button
+                sx={{
+                  background: "grey",
+                  "&:hover": {
+                    background: "#1976d2",
+                  },
+                  color: "white",
+                  fontSize: "small",
+                  marginRight: "15px",
+                }}
                 onClick={() => changeBiddingState(props.item.id, "paused")}
               >
                 Auktion pausieren
-              </button>
+              </Button>
             )}
           </div>
           <div>
             {props.view === "BiddingsRevoked" && (
-              <button
+              <Button
+                sx={{
+                  backgroundColor: "grey",
+                  color: "white",
+                  fontSize: "small",
+                  marginRight: "15px",
+                }}
                 onClick={() => changeBiddingState(props.item.id, "active")}
               >
                 Auktion erneut aufnehmen
-              </button>
+              </Button>
             )}
           </div>
 
