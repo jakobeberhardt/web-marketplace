@@ -31,8 +31,9 @@ import FireExtinguisher from "@mui/icons-material/FireExtinguisher";
 
 import icons from "./../../assets/icons/selection.json";
 import IcomoonReact from "icomoon-react";
+import Requirement from "../../types/Requirement";
 
-export default function Requirements(props: { item: Bidding }) {
+export default function Requirements(props: { item: Requirement }) {
   const iconMap = new Map<string, JSX.Element>([
     [
       "boxtrailer",
@@ -170,7 +171,7 @@ export default function Requirements(props: { item: Bidding }) {
   return (
     <>
       <div>
-        {Object.entries(props.item.shipment.requirements).map((element) => (
+        {Object.entries(props.item).map((element) => (
           <>
             {/* Gib was leeres zurück, wenn das Requirement null ist */}
             {!element[1] && <></>}
@@ -186,12 +187,12 @@ export default function Requirements(props: { item: Bidding }) {
                 {/* Icon */}
                 <div>{iconMap.get(element[0])}</div>
                 {/* Scope */}
-                <div>{element[1].scopes}</div>
+                {/* <div>{element[1].scopes}</div>
                 <div style={{ backgroundColor: "red" }}>
                   {(element[1].scopes = "ENROUTE")}
-                </div>
+                </div> */}
                 {/* Params bei IntRequirement z.B Ladehöhe in m */}
-                <div>{element[1].params}</div>
+                {/* <div>{element[1].params}</div> */}
               </div>
             )}
           </>
@@ -200,22 +201,3 @@ export default function Requirements(props: { item: Bidding }) {
     </>
   );
 }
-/*
- <List>
-                  <ListItem>
-                    <div style={{ backgroundColor: "green" }}>
-                      {" "}
-                      {props.item.shipment.totalLoadMeters?.toString()} icon
-                    </div>
-                    <div style={{ backgroundColor: "yellow" }}>
-                      {" "}
-                      {props.item.shipment.totalLoadMeters?.toString()} icon
-                    </div>
-                    <div style={{ backgroundColor: "orange" }}>
-                      {" "}
-                      {props.item.shipment.totalLoadMeters?.toString()} icon
-                    </div>
-                  </ListItem>
-                </List>
-
-                */

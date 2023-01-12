@@ -1,5 +1,4 @@
 import React from "react";
-
 import {
   Grid,
   List,
@@ -15,7 +14,6 @@ import { ExpandLess, ExpandMore, AccessTime } from "@mui/icons-material";
 import Bidding from "../../types/Bidding";
 import { Bid } from "./Bid/Bid";
 import Moment from "react-moment";
-
 import ScaleIcon from "@mui/icons-material/Scale";
 import AspectRatio from "@mui/icons-material/AspectRatio";
 import Straighten from "@mui/icons-material/Straighten";
@@ -27,6 +25,7 @@ import { useGlobalState } from "../GlobalStateProvider";
 import axios from "axios";
 import icons from "./../../assets/icons/selection.json";
 import IcomoonReact, { iconList } from "icomoon-react";
+import Requirements from "./Requirements";
 
 export function ShipmentItem(props: {
   item: Bidding;
@@ -325,6 +324,7 @@ export function ShipmentItem(props: {
                       maxHeight: "20px",
                     }}
                   />
+                  {/* <Requirements item={props.item.shipment.requirements} /> */}
                 </div>
               </div>
             </Grid>
