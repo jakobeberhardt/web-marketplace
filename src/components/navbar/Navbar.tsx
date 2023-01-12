@@ -221,6 +221,7 @@ const Navbar = ({ children }: Props) => {
 
   const drawerWidth = 240;
 
+  //Setter and Getter for cookies
   function setCookie(cname: string, cvalue: string, exdays: number) {
     const d = new Date();
     d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
@@ -244,6 +245,7 @@ const Navbar = ({ children }: Props) => {
     return "";
   }
 
+  //Immediately login when cookies exist
   useEffect(() => {
     let username = getCookie("username");
     if (username === "") return;

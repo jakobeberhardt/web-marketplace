@@ -50,6 +50,7 @@ function CustomToolbarComponent(props: {
       </button>
       <TextField
         id="basic"
+        data-testid="userInput"
         style={{
           marginLeft: "15px",
           marginRight: "auto",
@@ -84,6 +85,7 @@ function CustomToolbarComponent(props: {
               props.setItems
             )
           }
+          data-testid="deleteButton"
         >
           {`Entferne ${props.selectionModel.length} Nutzer`}
         </button>
@@ -182,84 +184,6 @@ export default function Allowlist() {
 
   return (
     <>
-      {/* <Box sx={{ width: "100%" }}>
-        <Paper sx={{ width: "100%", mb: 2 }}>
-          <TableHead>
-            <TableRow>
-              <TableCell align="left" padding="normal">
-                Bieterkreisgruppe
-              </TableCell>
-              <TableCell align="center" padding="normal">
-                FF-ID
-              </TableCell>
-              <TableCell align="center" padding="normal">
-                Mail
-              </TableCell>
-              <TableCell align="right" padding="none" />
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {items &&
-              items.map((item) => {
-                return (
-                  <TableRow hover>
-                    <TableCell align="left">Beispielgruppe</TableCell>
-                    <TableCell component="th" id={item}>
-                      {item}
-                    </TableCell>
-                    <TableCell align="right">example@neocargo.de</TableCell>
-                    <TableCell align="right">
-                      <ButtonBase
-                        onClick={() =>
-                          removeAllowListItem(item, state, setItems)
-                        }
-                      >
-                        <IconButton
-                          aria-label="delete"
-                          disabled
-                          style={{ color: "black", opacity: "0.3" }}
-                        >
-                          <DeleteIcon
-                            style={{ width: "20px", height: "20px" }}
-                          />
-                        </IconButton>
-                      </ButtonBase>
-                    </TableCell>
-                  </TableRow>
-                );
-              })}
-            <TableRow>
-              <TableCell>
-                <TextField
-                  id="basic"
-                  label="Bieter zur Liste hinzufügen"
-                  style={{ alignContent: "center" }}
-                  onChange={handleChange}
-                >
-                  <Input value={inputValue} />
-                </TextField>
-              </TableCell>
-              <TableCell>
-                <ListItemButton
-                  style={{ float: "right" }}
-                  alignItems="center"
-                  onClick={() => addAllowListItem(inputValue, state, setItems)}
-                >
-                  <ListItemIcon>
-                    <AddCircleOutline
-                      style={{
-                        width: "25px",
-                        height: "25px",
-                        color: "black",
-                      }}
-                    />
-                  </ListItemIcon>
-                </ListItemButton>
-              </TableCell>
-            </TableRow>
-          </TableBody>
-        </Paper>
-      </Box> */}
       <Box sx={{ height: "83vh", width: "100%" }}>
         <DataGrid
           sx={{

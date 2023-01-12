@@ -11,27 +11,20 @@ export function BidFinished(props: { biddingID: String; items: BidClass[] }) {
           backgroundColor: "white",
         }}
       >
-        {!(props.items.length > 0) && (
-          <CardContent>
-            <List>
-              <ListItem>
+        <CardContent>
+          <List>
+            <ListItem>
+              {!(props.items.length > 0) && (
                 <ListItemText primary={`Sie haben kein Gebot abgegeben`} />
-              </ListItem>
-            </List>
-          </CardContent>
-        )}
-        {/*Display placed bid*/}
-        {props.items.length > 0 && (
-          <CardContent>
-            <List>
-              <ListItem>
+              )}
+              {props.items.length > 0 && (
                 <ListItemText
                   primary={`Ihr Gebot: ${props.items[0].value.toString()} €`}
                 />
-              </ListItem>
-            </List>
-          </CardContent>
-        )}
+              )}
+            </ListItem>
+          </List>
+        </CardContent>
       </Card>
     </>
   );

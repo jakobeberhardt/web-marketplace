@@ -25,7 +25,7 @@ export function Bid(props: {
     setInputValue(event.target.value);
   };
 
-  const submitBidding = (
+  const submitBid = (
     biddingID: String,
     inputValue: String,
     setItems: Function
@@ -95,7 +95,7 @@ export function Bid(props: {
             <Button
               style={{ marginLeft: "auto" }}
               onClick={() =>
-                submitBidding(props.biddingID, inputValue, props.setItems)
+                submitBid(props.biddingID, inputValue, props.setItems)
               }
               variant="contained"
             >

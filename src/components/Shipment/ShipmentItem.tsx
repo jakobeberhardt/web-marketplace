@@ -93,7 +93,7 @@ export function ShipmentItem(props: {
         }}
         component="nav"
       >
-        <ListItemButton onClick={handleClick}>
+        <ListItemButton onClick={handleClick} role="button">
           <Typography sx={{ mr: "20px", fontWeight: "700" }}>
             Sendung:{" "}
           </Typography>
@@ -115,6 +115,7 @@ export function ShipmentItem(props: {
           {(props.view === "OffersActive" ||
             props.view === "OffersFinished") && (
             <Typography
+              data-testid="offerView"
               sx={{
                 backgroundColor: "#1E90FF",
                 color: "white",
@@ -243,7 +244,6 @@ export function ShipmentItem(props: {
             >
               <Typography style={{ fontWeight: "600" }}>Nach:</Typography>
               <div>{props.item.shipment.delivery.station.name}</div>
-              {/* TODO: Map this differently */}
               <div>{`${props.item.shipment.delivery.station.address?.zipcode} ${props.item.shipment.delivery.station.address?.city} ${props.item.shipment.delivery.station.address?.country}`}</div>
               <div>
                 {props.item.shipment.delivery.allowedTimeWindows.map(
@@ -293,8 +293,7 @@ export function ShipmentItem(props: {
                 )}
               </div>
             </Grid>
-            {/*TODO: List in Requirements.tsx einfügen &an Logik anbinden*/}
-
+            {/*TODO: List in Requirements.tsx einfügen & an Logik anbinden*/}
             <Grid xs={3} style={{ marginLeft: "20px" }} item={true}>
               <Typography style={{ fontWeight: "600" }}>
                 {" "}

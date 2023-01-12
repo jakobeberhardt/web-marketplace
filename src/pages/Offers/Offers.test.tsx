@@ -6,7 +6,7 @@ import biddings from "../../components/mock-shipment.json";
 
 test("Ich kann Shipments sehen, die für mich ausgeschrieben sind.", () => {
   const items = biddings;
-  const view = "Offers";
+  const view = "OffersActive";
   const setItems = () => {};
 
   render(
@@ -22,12 +22,12 @@ test("Ich kann Shipments sehen, die für mich ausgeschrieben sind.", () => {
   );
 
   fireEvent(
-    screen.getByText("LKW Convoy"),
+    screen.getByRole("button"),
     new MouseEvent("click", {
       bubbles: true,
     })
   );
 
-  const detailView = screen.getByTestId("detailView");
+  const detailView = screen.getByTestId("offerView");
   expect(detailView).toBeInTheDocument();
 });
