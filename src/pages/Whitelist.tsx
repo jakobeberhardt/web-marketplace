@@ -63,13 +63,6 @@ function CustomToolbarComponent(props: {
         InputProps={{
           inputProps: { maxLength: 5 },
         }}
-        /* InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <ControlPointIcon />
-            </InputAdornment>
-          ),
-        }} */
       />
 
       {props.selectionModel.length > 0 && (
@@ -132,7 +125,7 @@ function removeAllowListItem(
     "Content-Type": "application/json",
   };
   const data = {
-    id: items[0].toString(),
+    ids: items.map((e) => e.toString()),
   };
   axios
     .delete(`${process.env.REACT_APP_API_URL_LOCAL_AUTH}/api/v1/whitelist/`, {
