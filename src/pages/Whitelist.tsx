@@ -126,9 +126,10 @@ function removeAllowListItem(
     Authorization: `Bearer ${state.accessToken}`,
     "Content-Type": "application/json",
   };
-  const data = {
-    ids: items.map((e) => e.toString()),
-  };
+
+  const data = items.map((e) => {
+    return { id: e.toString() };
+  });
   axios
     .delete(`${process.env.REACT_APP_API_URL_LOCAL_AUTH}/api/v1/whitelist/`, {
       headers: headers,
