@@ -1,6 +1,29 @@
-# Getting Started with Create React App
+# NEOCARGO MARKETPLACE
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+| File or Folder in `src/` | Purpose                                         |
+| ------------------------ | ----------------------------------------------- |
+| `assets`                 | content for images and other blobs              |
+| `components`             | single reused components throughout the project |
+| `pages`                  | all main pages in the router                    |
+| `types`                  | types in the scope of bidding / shipments       |
+| `readme.md`              | this getting started guide                      |
+
+| Pages       | Purpose                                                               |
+| ----------- | --------------------------------------------------------------------- |
+| `Offers`    | Alle Ausschreibungen für die ein Nutzer auf dem Bieterkreis erscheint |
+| `Shipment`  | Alle Ausschreibungen die ein Nutzer selbst veröffentlicht hat         |
+| `Home`      | Landingpage                                                           |
+| `Whitelist` | Seite zum Anzeigen und Verwalten des Bieterkreises                    |
+
+| Components            | Purpose                                                                               |
+| --------------------- | ------------------------------------------------------------------------------------- |
+| `Navbar`              | Navigationsleiste (+ Login Logik)                                                     |
+| `UserSidebar`         | Anzeige von Informationen des momentanen Nutzers                                      |
+| `Bids`                | Anzeigen von mehreren Geboten, Logik zur Annahme eines Gebots                         |
+| `Bid`                 | Anzeige es Gebots, Logik zum Bieten und Einsehen des abgegebenen Gebots eines Nutzers |
+| `Requirements`        | Mappen der Icons zu verschiedenen Anforderungen eines Shipments                       |
+| `ShipmentItem`        | Darstellung aller relevanten Informationen eines Shipments                            |
+| `GlobalStateProvider` | Globales Objekt von Nutzerinformationen                                               |
 
 ## Available Scripts
 

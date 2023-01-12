@@ -33,7 +33,7 @@ export default function OffersFinished() {
   useEffect(() => {
     axios
       .get(
-        `${process.env.REACT_APP_API_URL_LOCAL_AUTH}/api/v1/biddings/assigned/`,
+        `${process.env.REACT_APP_API_URL_LOCAL_AUTH}/api/v1/biddings/assigned/finished/`,
         {
           headers: {
             Authorization: `Bearer ${state.accessToken}`,
