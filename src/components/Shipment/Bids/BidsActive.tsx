@@ -28,9 +28,8 @@ function BidItems(props: {
           <div
             style={{ margin: "auto", marginRight: "20rem", padding: "1rem" }}
           >
-            <Typography data-testid="userID">{item.userId}</Typography>
             <Typography data-testid="offerValue">
-              {item.value.toString()} €
+              {item.userId}: {item.value.toString()} €
             </Typography>
           </div>
           <ListItemButton
@@ -78,12 +77,15 @@ function acceptOffer(
     .then((response) => {
       if (response.status === 200) {
         axios
-          .get(`${process.env.REACT_APP_API_URL_LOCAL_AUTH}/api/v1/biddings/`, {
-            headers: {
-              Authorization: `Bearer ${state.accessToken}`,
-              "Content-Type": "application/json",
-            },
-          })
+          .get(
+            `${process.env.REACT_APP_API_URL_LOCAL_AUTH}/api/v1/biddings/active`,
+            {
+              headers: {
+                Authorization: `Bearer ${state.accessToken}`,
+                "Content-Type": "application/json",
+              },
+            }
+          )
           .then((getreponse) => setItems(getreponse.data));
       }
     });

@@ -14,7 +14,7 @@ test("Ich kann bei jedem Gebot den Button zum Zuschlag erteilen sehen", () => {
   expect(bidItem).toBeInTheDocument();
 });
 
-test("Ich kann den Wert von jedem Gebot sehen und es ist formattiert", () => {
+test("Ich kann den Wert und NutzerID von jedem Gebot sehen und es ist formattiert", () => {
   const setItems = () => {};
   const items: BidClass[] = [
     { id: "123", userId: "456", value: 500.0, currency: "Euro" },
@@ -22,7 +22,7 @@ test("Ich kann den Wert von jedem Gebot sehen und es ist formattiert", () => {
   render(<BidsActive setItems={setItems} items={items} />);
 
   const bidValue = screen.getByTestId("offerValue");
-  expect(bidValue.textContent).toBe("500 €");
+  expect(bidValue.textContent).toBe("456: 500 €");
 });
 
 test("Ich kann den Wert von jedem Gebot sehen und es ist formattiert mit Nachkommastellen", () => {
@@ -33,5 +33,5 @@ test("Ich kann den Wert von jedem Gebot sehen und es ist formattiert mit Nachkom
   render(<BidsActive setItems={setItems} items={items} />);
 
   const bidValue = screen.getByTestId("offerValue");
-  expect(bidValue.textContent).toBe("500.5 €");
+  expect(bidValue.textContent).toBe("456: 500.5 €");
 });
